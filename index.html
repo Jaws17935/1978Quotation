@@ -8,231 +8,99 @@
         :root {--primary:#1e3a8a;--secondary:#4b5e7a;--accent:#3b82f6;--bg-light:#f8fafc;--bg-highlight:#f1f5f9;--text:#111827;--text-light:#6b7280;--border:#e5e7eb;--success:#15803d;--danger:#e53e3e}
         *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
         body{background-color:var(--bg-light);color:var(--text);line-height:1.5;font-size:14px}
-        
-        /* Layout */
+        ::-webkit-scrollbar{width:0;height:0;background:transparent}
+        *{-ms-overflow-style:none;scrollbar-width:none}
         .container{max-width:1000px;margin:0 auto 20px;background-color:white;box-shadow:0 0 20px rgba(0,0,0,0.1)}
         .section{border-bottom:1px solid var(--border);margin-bottom:10px;padding-bottom:10px}
-        
-        /* Header */
-        .header{background-color:var(--primary);color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0 !important;padding-bottom:0 !important;border-bottom:none !important}
-        
-        /* Logo */
+        .header{background-color:var(--primary);color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0;padding-bottom:0;border-bottom:none}
         .company-logo{position:relative;cursor:pointer}
         .company-logo:hover{opacity:0.9}
-        .company-logo:after{content:"點擊更換LOGO";position:absolute;bottom:-5px;right:0;font-size:10px;background-color:rgba(0,0,0,0.5);padding:2px 4px;border-radius:2px;opacity:0;transition:opacity 0.2s}
-        .company-logo:hover:after{opacity:1}
+        
         .company-logo img{max-height:50px;object-fit:contain}
         .upload-logo{position:absolute;width:0.1px;height:0.1px;opacity:0;z-index:-1}
         .company-info p{opacity:0.9;margin-bottom:2px;line-height:1.3}
         .default-logo-text{font-size:22px;font-weight:600;color:white}
-        
-        /* Document Title */
         .document-title h2{font-size:20px;font-weight:600;margin-bottom:2px;margin-left:-20px}
         .document-title p{color:rgba(255,255,255,0.9);margin-bottom:2px;line-height:1.3}
-        
-        /* Date Fields */
         .date-display{cursor:pointer;transition:opacity 0.2s;border-bottom:1px dashed rgba(0,0,0,0.3);padding-bottom:1px;background-color:transparent}
         .date-display:hover{opacity:0.8;border-bottom:1px dashed rgba(0,0,0,0.6)}
         .document-title .date-display,.document-title .editable-field{color:white;border-bottom:1px dashed rgba(255,255,255,0.5)}
         .document-title .date-display:hover{border-bottom:1px dashed rgba(255,255,255,0.8)}
         .hidden-date-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}
         .content .date-display{color:var(--text);border-bottom:1px dashed var(--accent);display:inline-block;min-width:120px}
-        
-        /* Info Sections */
         .quote-info{padding:8px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:15px;background-color:var(--bg-highlight)}
         #poNumber{display:inline-block;min-width:100px}
-        
-        /* Section Titles */
-        .section-title,.section-title-with-controls{position:relative;padding-bottom:3px;height:22px;margin-bottom:4px !important;box-sizing:border-box}
-        .section-title{font-size:15px;text-transform:uppercase;letter-spacing:1px;color:var(--primary);font-weight:600;display:flex;align-items:center}
+        .section-title,.section-title-with-controls{position:relative;padding-bottom:2px;height:20px;margin-bottom:2px;box-sizing:border-box}
+        .section-title{font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--primary);font-weight:600;display:flex;align-items:center}
         .section-title:after{content:'';position:absolute;left:0;bottom:0;width:36px;height:2px;background-color:var(--accent)}
-        
-        /* Info Groups */
-        .info-group{margin-bottom:6px;overflow:visible}
+        .info-group{margin-bottom:6px;overflow:hidden}
         .info-group h4{font-size:14px;margin-bottom:3px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .info-group p{color:var(--text-light);margin-bottom:4px;line-height:1.4;word-wrap:break-word}
         .info-label{font-weight:600;display:inline-block;width:90px}
         .quote-meta-row{margin-bottom:2px;line-height:1.2}
-        
-        /* Editable Fields */
         [contenteditable=true],.editable-field{border-bottom:none;padding:1px;min-height:18px;min-width:80px;display:inline-block;color:var(--text);background-color:transparent}
         [contenteditable=true]:hover,.editable-field:hover{background-color:rgba(59,130,246,0.1)}
         [contenteditable=true]:focus,.editable-field:focus{outline:none;border-bottom:1px dashed var(--accent);background-color:rgba(59,130,246,0.1)}
-        
-        /* Items Section */
         .items-section{padding:10px 20px;background-color:white}
         .section-title-with-controls{display:flex;align-items:center;justify-content:space-between}
         .items-controls{display:flex;align-items:center;gap:5px;margin-left:10px}
-        
-        /* Buttons */
         .row-btn{background:none;border:none;cursor:pointer;font-size:18px;font-weight:bold;width:24px;height:24px;text-align:center;line-height:20px;transition:transform 0.2s;padding:0}
         .row-btn.add{color:var(--success)}
         .row-btn.delete{color:var(--danger)}
         .row-btn:hover{transform:scale(1.2)}
-        
-        /* Tables */
         table{width:100%;border-collapse:collapse;margin-top:6px;border:1px solid var(--border)}
         table th{background-color:var(--secondary);color:white;text-align:left;padding:5px;font-weight:600;border-bottom:2px solid var(--primary)}
         table td{padding:3px 5px;border-bottom:1px solid var(--border);vertical-align:middle}
         table tbody tr:hover{background-color:var(--bg-light)}
         .text-center{text-align:center}
-        
-        /* Input Fields */
         .input-field{width:100%;padding:2px;border:none;border-radius:2px;font-size:14px}
-        .price-input{text-align:center !important;}
+        .price-input{text-align:center}
         .quantity-input,.shipping-input,.installation-input,.unit-input{text-align:center}
         .input-field:focus{outline:none;border-color:var(--accent)}
         .quantity-input::-webkit-inner-spin-button,.quantity-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
         .quantity-input{-moz-appearance:textfield;appearance:none}
-        .original-price{text-decoration:line-through;color:var(--text-light);font-size:11px;display:block;text-align:center;}
-        
-        /* Grid Layouts */
-        .legal-terms-section,.bank-totals-section{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:10px 20px;background-color:var(--bg-highlight);align-items:start}
-        
-        /* Containers */
-        .legal-notice-container,.right-side-container,.terms-container,.notes-container,.totals-container,.bank-info-container{
-            display:flex;flex-direction:column;padding:0;margin:0 !important
-        }
-        
-        /* Content Areas */
-        .legal-notice,.terms-content,.notes-textarea{
-            background-color:var(--bg-light);border:1px solid var(--border);border-radius:4px;
-            padding:8px;font-size:13px;color:var(--text-light);line-height:1.4;
-            box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden;resize:none
-        }
-        .bank-info,.totals-table{
-            background-color:white;border:1px solid var(--border);border-radius:4px;
-            font-size:14px;color:var(--text-light);line-height:1.3;
-            box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden;resize:none
-        }
-        
-        .terms-content{
-            padding:8px 8px 0 8px !important;display:block !important;box-sizing:border-box;
-            height:auto;overflow:hidden;
-        }
-        
-        /* Lists */
-        .terms-list{padding-left:18px;padding-bottom:0 !important;list-style-type:disc;margin:0 !important;width:100%;font-size:13px !important}
-        .terms-list li{margin-bottom:4px !important;padding-bottom:0 !important;line-height:1.4 !important;font-size:13px !important}
-        .terms-list li:last-child{margin-bottom:0 !important}
-        
-        /* Notes */
-        #notes-textarea{
-            width:100%;margin:0 !important;padding:8px;min-height:50px;height:auto !important;
-            line-height:1.5;flex-grow:1;transition:none;-webkit-appearance:none
-        }
-        
-        /* Legal Notice */
+        .original-price{text-decoration:line-through;color:var(--text-light);font-size:11px;display:block;text-align:center}
+        .legal-terms-section, .bank-totals-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;background-color:var(--bg-highlight);align-items:start}
+        .flex-column-container{display:flex;flex-direction:column;padding:0;margin:0}
+        .content-box-light{background-color:var(--bg-light);border:1px solid var(--border);border-radius:4px;padding:8px;font-size:13px;color:var(--text-light);line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden;resize:none}
+        .content-box-white{background-color:white;border:1px solid var(--border);border-radius:4px;font-size:14px;color:var(--text-light);line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden;resize:none}
+        .terms-content{padding:8px 8px 0 8px;display:block;box-sizing:border-box;height:auto;overflow:hidden}
+        .terms-list{padding-left:18px;padding-bottom:0;list-style-type:disc;margin:0;width:100%;font-size:13px}
+        .terms-list li{margin-bottom:4px;padding-bottom:0;line-height:1.4;font-size:13px}
+        .terms-list li:last-child{margin-bottom:0}
+        #notes-textarea{width:100%;margin:0;padding:8px;min-height:80px;height:auto;line-height:1.5;flex-grow:1;transition:none;-webkit-appearance:none;resize:vertical;max-height:none;box-sizing:border-box;border:1px solid var(--border);background-color:var(--bg-light);font-size:13px;color:var(--text-light)}
+        .notes-container{position:relative;width:100%;min-height:100px;margin-top:5px;padding:0;overflow:hidden}
         .legal-notice h4{color:var(--primary);margin-bottom:4px;font-size:15px}
         .legal-notice p{margin-bottom:5px}
-        
-        /* Warranty Table */
         .warranty-term-table{width:100%;border-collapse:collapse;margin:4px 0}
         .warranty-term-table td{padding:3px 5px;border:1px solid var(--border);font-size:12px}
         .warranty-term-table .term-label{width:20%;font-weight:600;background-color:rgba(75,94,122,0.1);color:var(--primary)}
-        
-        /* Totals Section */
-        .totals-table {
-            width: 100%;
-            border: none;
-            background-color: white;
-            border-radius: 4px;
-        }
-        .totals-row {
-            height: 28px;
-            display: flex;
-            align-items: center;
-        }
-        .totals-row.totals-final {
-            margin-top: auto;
-            border-top: 1px solid var(--border);
-            padding-top: 4px;
-            height: 32px;
-        }
-        .totals-label {
-            width: 60%;
-            color: var(--text-light);
-            font-size: 14px;
-            padding-left: 6px;
-        }
-        .totals-value {
-            width: 40%;
-            text-align: right;
-            font-weight: 600;
-            font-size: 14px;
-            padding-right: 6px;
-        }
-        
-        /* Select */
-        .clean-select{appearance:none;border:none;background:transparent;width:100%;font-size:14px;font-weight:600;color:var(--text-light);cursor:pointer;outline:none;line-height:1.3}
-        
-        /* Bank Info & Totals Common Styles */
-        .bank-info-container, .totals-container {
-            height: 210px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .bank-info, .totals-table {
-            box-sizing: border-box;
-            padding: 8px 10px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            margin-top: 5px;
-        }
-        
-        /* Bank Info Specific */
-        .bank-info .info-group{
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-        }
-        .bank-info .info-label{
-            width: 80px;
-            font-weight: 600;
-            font-size: 14px;
-            display: inline-block;
-            color: var(--text-light);
-            line-height: 1.3;
-        }
-        .bank-info .info-group p{
-            font-size: 14px;
-            line-height: 1.3;
-            margin-bottom: 0;
-            padding: 3px 0;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            overflow: visible;
-        }
-        .bank-info span[contenteditable="true"]{
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 1.3;
-            min-height: 20px;
-            display: inline-block;
-            overflow: visible;
-        }
-        
-        /* Signature Section */
+        .totals-table{width:100%;border:none;background-color:white;border-radius:4px}
+        .totals-row{height:24px;display:flex;align-items:center}
+        .totals-row.totals-final{margin-top:auto;border-top:1px solid var(--border);padding-top:3px;height:28px}
+        .totals-label{width:60%;color:var(--text-light);font-size:13px;padding-left:5px}
+        .totals-value{width:40%;text-align:right;font-weight:600;font-size:13px;padding-right:5px}
+        .clean-select{appearance:none;border:none;background:transparent;width:100%;font-size:13px;font-weight:600;color:var(--text-light);cursor:pointer;outline:none;line-height:1.2}
+        .bank-info-container, .totals-container{height:180px;display:flex;flex-direction:column}
+        .bank-info, .totals-table{box-sizing:border-box;padding:6px 8px;flex-grow:1;display:flex;flex-direction:column;margin-top:3px}
+        .bank-info .info-group{margin:0;display:flex;flex-direction:column;justify-content:space-between;height:100%}
+        .bank-info .info-label{width:75px;font-weight:600;font-size:13px;display:inline-block;color:var(--text-light);line-height:1.2}
+        .bank-info .info-group p{font-size:13px;line-height:1.2;margin-bottom:0;padding:2px 0;height:24px;display:flex;align-items:center;overflow:hidden}
+        .bank-info span[contenteditable="true"]{font-size:13px;font-weight:600;line-height:1.2;min-height:18px;display:inline-block;overflow:hidden}
         .signature-section{width:100%;display:flex;justify-content:space-between;background-color:var(--bg-highlight);padding:10px 20px;gap:12px;align-items:stretch}
         .staff-info,.client-confirmation{width:48%;text-align:left;background-color:white;padding:10px;border:1px solid var(--border);border-radius:4px;display:flex;flex-direction:column;height:100%}
         .staff-info .info-group,.client-confirmation .info-group{margin-top:4px;margin-bottom:0;flex:1;display:flex;flex-direction:column;justify-content:space-between}
         .staff-info .info-label,.client-confirmation .info-label{width:70px}
-        
-        /* Print Styles */
-        @media print {
-            *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}
-            .header{background-color:var(--primary) !important}
-            .quote-info,.legal-terms-section,.bank-notes-section,.totals-container,.signature-section{background-color:var(--bg-highlight) !important}
-            table th{background-color:var(--secondary) !important}
-            .legal-notice,.bank-info{background-color:var(--bg-light) !important}
-        }
-        
-        /* Responsive Styles */
+        .notification-container{position:fixed;top:20px;right:20px;max-width:350px;background:white;box-shadow:0 4px 12px rgba(0,0,0,0.15);border-radius:4px;overflow:hidden;z-index:9999;transition:all 0.3s ease;opacity:0;transform:translateY(-20px)}
+        .notification-container.show{opacity:1;transform:translateY(0)}
+        .notification-content{padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+        .notification-message{flex:1;margin-right:10px;font-size:14px}
+        .notification-close{background:none;border:none;font-size:18px;cursor:pointer;padding:0 4px;line-height:1}
+        .notification-info{border-left:4px solid var(--accent)}
+        .notification-success{border-left:4px solid var(--success)}
+        .notification-warning{border-left:4px solid #f59e0b}
+        .notification-error{border-left:4px solid var(--danger)}
+        .info-group-text{margin-bottom:4px;line-height:1.4;word-wrap:break-word;color:var(--text-light)}
         @media(max-width:768px){
             .container{margin:0;width:100%}
             .header{flex-direction:column;align-items:center;text-align:center;padding:15px}
@@ -241,10 +109,28 @@
             .client-info,.quote-details,.contact-info{width:100%;margin-bottom:15px}
             .legal-terms-section,.bank-totals-section{display:flex;flex-direction:column;gap:15px;padding:15px}
             .legal-notice-container,.totals-container,.bank-info-container,.right-side-container{width:100%}
-            .items-section{padding:10px 15px;overflow-x:auto}
+            .items-section{padding:10px 15px;overflow-x:hidden}
             table{min-width:650px}
             .signature-section{flex-direction:column;padding:15px}
             .staff-info,.client-confirmation{width:100%;margin-bottom:10px}
+        }
+        @media (min-width:769px) and (max-width:992px){
+            .container{margin:0 auto;width:95%}
+            .legal-terms-section, .bank-totals-section{gap:12px}
+            .section-title{font-size:13px}
+        }
+        @media print{
+            *{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+            body{width:100%;margin:0;padding:0}
+            .container{width:100%;margin:0;box-shadow:none}
+            .header{background-color:var(--primary) !important}
+            .quote-info,.legal-terms-section,.signature-section{background-color:var(--bg-highlight) !important}
+            table th{background-color:var(--secondary) !important}
+            .legal-notice,.bank-info{background-color:var(--bg-light) !important}
+            .row-btn, .upload-logo, .notification-container{display:none !important}
+            .editable-field, [contenteditable=true]{border:none !important;background-color:transparent !important}
+            .content-box-light, .content-box-white{box-shadow:none !important;border:1px solid #ccc !important}
+            table th{background-color:#4b5e7a !important;-webkit-print-color-adjust:exact !important;color-adjust:exact !important}
         }
     </style>
 </head>
@@ -329,11 +215,10 @@
                 </div>
             </div>
             
-            <!-- 銀行資訊和總計金額並排 -->
             <div class="bank-totals-section section">
-                <div class="bank-info-container">
+                <div class="bank-info-container flex-column-container">
                     <div class="section-title">銀行資訊</div>
-                    <div class="bank-info">
+                    <div class="bank-info content-box-white">
                         <div class="info-group">
                             <p><span class="info-label">金融機構：</span><span contenteditable="true" data-placeholder="請輸入金融機構" class="editable-field">第一銀行</span></p>
                             <p><span class="info-label">機構分支：</span><span contenteditable="true" data-placeholder="請輸入機構分支" class="editable-field">東港分行</span></p>
@@ -343,9 +228,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="totals-container">
+                <div class="totals-container flex-column-container">
                     <div class="section-title">總計金額</div>
-                    <div class="totals-table">
+                    <div class="totals-table content-box-white">
                         <div class="totals-row"><span class="totals-label">商品合計</span><span class="totals-value" id="subtotal">0</span></div>
                         <div class="totals-row"><span class="totals-label">安裝費用</span><span class="totals-value" id="totalInstallation">0</span></div>
                         <div class="totals-row"><span class="totals-label">運送費用</span><span class="totals-value" id="totalShipping">0</span></div>
@@ -363,11 +248,10 @@
                 </div>
             </div>
             
-            <!-- 法律聲明與合約條款並排，其他備註在合約條款下方 -->
             <div class="legal-terms-section section">
-                <div class="legal-notice-container">
+                <div class="legal-notice-container flex-column-container">
                     <div class="section-title">法律聲明與注意事項</div>
-                    <div class="legal-notice">
+                    <div class="legal-notice content-box-light">
                         <h4>契約法律關係說明</h4>
                         <p>依據中華民國民法第153條及消費者保護法第4條規定，本報價單一經貴方接受並確認，即構成具有法律約束力之買賣契約，雙方均應依誠信原則履行契約義務。</p>
                         <h4>商品瑕疵責任</h4>
@@ -388,10 +272,10 @@
                         <p style="margin-bottom:0;">若貴方提供圖樣、設計或其他內容進行客製化商品製作，貴方需確保擁有該等內容之合法使用權或著作權。對於貴方提供之任何可能涉及第三方著作權、商標權或其他智慧財產權之內容，本公司不負審查義務及侵權責任。若因此導致任何法律爭議或損害，應由貴方承擔全部責任並賠償本公司因此遭受之損失。本公司保留拒絕處理任何疑似侵權內容之權利。</p>
                     </div>
                 </div>
-                <div class="right-side-container">
+                <div class="right-side-container flex-column-container">
                     <div class="terms-container">
                         <div class="section-title">合約條款與條件</div>
-                        <div class="terms-content">
+                        <div class="terms-content content-box-light">
                             <ul class="terms-list">
                                 <li>本報價單自開立日起30天內有效，逾期未接受者視為自動失效。</li>
                                 <li>政府機關、公立學校採購適用政府採購法相關規定，如有牴觸，以政府採購法為準。</li>
@@ -405,7 +289,7 @@
                     </div>
                     <div class="notes-container">
                         <div class="section-title">其他備註</div>
-                        <textarea id="notes-textarea" placeholder="請在此填寫其他特殊需求或說明..." rows="5"></textarea>
+                        <textarea id="notes-textarea" class="content-box-light" placeholder="請在此填寫其他特殊需求或說明..." rows="5"></textarea>
                     </div>
                 </div>
             </div>
@@ -432,183 +316,96 @@
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // 常量定義
+        // 常量配置
+        const CONFIG = {
+            TAX_RATE: 0.05,
+            DEPOSIT_RATE: 0.3,
+            DEFAULT_VALID_DAYS: 7,
+            MAX_VALID_DAYS: 30,
+            DEFAULT_DELIVERY_DAYS: 20
+        };
+        
         const MONTH_ABBR = ["JA", "FE", "MR", "AP", "MY", "JN", "JL", "AU", "SE", "OC", "NO", "DE"];
         const TODAY = new Date();
         
-        // 快速選擇器
+        // DOM 元素簡易選擇器
         const $ = id => document.getElementById(id);
         const $all = sel => document.querySelectorAll(sel);
         
-        // 元素快取
-        const els = {};
-        
         // 初始化
-        function initApp() {
-            // 緩存頻繁使用的DOM元素
-            cacheElements();
-            
-            // 檢查必要元素是否存在
-            if (!validateElements()) {
+        function init() {
+            // 驗證關鍵元素
+            const requiredEls = ['quoteNumber', 'quoteDateText', 'quoteValidText', 'deliveryDateText',
+                               'itemsTableBody', 'subtotal', 'grandTotal', 'taxType'];
+            if(!requiredEls.every(id => $(id))) {
                 console.error('初始化失敗：部分必要元素不存在');
                 return;
             }
             
-            // 初始化各功能模塊
             setupLogoUpload();
-            initializeDates();
+            initDates();
             setupEditableElements();
             setupEventListeners();
-            generateUniqueId(); // 使用更可靠的ID生成方法
             updateTotals();
-            
-            // 調整容器高度（單次調用並延遲執行）
             setTimeout(adjustLayout, 100);
-            
-            // 視窗大小變化時重新調整佈局
             window.addEventListener('resize', debounce(adjustLayout, 250));
         }
         
-        // 緩存常用DOM元素
-        function cacheElements() {
-            // 重要元素列表
-            const elementIds = [
-                'quoteDate', 'quoteDateText', 'quoteValidUntil', 'quoteValidText', 
-                'deliveryDate', 'deliveryDateText', 'quoteNumber', 'poNumber', 
-                'itemsTableBody', 'taxType', 'subtotal', 'totalShipping', 
-                'totalInstallation', 'depositAmount', 'grandTotal', 'notes-textarea', 
-                'logo-container', 'upload-logo', 'addItemBtn', 'deleteItemBtn', 'quoteTable'
-            ];
-            
-            // 緩存所有元素
-            elementIds.forEach(id => {
-                els[id] = $(id);
-            });
-        }
-        
-        // 驗證元素是否存在
-        function validateElements() {
-            const requiredElements = [
-                'quoteDate', 'quoteDateText', 'quoteValidUntil', 'quoteValidText', 
-                'deliveryDate', 'deliveryDateText', 'quoteNumber', 'poNumber', 
-                'itemsTableBody', 'taxType', 'subtotal', 'grandTotal'
-            ];
-            
-            return requiredElements.every(id => els[id] !== null);
-        }
-        
         // 防抖函數
-        function debounce(func, wait) {
-            let timeout;
+        const debounce = (fn, wait) => {
+            let t;
             return function() {
-                const context = this;
-                const args = arguments;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
+                clearTimeout(t);
+                t = setTimeout(() => fn.apply(this, arguments), wait);
             };
         }
         
-        // 佈局調整
+        // 調整布局
         function adjustLayout() {
-            // 讀取階段 - 收集所有需要的測量數據
-            const measurements = collectLayoutMeasurements();
-            
-            // 寫入階段 - 根據測量數據一次性更新DOM
-            applyLayoutMeasurements(measurements);
-            
-            // 調整文本區域高度
-            if (els['notes-textarea']) {
-                adjustTextareaHeight();
-            }
-        }
-        
-        // 收集佈局測量數據（僅讀取DOM，不寫入）
-        function collectLayoutMeasurements() {
-            // 由於銀行和總計區域現在使用CSS固定高度，只需收集標題高度
-            const bankTotals = {
-                bankTitle: document.querySelector('.bank-info-container .section-title')?.offsetHeight || 22,
-                totalsTitle: document.querySelector('.totals-container .section-title')?.offsetHeight || 22
-            };
-            
-            // 收集法律和條款區域的數據
-            const legalTerms = {
-                legalContainer: document.querySelector('.legal-notice-container')?.offsetHeight || 0,
-                rightSideContainer: document.querySelector('.right-side-container')?.offsetHeight || 0,
-                legalHeader: document.querySelector('.legal-notice-container .section-title')?.offsetHeight || 30,
-                termsHeader: document.querySelector('.terms-container .section-title')?.offsetHeight || 30,
-                notesContainer: document.querySelector('.notes-container')?.offsetHeight || 0
-            };
-            
-            return { bankTotals, legalTerms };
-        }
-        
-        // 應用佈局測量（一次性寫入DOM）
-        function applyLayoutMeasurements(measurements) {
-            const { bankTotals, legalTerms } = measurements;
-            
-            // 銀行和總計區域使用CSS固定高度，不需動態調整
-            // 僅同步標題高度確保對齊
             const bankTitle = document.querySelector('.bank-info-container .section-title');
             const totalsTitle = document.querySelector('.totals-container .section-title');
             
             if (bankTitle && totalsTitle) {
-                const titleHeight = Math.max(bankTitle.offsetHeight, totalsTitle.offsetHeight);
-                bankTitle.style.height = `${titleHeight}px`;
-                totalsTitle.style.height = `${titleHeight}px`;
+                const h = Math.max(bankTitle.offsetHeight, totalsTitle.offsetHeight);
+                bankTitle.style.height = totalsTitle.style.height = `${h}px`;
             }
             
-            // 調整法律條款區域
-            const legalContainer = document.querySelector('.legal-notice-container');
-            const rightSideContainer = document.querySelector('.right-side-container');
-            const legalNotice = document.querySelector('.legal-notice');
-            const termsContent = document.querySelector('.terms-content');
-            
-            if (legalContainer && rightSideContainer) {
-                const maxHeight = Math.max(legalTerms.legalContainer, legalTerms.rightSideContainer);
-                legalContainer.style.height = rightSideContainer.style.height = `${maxHeight}px`;
-                
-                if (legalNotice) {
-                    legalNotice.style.height = `${maxHeight - legalTerms.legalHeader - 10}px`;
-                }
-                
-                if (termsContent && legalTerms.notesContainer > 0) {
-                    const availableRightHeight = maxHeight - legalTerms.notesContainer - 22;
-                    termsContent.style.height = `${availableRightHeight - legalTerms.termsHeader - 10}px`;
-                }
+            // 調整文本區域高度
+            const textarea = $('notes-textarea');
+            if (textarea) {
+                textarea.style.height = 'auto';
+                textarea.style.height = Math.max(80, textarea.scrollHeight) + 'px';
             }
-        }
-        
-        // 調整文本區域高度
-        function adjustTextareaHeight() {
-            const textarea = els['notes-textarea'];
-            if (!textarea) return;
-            
-            textarea.style.height = 'auto';
-            textarea.style.height = `${textarea.scrollHeight}px`;
         }
         
         // 初始化日期
-        function initializeDates() {
+        function initDates() {
             // 設置報價日期
-            if (els.quoteDate && els.quoteDateText) {
-                els.quoteDate.value = TODAY.toISOString().split("T")[0];
-                els.quoteDateText.textContent = formatDateForDisplay(els.quoteDate.value);
+            const quoteDate = $('quoteDate');
+            const quoteDateText = $('quoteDateText');
+            if (quoteDate && quoteDateText) {
+                quoteDate.value = TODAY.toISOString().split("T")[0];
+                quoteDateText.textContent = formatDate(quoteDate.value);
             }
             
             // 設置有效期限
-            if (els.quoteValidUntil && els.quoteValidText) {
-                const validDate = new Date(TODAY);
-                validDate.setDate(TODAY.getDate() + 7);
-                els.quoteValidUntil.value = validDate.toISOString().split("T")[0];
-                els.quoteValidText.textContent = formatDateForDisplay(els.quoteValidUntil.value);
+            const validDate = $('quoteValidUntil');
+            const validText = $('quoteValidText');
+            if (validDate && validText) {
+                const vDate = new Date(TODAY);
+                vDate.setDate(TODAY.getDate() + CONFIG.DEFAULT_VALID_DAYS);
+                validDate.value = vDate.toISOString().split("T")[0];
+                validText.textContent = formatDate(validDate.value);
             }
             
-            // 設置交付日期
-            if (els.deliveryDate && els.deliveryDateText) {
-                const deliveryDate = new Date(TODAY);
-                deliveryDate.setDate(TODAY.getDate() + 20);
-                els.deliveryDate.value = deliveryDate.toISOString().split("T")[0];
-                els.deliveryDateText.textContent = formatDateForDisplay(els.deliveryDate.value);
+            // 設置交期日期
+            const delivDate = $('deliveryDate');
+            const delivText = $('deliveryDateText');
+            if (delivDate && delivText) {
+                const dDate = new Date(TODAY);
+                dDate.setDate(TODAY.getDate() + CONFIG.DEFAULT_DELIVERY_DAYS);
+                delivDate.value = dDate.toISOString().split("T")[0];
+                delivText.textContent = formatDate(delivDate.value);
             }
             
             updateQuoteNumber();
@@ -617,65 +414,43 @@
         }
         
         // 生成唯一ID
-        function generateUniqueId() {
-            if (!els.quoteNumber) return;
+        function generateId(date = TODAY, prefix = '', type = 'quote') {
+            const month = MONTH_ABBR[date.getMonth()];
+            const year = date.getFullYear().toString().slice(-2);
+            const monthNum = String(date.getMonth() + 1).padStart(2, "0");
+            const day = String(date.getDate()).padStart(2, "0");
+            const rand = Math.random().toString(36).substring(2, 4).toUpperCase();
             
-            // 使用時間戳和隨機數組合生成唯一ID
-            const timestamp = new Date().getTime().toString(36);
-            const randomStr = Math.random().toString(36).substring(2, 8);
-            const uniqueId = `${timestamp}-${randomStr}`.toUpperCase();
-            
-            // 使用更可讀的格式
-            if (els.quoteDate) {
-                const date = new Date(els.quoteDate.value || TODAY);
-                const month = MONTH_ABBR[date.getMonth()];
-                const year = date.getFullYear().toString().slice(-2);
-                const monthNum = String(date.getMonth() + 1).padStart(2, "0");
-                const day = String(date.getDate()).padStart(2, "0");
-                
-                // 使用前6個字符作為隨機部分
-                const shortRandomStr = uniqueId.substring(0, 6);
-                els.quoteNumber.textContent = `${month}-${year}${monthNum}${day}-${shortRandomStr}`;
-            }
+            return type === 'po' 
+                ? `${prefix}${rand}${monthNum}${day}${year}`
+                : `${prefix}${month}-${year}${monthNum}${day}${rand}`;
         }
         
-        // 更新報價單號
+        // 更新報價單號與採購編號
         function updateQuoteNumber() {
-            if (!els.quoteDate || !els.quoteNumber) return;
+            const qNum = $('quoteNumber');
+            const qDate = $('quoteDate');
+            if (!qNum) return;
             
-            const date = new Date(els.quoteDate.value || TODAY);
-            const monthIndex = date.getMonth();
-            const year = date.getFullYear().toString().slice(-2);
-            const month = MONTH_ABBR[monthIndex];
-            const monthNum = String(monthIndex + 1).padStart(2, "0");
-            const day = String(date.getDate()).padStart(2, "0");
-            
-            // 使用時間戳的一部分替代隨機數
-            const timestamp = Date.now().toString().slice(-4);
-            els.quoteNumber.textContent = `${month}-${year}${monthNum}${day}-${timestamp}`;
+            const date = new Date((qDate?.value) || TODAY);
+            qNum.textContent = generateId(date);
         }
         
-        // 更新採購編號
         function updatePoNumber() {
-            if (!els.quoteDate || !els.poNumber) return;
-            
-            const date = new Date(els.quoteDate.value || TODAY);
-            const day = String(date.getDate()).padStart(2, "0");
-            const month = String(date.getMonth() + 1).padStart(2, "0");
-            const year = date.getFullYear().toString().slice(-2);
-            
-            // 使用時間戳的一部分替代隨機數
-            const timestamp = Date.now().toString().slice(-4);
-            els.poNumber.textContent = `PO-${timestamp}${day}${month}${year}`;
+            const po = $('poNumber');
+            const qDate = $('quoteDate');
+            if (po && qDate) {
+                const date = new Date(qDate.value || TODAY);
+                po.textContent = generateId(date, 'PO-', 'po');
+            }
         }
         
         // 設置日期互動
         function setupDateInteractions() {
-            // 設置日期點擊顯示日期選擇器
             [
-                {display: els.quoteDateText, picker: els.quoteDate},
-                {display: els.quoteValidText, picker: els.quoteValidUntil},
-                {display: els.deliveryDateText, picker: els.deliveryDate}
+                {display: $('quoteDateText'), picker: $('quoteDate')},
+                {display: $('quoteValidText'), picker: $('quoteValidUntil')},
+                {display: $('deliveryDateText'), picker: $('deliveryDate')}
             ].forEach(item => {
                 if (item.display && item.picker) {
                     item.display.addEventListener('click', e => {
@@ -690,128 +465,170 @@
                 }
             });
             
-            // 日期變更時更新顯示並驗證
-            if (els.quoteDate) {
-                els.quoteDate.addEventListener('change', function() {
-                    if (els.quoteDateText) {
-                        els.quoteDateText.textContent = formatDateForDisplay(this.value);
-                    }
+            // 報價日期變更
+            const qDate = $('quoteDate');
+            if (qDate) {
+                qDate.addEventListener('change', function() {
+                    const qText = $('quoteDateText');
+                    if (qText) qText.textContent = formatDate(this.value);
                     
                     updateQuoteNumber();
                     updatePoNumber();
-                    
-                    const date = new Date(this.value);
-                    
-                    // 更新有效期限
-                    if (els.quoteValidUntil && els.quoteValidText) {
-                        const validDate = new Date(date);
-                        validDate.setDate(date.getDate() + 7);
-                        els.quoteValidUntil.value = validDate.toISOString().split('T')[0];
-                        els.quoteValidText.textContent = formatDateForDisplay(els.quoteValidUntil.value);
-                    }
-                    
-                    // 更新交付日期
-                    if (els.deliveryDate && els.deliveryDateText) {
-                        const deliveryDate = new Date(date);
-                        deliveryDate.setDate(date.getDate() + 20);
-                        els.deliveryDate.value = deliveryDate.toISOString().split('T')[0];
-                        els.deliveryDateText.textContent = formatDateForDisplay(els.deliveryDate.value);
-                    }
-                    
-                    // 驗證日期
                     validateDates();
                     validateDeliveryDate();
+                    showNotification("報價日期已更新", "info");
                 });
             }
             
             // 有效期限變更
-            if (els.quoteValidUntil) {
-                els.quoteValidUntil.addEventListener('change', function() {
-                    if (els.quoteValidText) {
-                        els.quoteValidText.textContent = formatDateForDisplay(this.value);
-                    }
+            const vDate = $('quoteValidUntil');
+            if (vDate) {
+                vDate.addEventListener('change', function() {
+                    const vText = $('quoteValidText');
+                    if (vText) vText.textContent = formatDate(this.value);
                     validateDates();
                 });
             }
             
-            // 交付日期變更
-            if (els.deliveryDate) {
-                els.deliveryDate.addEventListener('change', function() {
-                    if (els.deliveryDateText) {
-                        els.deliveryDateText.textContent = formatDateForDisplay(this.value);
-                    }
+            // 交期日期變更
+            const dDate = $('deliveryDate');
+            if (dDate) {
+                dDate.addEventListener('change', function() {
+                    const dText = $('deliveryDateText');
+                    if (dText) dText.textContent = formatDate(this.value);
                     validateDeliveryDate();
                 });
             }
         }
         
-        // 驗證日期
+        // 日期驗證相關函數
+        function validateMinDate(dateInput, dateText, minDate, message) {
+            if (!dateInput || !dateText || !minDate) return false;
+            
+            const selectedDate = new Date(dateInput.value);
+            if (selectedDate < minDate) {
+                if (confirm(message)) {
+                    const correctedDate = new Date(minDate);
+                    correctedDate.setDate(minDate.getDate() + 1);
+                    dateInput.value = correctedDate.toISOString().split("T")[0];
+                    dateText.textContent = formatDate(dateInput.value);
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        function validateMaxDate(dateInput, dateText, maxDate, message) {
+            if (!dateInput || !dateText || !maxDate) return false;
+            
+            const selectedDate = new Date(dateInput.value);
+            if (selectedDate > maxDate) {
+                if (confirm(message)) {
+                    dateInput.value = maxDate.toISOString().split("T")[0];
+                    dateText.textContent = formatDate(dateInput.value);
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        // 驗證有效期限
         function validateDates() {
-            if (!els.quoteDate || !els.quoteValidUntil || !els.quoteValidText) return;
+            const qDate = $('quoteDate');
+            const vDate = $('quoteValidUntil');
+            const vText = $('quoteValidText');
             
-            const quoteDate = new Date(els.quoteDate.value || TODAY);
-            const validDate = new Date(els.quoteValidUntil.value);
+            if (!qDate || !vDate || !vText) return;
             
-            if (validDate < quoteDate) {
-                const correctedDate = new Date(quoteDate);
-                correctedDate.setDate(quoteDate.getDate() + 7);
-                els.quoteValidUntil.value = correctedDate.toISOString().split("T")[0];
-                els.quoteValidText.textContent = formatDateForDisplay(els.quoteValidUntil.value);
-                alert("請注意有效期限不得早於報價日；系統已自動為您修正請再次確認");
-            }
+            const quoteDate = new Date(qDate.value || TODAY);
             
+            // 檢查最小日期 - 有效期限不應早於報價日期
+            validateMinDate(
+                vDate, vText, quoteDate, 
+                "有效期限不得早於報價日期。是否自動調整為報價日期後 " + CONFIG.DEFAULT_VALID_DAYS + " 天？"
+            );
+            
+            // 檢查最大日期 - 有效期限不應超過最大天數
             const maxValidDate = new Date(quoteDate);
-            maxValidDate.setDate(quoteDate.getDate() + 30);
-            
-            if (validDate > maxValidDate) {
-                els.quoteValidUntil.value = maxValidDate.toISOString().split("T")[0];
-                els.quoteValidText.textContent = formatDateForDisplay(els.quoteValidUntil.value);
-                alert("請注意合約條款第一項有效期限最高為 30 天");
-            }
+            maxValidDate.setDate(quoteDate.getDate() + CONFIG.MAX_VALID_DAYS);
+            validateMaxDate(
+                vDate, vText, maxValidDate,
+                "根據合約條款，有效期限最長為 " + CONFIG.MAX_VALID_DAYS + " 天。是否調整為最長期限？"
+            );
         }
         
         // 驗證交付日期
         function validateDeliveryDate() {
-            if (!els.quoteDate || !els.deliveryDate || !els.deliveryDateText) return;
+            const qDate = $('quoteDate');
+            const dDate = $('deliveryDate');
+            const dText = $('deliveryDateText');
             
-            const quoteDate = new Date(els.quoteDate.value || TODAY);
-            const deliveryDate = new Date(els.deliveryDate.value);
+            if (!qDate || !dDate || !dText) return;
             
-            if (deliveryDate < quoteDate) {
-                alert("預計交期不得早於報價日期；請再次確認您設定的預計交期");
-                const correctedDate = new Date(quoteDate);
-                correctedDate.setDate(quoteDate.getDate() + 20);
-                els.deliveryDate.value = correctedDate.toISOString().split("T")[0];
-                els.deliveryDateText.textContent = formatDateForDisplay(els.deliveryDate.value);
-            }
+            const quoteDate = new Date(qDate.value || TODAY);
+            
+            validateMinDate(
+                dDate, dText, quoteDate,
+                "預計交期不得早於報價日期。是否自動調整為報價日期後 " + CONFIG.DEFAULT_DELIVERY_DAYS + " 天？"
+            );
         }
         
         // Logo上傳
         function setupLogoUpload() {
-            if (!els['logo-container'] || !els['upload-logo']) return;
+            const logoContainer = $('logo-container');
+            const uploadLogo = $('upload-logo');
             
-            els['logo-container'].addEventListener('click', () => els['upload-logo'].click());
-            els['upload-logo'].addEventListener('change', e => {
+            if (!logoContainer || !uploadLogo) return;
+            
+            // 點擊觸發檔案選擇
+            logoContainer.addEventListener('click', () => {
+                uploadLogo.value = '';
+                uploadLogo.click();
+            });
+            
+            // 檔案選擇處理
+            uploadLogo.addEventListener('change', e => {
                 const file = e.target.files[0];
                 if (!file) return;
+                
                 if (!file.type.match('image.*')) {
-                    alert('請選擇圖片檔案');
+                    showNotification('請選擇圖片檔案', 'error');
                     return;
                 }
+                
                 if (file.size > 2*1024*1024) {
-                    alert('圖片大小不能超過 2MB');
+                    showNotification('圖片大小不能超過 2MB', 'error');
                     return;
                 }
                 
                 const reader = new FileReader();
-                reader.onload = e => {
-                    els['logo-container'].innerHTML = '';
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.alt = '公司Logo';
-                    img.style.maxHeight = '50px';
-                    els['logo-container'].appendChild(img);
+                
+                reader.onerror = () => {
+                    showNotification('讀取圖片時發生錯誤', 'error');
                 };
+                
+                reader.onload = e => {
+                    try {
+                        const tempImg = new Image();
+                        tempImg.onload = () => {
+                            logoContainer.innerHTML = '';
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.alt = '公司Logo';
+                            img.style.maxHeight = '50px';
+                            logoContainer.appendChild(img);
+                        };
+                        
+                        tempImg.onerror = () => {
+                            showNotification('圖片格式無效', 'error');
+                        };
+                        
+                        tempImg.src = e.target.result;
+                    } catch (err) {
+                        showNotification('處理圖片時發生錯誤', 'error');
+                    }
+                };
+                
                 reader.readAsDataURL(file);
             });
         }
@@ -819,31 +636,26 @@
         // 設置可編輯元素
         function setupEditableElements() {
             const editables = $all('[contenteditable="true"],.editable-field');
-            if (!editables.length) return;
-            
-            let isComposing = false;
             
             editables.forEach(el => {
                 if (!el) return;
                 
-                // 處理中文輸入法
-                el.addEventListener("compositionstart", () => isComposing = true);
-                el.addEventListener("compositionend", function() {
-                    isComposing = false;
-                    handleInput(this);
+                el.isComposing = false;
+                
+                el.addEventListener("compositionstart", function() { this.isComposing = true; });
+                el.addEventListener("compositionend", function() { 
+                    this.isComposing = false; 
+                    handleInput(this); 
                 });
                 
-                // 阻止在可編輯區域按Enter換行
                 el.addEventListener("keypress", e => {
                     if (e.key === "Enter") e.preventDefault();
                 });
                 
-                // 輸入處理
                 el.addEventListener("input", function() {
-                    if (!isComposing) handleInput(this);
+                    if (!this.isComposing) handleInput(this);
                 });
                 
-                // 粘貼處理
                 el.addEventListener("paste", function(e) {
                     e.preventDefault();
                     const text = (e.clipboardData || window.clipboardData)
@@ -851,12 +663,12 @@
                         .replace(/\n/g, "")
                         .trim();
                     document.execCommand("insertText", false, formatText(text, this.getAttribute("data-type")));
-                    setCursorToEnd(this);
+                    cursorHelper.setToEnd(this);
                 });
             });
         }
         
-        // 處理輸入
+        // 文本處理函數
         function handleInput(element) {
             if (!element) return;
             
@@ -866,6 +678,8 @@
                     element.innerText.replace(/\n/g, "").trim(),
                     element.getAttribute("data-type")
                 );
+                
+                if (text === element.innerText) return;
                 
                 const selection = window.getSelection();
                 if (!selection) return;
@@ -880,7 +694,7 @@
                     restoreCursorPosition(element, cursorPos);
                 }
             } catch (err) {
-                console.error('處理輸入時發生錯誤:', err);
+                console.error('處理輸入錯誤:', err);
             }
         }
         
@@ -893,7 +707,7 @@
             return text;
         }
         
-        // 保存光標位置（安全版本）
+        // 保存光標位置
         function saveCursorPosition(element) {
             if (!element) return null;
             
@@ -910,7 +724,7 @@
             };
         }
         
-        // 恢復光標位置（安全版本）
+        // 恢復光標位置
         function restoreCursorPosition(element, position) {
             if (!element || !position) return;
             
@@ -918,25 +732,43 @@
                 const selection = window.getSelection();
                 if (!selection) return;
                 
-                const range = document.createRange();
-                let targetNode = position.container;
+                // 尋找所有文字節點
+                const walker = document.createTreeWalker(
+                    element,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
                 
-                if (targetNode.nodeType !== Node.TEXT_NODE) {
-                    const textNodes = Array.from(element.childNodes).filter(n => n.nodeType === Node.TEXT_NODE);
-                    targetNode = textNodes[0] || document.createTextNode("");
-                    if (!targetNode.parentNode) element.appendChild(targetNode);
+                // 如果沒有文字節點，添加一個
+                if (!walker.nextNode()) {
+                    const textNode = document.createTextNode(element.textContent || "");
+                    element.textContent = '';
+                    element.appendChild(textNode);
+                    
+                    const range = document.createRange();
+                    range.setStart(textNode, 0);
+                    range.setEnd(textNode, 0);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    return;
                 }
                 
-                const textLength = targetNode.textContent ? targetNode.textContent.length : 0;
-                const startPos = Math.min(position.start, textLength);
-                const endPos = Math.min(position.end, textLength);
+                // 重置walker
+                walker.currentNode = element;
                 
-                range.setStart(targetNode, startPos);
-                range.setEnd(targetNode, endPos);
+                // 找到第一個文字節點
+                const firstTextNode = walker.nextNode();
+                const textLength = firstTextNode.textContent ? firstTextNode.textContent.length : 0;
+                const safePos = Math.min(position.start, textLength);
+                
+                const range = document.createRange();
+                range.setStart(firstTextNode, safePos);
+                range.setEnd(firstTextNode, safePos);
                 selection.removeAllRanges();
                 selection.addRange(range);
             } catch (err) {
-                console.error('恢復光標位置時發生錯誤:', err);
+                setCursorToEnd(element);
             }
         }
         
@@ -948,63 +780,175 @@
                 const selection = window.getSelection();
                 if (!selection) return;
                 
-                const range = document.createRange();
-                const textNodes = Array.from(element.childNodes).filter(n => n.nodeType === Node.TEXT_NODE);
-                const lastTextNode = textNodes.length ? textNodes[textNodes.length - 1] : document.createTextNode("");
+                // 尋找最後一個文字節點
+                const walker = document.createTreeWalker(
+                    element,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
                 
-                if (!lastTextNode.parentNode) element.appendChild(lastTextNode);
+                let lastTextNode = null;
+                let currentNode;
+                
+                while (currentNode = walker.nextNode()) {
+                    lastTextNode = currentNode;
+                }
+                
+                // 如果沒有文字節點，添加一個
+                if (!lastTextNode) {
+                    lastTextNode = document.createTextNode("");
+                    element.appendChild(lastTextNode);
+                }
                 
                 const textLength = lastTextNode.textContent ? lastTextNode.textContent.length : 0;
+                
+                const range = document.createRange();
                 range.setStart(lastTextNode, textLength);
                 range.setEnd(lastTextNode, textLength);
                 selection.removeAllRanges();
                 selection.addRange(range);
             } catch (err) {
-                console.error('設置光標到末尾時發生錯誤:', err);
+                console.error('設置游標到末尾錯誤');
             }
         }
         
         // 設置事件監聽
         function setupEventListeners() {
-            if (!els.addItemBtn || !els.deleteItemBtn || !els.quoteTable || !els.taxType) return;
+            const addBtn = $('addItemBtn'); 
+            const delBtn = $('deleteItemBtn');
+            const qTable = $('quoteTable');
+            const taxType = $('taxType');
             
-            // 添加行
-            els.addItemBtn.addEventListener('click', () => {
-                addRow();
-                setTimeout(adjustLayout, 100);
+            if (!addBtn || !delBtn || !qTable || !taxType) return;
+            
+            // 增加防抖函數
+            const updateTotalDebounced = debounce(() => {
+                updateTotals();
+                adjustLayout();
+            }, 200);
+            
+            // 表格相關事件委派
+            qTable.addEventListener('input', e => {
+                const target = e.target;
+                
+                if (target.classList.contains('price-input') || 
+                    target.classList.contains('quantity-input') ||
+                    target.classList.contains('shipping-input') ||
+                    target.classList.contains('installation-input')) {
+                    
+                    if (target.classList.contains('price-input') || 
+                        target.classList.contains('shipping-input') || 
+                        target.classList.contains('installation-input')) {
+                        formatInputValue(target);
+                    }
+                    
+                    updateTotalDebounced();
+                }
             });
             
-            // 刪除行
-            els.deleteItemBtn.addEventListener('click', () => {
-                if (!els.itemsTableBody) return;
+            // 增加表格焦點事件
+            qTable.addEventListener('focusin', e => {
+                const target = e.target;
+                if (target.tagName === 'INPUT') {
+                    target.select();
+                }
+            });
+            
+            // 鍵盤導航
+            qTable.addEventListener('keydown', e => {
+                if (e.key === 'Tab') {
+                    const tbody = $('itemsTableBody');
+                    if (!tbody) return;
+                    
+                    const rows = tbody.children;
+                    if (!rows.length) return;
+                    
+                    const lastRow = rows[rows.length - 1];
+                    if (!lastRow) return;
+                    
+                    const lastInput = lastRow.querySelector('.shipping-input');
+                    if (!lastInput) return;
+                    
+                    if (e.target === lastInput && !e.shiftKey) {
+                        e.preventDefault();
+                        addRow();
+                        
+                        setTimeout(() => {
+                            const newRow = tbody.lastChild;
+                            if (!newRow) return;
+                            
+                            const firstInput = newRow.querySelector('.category-input');
+                            if (firstInput) firstInput.focus();
+                        }, 0);
+                    }
+                }
+            });
+            
+            // 添加行按鈕
+            addBtn.addEventListener('click', () => {
+                addRow();
+                adjustLayout();
+            });
+            
+            // 刪除行按鈕
+            delBtn.addEventListener('click', () => {
+                const tbody = $('itemsTableBody');
+                if (!tbody) return;
                 
-                const rows = els.itemsTableBody.children;
+                const rows = tbody.children;
                 if (rows.length > 1) {
                     rows[rows.length-1].remove();
                     updateTotals();
-                    setTimeout(adjustLayout, 100);
+                    adjustLayout();
                 } else {
-                    alert("必須保留至少一行！");
+                    showNotification("必須保留至少一行！", "warning");
                 }
             });
             
-            // 表格輸入變更
-            els.quoteTable.addEventListener('input', debounce(e => {
-                if (e.target.classList.contains('input-field')) {
-                    updateTotals();
-                    setTimeout(adjustLayout, 100);
-                }
-            }, 100));
+            // 稅率類型變更
+            taxType.addEventListener('change', updateTotalDebounced);
             
-            // 稅型變更
-            els.taxType.addEventListener('change', () => {
-                updateTotals();
-                setTimeout(adjustLayout, 100);
+            // 文本區域自動調整高度
+            const notesTextarea = $('notes-textarea');
+            if (notesTextarea) {
+                const adjustTextareaHeight = debounce(() => {
+                    notesTextarea.style.height = 'auto';
+                    notesTextarea.style.height = Math.max(80, notesTextarea.scrollHeight) + 'px';
+                }, 100);
+                
+                notesTextarea.addEventListener('input', adjustTextareaHeight);
+                notesTextarea.addEventListener('focus', adjustTextareaHeight);
+            }
+            
+            // 增加打印前的表單驗證
+            window.addEventListener('beforeprint', () => {
+                if (!validateFormQuietly()) {
+                    showNotification('表單有未完成的項目，打印前請先完成', 'warning');
+                }
             });
         }
         
+        // 格式化輸入值
+        function formatInputValue(input) {
+            if (!input) return;
+            
+            const value = input.value;
+            
+            if (input.classList.contains('price-input') || 
+                input.classList.contains('shipping-input') || 
+                input.classList.contains('installation-input')) {
+                const numValue = formatHelper.parseNumber(value);
+                if (numValue === 0 && value === '') {
+                    return;
+                }
+                
+                input.value = formatHelper.formatCurrency(numValue);
+            }
+        }
+        
         // 格式化日期顯示
-        function formatDateForDisplay(dateString) {
+        function formatDate(dateString) {
             if (!dateString) return '';
             
             try {
@@ -1014,14 +958,14 @@
                     day: 'numeric'
                 });
             } catch (e) {
-                console.error('日期格式化錯誤:', e);
                 return dateString;
             }
         }
         
         // 添加行
         function addRow() {
-            if (!els.itemsTableBody) return;
+            const tbody = $('itemsTableBody');
+            if (!tbody) return;
             
             const newRow = document.createElement("tr");
             newRow.innerHTML = `
@@ -1031,92 +975,166 @@
                     <input type="text" class="price-input input-field" value="">
                     <span class="original-price"></span>
                 </td>
-                <td class="text-center"><input type="number" class="quantity-input input-field" value="" min="1"></td>
+                <td class="text-center"><input type="number" class="quantity-input input-field" value="1" min="1"></td>
                 <td class="text-center"><input type="text" class="unit-input input-field" value=""></td>
                 <td class="text-center"><input type="text" class="installation-input input-field" value=""></td>
                 <td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>
             `;
-            els.itemsTableBody.appendChild(newRow);
+            tbody.appendChild(newRow);
             updateTotals();
         }
         
         // 更新總計
         function updateTotals() {
-            if (!els.itemsTableBody) return;
+            const tbody = $('itemsTableBody');
+            const subtotalEl = $('subtotal');
+            const totalShippingEl = $('totalShipping');
+            const totalInstallationEl = $('totalInstallation');
+            const depositAmountEl = $('depositAmount');
+            const grandTotalEl = $('grandTotal');
+            const taxTypeEl = $('taxType');
+            
+            if (!tbody || !grandTotalEl) return;
             
             let subtotal = 0, totalShipping = 0, totalInstallation = 0;
             
-            Array.from(els.itemsTableBody.children).forEach(row => {
+            Array.from(tbody.children).forEach(row => {
                 const priceInput = row.querySelector(".price-input");
                 const quantityInput = row.querySelector(".quantity-input");
                 const shippingInput = row.querySelector(".shipping-input");
                 const installationInput = row.querySelector(".installation-input");
                 
-                // 改進的數字解析邏輯
-                const price = parseNumericValue(priceInput?.value);
-                const quantity = parseNumericValue(quantityInput?.value, true);
-                const shipping = parseNumericValue(shippingInput?.value);
-                const installation = parseNumericValue(installationInput?.value);
+                const price = formatHelper.parseNumber(priceInput?.value || "0");
+                const quantity = Math.max(1, formatHelper.parseNumber(quantityInput?.value || "1", true));
+                const shipping = formatHelper.parseNumber(shippingInput?.value || "0");
+                const installation = formatHelper.parseNumber(installationInput?.value || "0");
                 
-                subtotal += price * quantity;
+                subtotal += Math.round(price * quantity);
                 totalShipping += shipping;
                 totalInstallation += installation;
             });
             
-            // 計算總計和稅金
             const untaxedTotal = subtotal + totalShipping + totalInstallation;
-            const isTaxed = els.taxType && els.taxType.value === "taxed";
-            let tax = 0;
-            
-            if (isTaxed) {
-                tax = Math.round(untaxedTotal * 0.05); // 四捨五入稅額
-            }
+            const isTaxed = taxTypeEl && taxTypeEl.value === "taxed";
+            const tax = isTaxed ? Math.round(untaxedTotal * CONFIG.TAX_RATE) : 0;
             
             const grandTotal = untaxedTotal + tax;
-            const depositAmount = Math.round(grandTotal * 0.3); // 四捨五入訂金金額
+            const depositAmount = Math.round(grandTotal * CONFIG.DEPOSIT_RATE);
             
-            // 更新顯示
-            if (els.subtotal) els.subtotal.textContent = formatCurrency(subtotal);
-            if (els.totalShipping) els.totalShipping.textContent = formatCurrency(totalShipping);
-            if (els.totalInstallation) els.totalInstallation.textContent = formatCurrency(totalInstallation);
-            if (els.depositAmount) els.depositAmount.textContent = formatCurrency(depositAmount);
-            if (els.grandTotal) els.grandTotal.textContent = formatCurrency(grandTotal);
+            if (subtotalEl) subtotalEl.textContent = formatHelper.formatCurrency(subtotal);
+            if (totalShippingEl) totalShippingEl.textContent = formatHelper.formatCurrency(totalShipping);
+            if (totalInstallationEl) totalInstallationEl.textContent = formatHelper.formatCurrency(totalInstallation);
+            if (depositAmountEl) depositAmountEl.textContent = formatHelper.formatCurrency(depositAmount);
+            if (grandTotalEl) grandTotalEl.textContent = formatHelper.formatCurrency(grandTotal);
         }
         
-        // 解析數值
-        function parseNumericValue(value, isInteger = false) {
-            if (!value) return 0;
+        // 解析數值與格式化貨幣
+        const formatHelper = {
+            // 解析數值
+            parseNumber: (value, isInteger = false) => {
+                if (!value) return 0;
+                
+                // 轉換為字串並移除非數字字符
+                let sanitized = value.toString()
+                    .replace(/[^\d.-]/g, '')
+                    .trim();
+                
+                // 處理多個小數點
+                const dotIdx = sanitized.indexOf('.');
+                if (dotIdx !== -1) {
+                    const before = sanitized.substring(0, dotIdx + 1);
+                    const after = sanitized.substring(dotIdx + 1).replace(/\./g, '');
+                    sanitized = before + after;
+                }
+                
+                // 處理多個負號
+                if (sanitized.indexOf('-') !== -1) {
+                    const isNeg = sanitized.charAt(0) === '-';
+                    sanitized = sanitized.replace(/-/g, '');
+                    if (isNeg) sanitized = '-' + sanitized;
+                }
+                
+                try {
+                    const num = isInteger ? parseInt(sanitized, 10) : parseFloat(sanitized);
+                    return (isNaN(num) || !isFinite(num)) ? 0 : num;
+                } catch(e) {
+                    return 0;
+                }
+            },
             
-            // 移除所有非數字字符，但保留數字和小數點
-            const cleanValue = value.toString().replace(/[^\d.-]/g, '');
-            
-            // 確保負號只出現在開頭
-            let sanitizedValue = cleanValue;
-            if (cleanValue.indexOf('-') !== -1 && cleanValue.indexOf('-') !== 0) {
-                sanitizedValue = cleanValue.replace(/-/g, '');
-                if (cleanValue.charAt(0) === '-') {
-                    sanitizedValue = '-' + sanitizedValue;
+            // 格式化貨幣
+            formatCurrency: value => {
+                if (isNaN(value) || !isFinite(value)) return '0';
+                
+                try {
+                    return new Intl.NumberFormat('zh-TW', {
+                        style: 'decimal',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    }).format(Math.round(value));
+                } catch (e) {
+                    return Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
             }
+        };
+        
+        // 通知系統
+        function showNotification(message, type = 'info') {
+            const existingNotif = document.querySelector('.notification-container');
+            if (existingNotif) {
+                clearTimeout(existingNotif.dataset.timerId);
+                existingNotif.remove();
+            }
             
-            // 解析為數字
-            const num = isInteger ? parseInt(sanitizedValue, 10) : parseFloat(sanitizedValue);
-            return isNaN(num) ? 0 : num;
+            const notification = document.createElement('div');
+            notification.className = `notification-container notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span class="notification-message">${message}</span>
+                    <button class="notification-close">×</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', () => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            });
+            
+            const timerId = setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+            
+            notification.dataset.timerId = timerId;
+            
+            return notification;
         }
         
-        // 格式化貨幣
-        function formatCurrency(value) {
-            if (isNaN(value)) return '0';
+        // 表單驗證
+        function validateFormQuietly() {
+            const tbody = $('itemsTableBody');
+            if (!tbody) return false;
             
-            // 使用千分位格式化
-            return value.toLocaleString('zh-TW', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
+            // 檢查是否有填寫的商品項目
+            const hasItems = Array.from(tbody.children).some(row => {
+                const nameInput = row.querySelector('.name-input');
+                const priceInput = row.querySelector('.price-input');
+                return nameInput?.value.trim() !== '' && priceInput?.value.trim() !== '';
             });
+            
+            if (!hasItems) return false;
+            
+            // 檢查必填客戶資訊
+            const clientName = document.querySelector('.client-info h4');
+            return clientName && clientName.textContent.trim();
         }
         
         // 啟動應用程序
-        initApp();
+        init();
     });
     </script>
 </body>
