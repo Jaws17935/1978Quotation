@@ -10,9 +10,26 @@
         body{background-color:var(--bg-light);color:var(--text);line-height:1.5;font-size:14px}
         ::-webkit-scrollbar{width:0;height:0;background:transparent}
         *{-ms-overflow-style:none;scrollbar-width:none}
-        .container{max-width:1000px;margin:0 auto 20px;background-color:#fff;box-shadow:0 0 20px rgba(0,0,0,.1)}
-        .section{border-bottom:1px solid var(--border);margin-bottom:10px;padding-bottom:10px}
-        .header{background-color:var(--primary);color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0;padding-bottom:0;border-bottom:none;position:relative}
+        .container{max-width:1000px;margin:0 auto;background-color:#fff;box-shadow:0 0 20px rgba(0,0,0,.1)}
+        .section{border-bottom:none;margin-bottom:0;padding-bottom:0}
+        
+        /* 移除多餘的邊框 */
+        .section {
+            border: none !important;
+        }
+        
+        /* 不同背景色區塊分隔 */
+        .quote-info, .bank-totals-section, .legal-terms-section, .signature-section {
+            background-color: var(--bg-highlight);
+        }
+        .header {
+            background-color: var(--primary);
+        }
+        .items-section {
+            background-color: #fff;
+        }
+        
+        .header{color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0;padding-bottom:0;border-bottom:none;position:relative}
         .company-logo{position:relative;cursor:pointer}
         .company-logo:hover{opacity:.9}
         .company-logo img{max-height:50px;object-fit:contain}
@@ -25,13 +42,12 @@
         .date-display:hover{opacity:.8;border-bottom:1px dashed rgba(0,0,0,.6)}
         .document-title .date-display,.document-title .editable-field{color:#fff;border-bottom:1px dashed rgba(255,255,255,.5)}
         .document-title .date-display:hover{border-bottom:1px dashed rgba(255,255,255,.8)}
-        .hidden-date-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}
+        .hidden-date-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;z-index:-1}
         .content .date-display{color:var(--text);border-bottom:1px dashed var(--accent);display:inline-block;width:auto;min-width:0}
         #quoteDateText, #quoteValidText, #deliveryDateText {
             padding-right: 2px;
         }
-        .quote-info{padding:8px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:15px;background-color:var(--bg-highlight)}
-        #poNumber{display:inline-block;min-width:100px}
+        .quote-info{padding:8px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
         .section-title,.section-title-with-controls{position:relative;padding-bottom:2px;height:20px;margin-bottom:2px;box-sizing:border-box}
         .section-title{font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--primary);font-weight:600;display:flex;align-items:center}
         .section-title:after{content:'';position:absolute;left:0;bottom:0;width:36px;height:2px;background-color:var(--accent)}
@@ -39,39 +55,174 @@
         .info-group h4{font-size:14px;margin-bottom:3px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .info-group p{color:var(--text-light);margin-bottom:4px;line-height:1.4;word-wrap:break-word}
         .info-label{font-weight:600;display:inline-block;width:90px}
-        .quote-meta-row{margin-bottom:2px;line-height:1.2}
+        .quote-meta-row{margin-bottom:6px;line-height:1.2}
         [contenteditable=true],.editable-field{border-bottom:none;padding:1px;min-height:18px;min-width:80px;display:inline-block;color:var(--text);background-color:transparent}
         [contenteditable=true]:hover,.editable-field:hover{background-color:rgba(59,130,246,.1)}
         [contenteditable=true]:focus,.editable-field:focus{outline:none;border-bottom:1px dashed var(--accent);background-color:rgba(59,130,246,.1)}
-        .items-section{padding:10px 20px;background-color:#fff}
-        .section-title-with-controls{display:flex;align-items:center;justify-content:space-between}
-        .items-controls{display:flex;align-items:center;gap:5px;margin-left:10px}
-        .row-btn{background:none;border:none;cursor:pointer;font-size:18px;font-weight:700;width:24px;height:24px;text-align:center;line-height:20px;transition:transform .2s;padding:0}
+        
+        .items-section{padding:8px 20px}
+        .section-title-with-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+        .items-controls{display:flex;align-items:center;gap:6px;margin-left:10px}
+        .row-btn{background:none;border:none;cursor:pointer;font-size:18px;font-weight:700;width:24px;height:24px;text-align:center;line-height:20px;transition:all .2s;padding:0}
         .row-btn.add{color:var(--success)}
         .row-btn.delete{color:var(--danger)}
-        .row-btn:hover{transform:scale(1.2)}
-        table{width:100%;border-collapse:collapse;margin-top:6px;border:1px solid var(--border)}
-        table th{background-color:var(--secondary);color:#fff;text-align:left;padding:5px;font-weight:600;border-bottom:2px solid var(--primary)}
-        table td{padding:3px 5px;border-bottom:1px solid var(--border);vertical-align:middle}
-        table tbody tr:hover{background-color:var(--bg-light)}
+        .row-btn:hover{transform:scale(1.15);opacity:0.85}
+        .items-section .section-title{font-size:14px;letter-spacing:1px;color:var(--primary);position:relative;padding-bottom:3px}
+        .items-section .section-title:after{height:2px;width:36px;border-radius:1px;bottom:-1px}
+        table{width:100%;border-collapse:collapse;margin-top:8px;border-radius:5px;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,0.03);border:none}
+        table th{background-color:var(--primary);color:#fff;text-align:left;padding:6px 8px;font-weight:600;font-size:14px;border:none;letter-spacing:0.5px}
+        table th:first-child{border-top-left-radius:5px}
+        table th:last-child{border-top-right-radius:5px}
+        table td{padding:5px 8px;border:none;border-bottom:1px solid var(--border);vertical-align:middle;transition:all 0.2s ease}
+        table tbody tr{background-color:#fff;transition:all 0.2s ease}
+        table tbody tr:nth-child(even){background-color:var(--bg-light)}
+        table tbody tr:hover{background-color:var(--bg-highlight);box-shadow:0 0 3px rgba(0,0,0,0.03) inset}
+        table tbody tr:last-child td{border-bottom:none}
+        table tbody tr:last-child td:first-child{border-bottom-left-radius:5px}
+        table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
         .text-center{text-align:center}
-        .input-field{width:100%;padding:2px;border:none;border-radius:2px;font-size:14px}
-        .price-input{text-align:center}
+        .input-field{width:100%;padding:4px 6px;border:none;border-radius:3px;font-size:13px;transition:all 0.2s ease;background-color:transparent}
+        .price-input{text-align:center;font-weight:500;color:var(--primary)}
         .quantity-input,.shipping-input,.installation-input,.unit-input{text-align:center}
-        .input-field:focus{outline:none;border-color:var(--accent)}
+        .input-field:focus{outline:none;background-color:rgba(59,130,246,0.08);box-shadow:0 0 0 1px rgba(59,130,246,0.2)}
+        .input-field:hover{background-color:rgba(241,245,249,0.5)}
+        .category-input{font-weight:500;color:var(--secondary)}
+        .name-input{font-weight:500}
         .quantity-input::-webkit-inner-spin-button,.quantity-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
         .quantity-input{-moz-appearance:textfield;appearance:none}
-        .original-price{text-decoration:line-through;color:var(--text-light);font-size:11px;display:block;text-align:center}
-        .legal-terms-section,.bank-totals-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;background-color:var(--bg-highlight);align-items:start}
+        .original-price{text-decoration:line-through;color:var(--text-light);font-size:11px;display:block;text-align:center;padding-top:2px;opacity:0.7}
+        .bank-totals-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;align-items:start}
+        .legal-terms-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;align-items:start}
         .flex-column-container{display:flex;flex-direction:column;padding:0;margin:0}
-        .content-box-light{background-color:var(--bg-light);border:1px solid var(--border);border-radius:4px;padding:8px;font-size:13px;color:var(--text-light);line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden;resize:none}
-        .content-box-white{background-color:#fff;border:1px solid var(--border);border-radius:4px;font-size:14px;color:var(--text-light);line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden;resize:none}
-        .terms-content{padding:8px 8px 0;display:block;box-sizing:border-box;height:auto;overflow:hidden}
-        .terms-list{padding-left:18px;padding-bottom:0;list-style-type:disc;margin:0;width:100%;font-size:13px}
-        .terms-list li{margin-bottom:4px;padding-bottom:0;line-height:1.4;font-size:13px}
-        .terms-list li:last-child{margin-bottom:0}
-        #notes-textarea{width:100%;margin:0;padding:8px;min-height:80px;height:auto;line-height:1.5;flex-grow:1;transition:none;-webkit-appearance:none;resize:vertical;max-height:none;box-sizing:border-box;border:1px solid var(--border);background-color:var(--bg-light);font-size:13px;color:var(--text-light)}
-        .notes-container{position:relative;width:100%;min-height:100px;margin-top:5px;padding:0;overflow:hidden}
+        .content-box-light{
+            background-color:var(--bg-light);
+            border:1px solid var(--border);
+            border-radius:4px;
+            padding:8px;
+            font-size:13px;
+            color:var(--text-light);
+            line-height:1.4;
+            box-shadow:0 1px 3px rgba(0,0,0,.1);
+            overflow:visible;
+            height: auto;
+        }
+        .content-box-white{background-color:#fff;border:1px solid var(--border);border-radius:4px;font-size:14px;color:var(--text-light);line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:visible}
+        
+        /* 合約條款與條件区域的改进样式 */
+        .terms-container {
+            margin-bottom: 6px;
+            flex-shrink: 0;
+        }
+
+        /* 移除固定高度和滚动条，改为自适应内容高度 */
+        .terms-content {
+            height: auto !important;
+            overflow-y: visible !important;
+            padding: 8px 8px 4px;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        /* 更紧凑的条款列表 */
+        .terms-list {
+            padding-left: 16px;
+            padding-bottom: 0;
+            list-style-type: disc;
+            margin: 0;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        /* 减小条款间距和行高 */
+        .terms-list li {
+            margin-bottom: 2px;
+            padding-bottom: 0;
+            line-height: 1.25;
+            font-size: 12px;
+        }
+
+        /* 最后一个条款项目无底部间距 */
+        .terms-list li:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 右側容器設為flex佈局並占滿高度 */
+        .right-side-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        /* 备注区域自适应剩余空间 */
+        .notes-container {
+            position: relative;
+            width: 100%;
+            padding: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            margin-top: 6px;
+            min-height: 90px; /* 確保有足夠空間顯示最小的文本框 */
+        }
+        
+        /* 徹底移除所有滾輪行為的備註框 */
+        #notes-textarea {
+            width: 100%;
+            margin: 0;
+            padding: 8px;
+            height: 65px;
+            min-height: 65px;
+            max-height: none; /* 移除最大高度限制，讓內容可以完全顯示 */
+            font-size: 12px; /* 調整為與條款列表相同的字體大小 */
+            line-height: 1.25; /* 調整為與條款列表相同的行高 */
+            flex-grow: 1;
+            transition: none;
+            -webkit-appearance: none;
+            resize: vertical;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            background-color: var(--bg-light);
+            color: var(--text-light); /* 調整為與法律文件相同的文字顏色 */
+            
+            /* 徹底禁用滾動行為 */
+            overflow: hidden !important; /* 關鍵：使用hidden代替auto完全禁用滾動 */
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+            overflow-y: hidden !important;
+            overflow-x: hidden !important;
+        }
+        
+        /* 為了安全起見，也禁用所有滾輪樣式 */
+        #notes-textarea::-webkit-scrollbar,
+        #notes-textarea::-webkit-scrollbar-thumb,
+        #notes-textarea::-webkit-scrollbar-track,
+        #notes-textarea::-webkit-scrollbar-corner {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            background: transparent !important;
+            visibility: hidden !important;
+        }
+        
+        /* 所有瀏覽器全局滾動條設置 */
+        textarea::-webkit-scrollbar { 
+            display: none !important; 
+            width: 0 !important;
+            height: 0 !important;
+        }
+        
+        .legal-notice-container{
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .legal-notice{
+            height: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: visible;
+        }
         .legal-notice h4{color:var(--primary);margin-bottom:4px;font-size:15px}
         .legal-notice p{margin-bottom:5px}
         .warranty-term-table{width:100%;border-collapse:collapse;margin:4px 0}
@@ -89,7 +240,7 @@
         .bank-info .info-label{width:75px;font-weight:600;font-size:13px;display:inline-block;color:var(--text-light);line-height:1.2}
         .bank-info .info-group p{font-size:13px;line-height:1.2;margin-bottom:0;padding:2px 0;height:24px;display:flex;align-items:center;overflow:hidden}
         .bank-info span[contenteditable="true"]{font-size:13px;font-weight:600;line-height:1.2;min-height:18px;display:inline-block;overflow:hidden}
-        .signature-section{width:100%;display:flex;justify-content:space-between;background-color:var(--bg-highlight);padding:10px 20px;gap:12px;align-items:stretch}
+        .signature-section{width:100%;display:flex;justify-content:space-between;padding:10px 20px;gap:12px;align-items:stretch}
         .staff-info,.client-confirmation{width:48%;text-align:left;background-color:#fff;padding:10px;border:1px solid var(--border);border-radius:4px;display:flex;flex-direction:column;height:100%}
         .staff-info .info-group,.client-confirmation .info-group{margin-top:4px;margin-bottom:0;flex:1;display:flex;flex-direction:column;justify-content:space-between}
         .staff-info .info-label,.client-confirmation .info-label{width:70px}
@@ -244,9 +395,7 @@
             
             /* 容器不被裁切的關鍵設定 */
             .header, .quote-info, .bank-totals-section, 
-            .legal-terms-section, .signature-section, 
-            .legal-notice-container, .right-side-container, 
-            .bank-info-container, .totals-container {
+            .legal-terms-section, .signature-section {
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
@@ -273,14 +422,6 @@
                 size: A4 portrait;
                 margin: 0.3cm;
             }
-            
-            /* 確保背景色顯示 */
-            .header { background-color: var(--primary) !important; }
-            .quote-info, .legal-terms-section, .bank-totals-section, .signature-section { 
-                background-color: var(--bg-highlight) !important; 
-            }
-            table th { background-color: var(--secondary) !important; }
-            .legal-notice, .bank-info, .content-box-light { background-color: var(--bg-light) !important; }
             
             /* 標題區域調整 */
             .header {
@@ -314,96 +455,20 @@
             
             /* 整體佈局調整 */
             .section {
-                margin-bottom: 3px;
-                padding-bottom: 3px;
+                margin-bottom: 0;
+                padding-bottom: 0;
             }
             
-            .quote-info {
-                padding: 4px 15px;
-                gap: 5px;
+            .quote-info, .legal-terms-section, .bank-totals-section, .signature-section, .items-section {
+                padding: 5px 15px;
             }
             
-            .legal-terms-section, .bank-totals-section {
-                padding: 4px 15px;
-                gap: 4px;
-            }
-            
-            .signature-section {
-                padding: 4px 15px;
-                gap: 5px;
-            }
-            
-            .items-section {
-                padding: 4px 15px;
-            }
-            
-            /* 縮小部分元素 */
-            .terms-list li { font-size: 10px; margin-bottom: 1px; line-height: 1.2; }
-            .legal-notice p { font-size: 10px; margin-bottom: 2px; line-height: 1.2; }
-            .legal-notice h4 { font-size: 12px; margin-bottom: 2px; }
-            .warranty-term-table td { padding: 1px 2px; font-size: 9px; }
-            .info-group p { margin-bottom: 1px; }
-            
-            /* 輸入框和可編輯區域保持與網頁顯示一致 */
-            .editable-field, [contenteditable=true], input.input-field {
-                border: none !important;
-                background-color: transparent !important;
-                -webkit-appearance: none !important;
-                box-shadow: none !important;
-            }
-            
-            /* 隱藏不需要的元素 */
-            .row-btn, .upload-logo, .notification-overlay, .items-controls {
-                display: none !important;
-            }
-            
-            /* 不允許任何容器被切割 */
-            .header, .quote-info, .items-section, .bank-totals-section, 
-            .legal-terms-section, .signature-section, .bank-info-container, 
-            .totals-container, .legal-notice-container, .right-side-container {
-                break-inside: avoid !important;
-                page-break-inside: avoid !important;
-            }
-            
-            /* 允許在這些元素後分頁 */
-            .quote-info, .items-section, .bank-totals-section {
-                break-after: auto !important;
-                page-break-after: auto !important;
-            }
-            
-            /* 商品明細表格調整 */
-            .items-section .section-title {
-                font-size: 12px;
-                margin-bottom: 2px;
-            }
-            
-            table {
-                width: 100% !important;
-                table-layout: fixed;
-                font-size: 11px;
-                margin-top: 3px;
-            }
-            
-            table th {
-                padding: 3px 2px;
-                font-size: 11px;
-            }
-            
-            table td {
-                padding: 1px 2px;
-            }
-            
-            .input-field {
-                font-size: 11px;
-                padding: 1px;
-            }
-            
-            .original-price {
-                font-size: 9px;
-            }
-            
-            /* 客戶資訊、聯絡窗口和報價資訊區域字體調整 */
-            .quote-info .section-title {
+            /* 字體和元素縮小 */
+            .quote-info .section-title,
+            .items-section .section-title,
+            .legal-terms-section .section-title,
+            .bank-totals-section .section-title,
+            .signature-section .section-title {
                 font-size: 12px;
                 height: 16px;
                 margin-bottom: 1px;
@@ -414,120 +479,45 @@
                 margin-bottom: 1px;
             }
             
-            .quote-info .info-group p {
+            .quote-info .info-group p,
+            .bank-info .info-group p,
+            .staff-info .info-group p, 
+            .client-confirmation .info-group p {
                 font-size: 11px;
                 margin-bottom: 1px;
                 line-height: 1.2;
             }
             
-            .quote-info .info-label {
+            .quote-info .info-label,
+            .bank-info .info-label,
+            .staff-info .info-label, 
+            .client-confirmation .info-label {
                 width: 70px;
                 font-size: 11px;
             }
             
-            .quote-info .editable-field,
-            .quote-info [contenteditable="true"] {
-                font-size: 11px;
-                min-height: 14px;
-                min-width: 60px;
-            }
-            
-            .quote-info .quote-meta-row {
-                margin-bottom: 1px;
-                line-height: 1.1;
-            }
-            
-            /* 調整標題下方的線條位置 */
-            .section-title:after {
-                bottom: -1px;
-                height: 1px;
-                width: 30px;
-            }
-            
-            /* 保持表單控件原始顯示 */
-            select, textarea, input { appearance: none !important; }
-            
-            /* 調整標題區域 */
-            .header {
-                padding: 5px 15px;
-            }
-            
-            .company-logo img {
-                max-height: 40px;
-            }
-            
-            .default-logo-text {
-                font-size: 18px;
-            }
-            
-            .company-info p {
-                font-size: 11px;
-                margin-bottom: 1px;
-                line-height: 1.2;
-            }
-            
-            .document-title h2 {
-                font-size: 18px;
-                margin-bottom: 1px;
-            }
-            
-            .document-title p {
-                font-size: 11px;
-                margin-bottom: 1px;
-                line-height: 1.2;
-            }
-            
-            /* 客戶資訊區域字體調整 */
-            .quote-info {
-                padding: 5px 15px;
-                gap: 10px;
-            }
-            
-            .quote-info .section-title {
-                font-size: 12px;
-                height: 16px;
-                margin-bottom: 1px;
-            }
-            
-            .quote-info .info-group h4 {
-                font-size: 12px;
-                margin-bottom: 1px;
-            }
-            
-            .quote-info .info-group p {
-                font-size: 11px;
-                margin-bottom: 1px;
-                line-height: 1.2;
-            }
-            
-            .quote-info .info-label {
-                width: 70px;
-                font-size: 11px;
-            }
-            
-            /* 商品明細表格調整 */
-            .items-section {
-                padding: 5px 15px;
-            }
-            
-            .items-section .section-title {
-                font-size: 12px;
-                margin-bottom: 2px;
-            }
-            
+            /* 表格調整 */
             table {
                 width: 100% !important;
                 font-size: 11px;
                 margin-top: 3px;
+                box-shadow: none;
+                border: 1px solid var(--border);
+                border-radius: 4px;
             }
             
             table th {
-                padding: 3px 2px;
+                padding: 3px 4px;
                 font-size: 11px;
+                background-color: var(--primary) !important;
             }
             
             table td {
-                padding: 1px 2px;
+                padding: 2px 4px;
+            }
+            
+            table tbody tr:nth-child(even) {
+                background-color: rgba(241, 245, 249, 0.5) !important;
             }
             
             .input-field {
@@ -535,36 +525,7 @@
                 padding: 1px;
             }
             
-            /* 銀行資訊與總計金額區域 */
-            .bank-totals-section {
-                padding: 5px 15px;
-                gap: 10px;
-            }
-            
-            .bank-info .info-group p {
-                font-size: 11px;
-                height: 18px;
-            }
-            
-            .bank-info .info-label {
-                width: 65px;
-                font-size: 11px;
-            }
-            
-            .totals-table .totals-row {
-                height: 18px;
-            }
-            
-            .totals-label, .totals-value, .clean-select {
-                font-size: 11px;
-            }
-            
-            /* 法律聲明和條款區域 */
-            .legal-terms-section {
-                padding: 5px 15px;
-                gap: 10px;
-            }
-            
+            /* 法律聲明和條款 */
             .terms-list li { 
                 font-size: 10px; 
                 margin-bottom: 1px; 
@@ -587,32 +548,150 @@
                 font-size: 9px; 
             }
             
-            /* 簽名區域調整 */
-            .signature-section {
-                padding: 5px 15px;
-                gap: 10px;
+            /* 總計部分 */
+            .totals-table .totals-row {
+                height: 18px;
             }
             
-            .signature-section .section-title {
-                font-size: 12px;
-                margin-bottom: 1px;
+            .totals-label, .totals-value, .clean-select {
+                font-size: 11px;
             }
             
+            /* 簽名區域 */
             .staff-info, .client-confirmation {
                 padding: 5px;
             }
             
-            .staff-info .info-label, 
-            .client-confirmation .info-label {
-                width: 55px;
-                font-size: 11px;
+            /* 打印時textarea的特殊處理 */
+            #notes-textarea {
+                resize: none !important;
+                height: auto !important;
+                min-height: 40px;
+                font-size: 10px !important;
+                overflow: visible !important; /* 確保內容完全顯示 */
+            }
+        }
+        
+        /* 客戶資訊區塊更紧凑效果 */
+        .client-info {
+            position: relative;
+            transition: all 0.2s ease;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            margin: -1px;
+        }
+
+        /* 懸停時添加輕微陰影和邊框 */
+        .client-info:hover {
+            background-color: rgba(241, 245, 249, 0.5);
+            border-color: var(--border);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 區段標題更紧凑 */
+        .client-info .section-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+            padding-bottom: 2px;
+            height: 18px;
+            font-size: 13px;
+        }
+
+        .client-info .section-title:after {
+            height: 2px;
+            width: 32px;
+        }
+
+        /* 改善排版 - 更紧凑版本 */
+        .client-info .info-group h4 {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+
+        .client-info .info-group p {
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+
+        /* 可編輯欄位紧凑样式 */
+        .client-info .editable-field {
+            border-bottom: 1px dashed rgba(203, 213, 225, 0.5);
+            padding: 1px 3px;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+            min-width: 100px;
+            min-height: 16px;
+        }
+
+        /* 空欄位的提示樣式 */
+        .client-info .editable-field:empty {
+            min-height: 18px;
+            background-color: rgba(241, 245, 249, 0.3);
+        }
+
+        /* 統一編號樣式調整 */
+        .client-info p:last-child {
+            margin-bottom: 1px;
+        }
+
+        /* 列印樣式調整 */
+        @media print {
+            .client-info {
+                padding: 0;
+                background-color: transparent !important;
+                border-color: transparent !important;
+                box-shadow: none !important;
             }
             
-            .staff-info .info-group p, 
-            .client-confirmation .info-group p {
-                font-size: 11px;
-                margin-bottom: 1px;
+            .client-info .editable-field {
+                border-bottom: none !important;
+                box-shadow: none !important;
+                background-color: transparent !important;
             }
+        }
+
+        /* 進一步緊湊聯絡窗口和報價資訊區塊 */
+        .contact-info, .quote-details {
+            position: relative;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            margin: -1px;
+        }
+
+        .contact-info:hover, .quote-details:hover {
+            background-color: rgba(241, 245, 249, 0.5);
+            border-color: var(--border);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-info .section-title, 
+        .quote-details .section-title {
+            margin-bottom: 5px;
+            padding-bottom: 2px;
+            height: 18px;
+            font-size: 13px;
+        }
+
+        .contact-info .info-group p, 
+        .quote-details .info-group p {
+            margin-bottom: 2px;
+            line-height: 1.3;
+        }
+
+        /* 整體報價區塊間距調整 */
+        .quote-info {
+            gap: 10px;
+            padding: 6px 16px;
+        }
+        
+        /* 報價資訊區塊平衡調整 */
+        .quote-details .info-group {
+            margin-top: 4px;
         }
     </style>
 </head>
@@ -652,7 +731,6 @@
                 <div class="quote-details">
                     <div class="section-title">報價資訊</div>
                     <div class="info-group">
-                        <p class="quote-meta-row"><span class="info-label">採購編號：</span><span id="poNumber" class="editable-field"></span></p>
                         <p class="quote-meta-row"><span class="info-label">預計交期：</span><span id="deliveryDateText" class="date-display editable-field"></span><input type="date" id="deliveryDate" class="hidden-date-input"></p>
                         <p class="quote-meta-row"><span class="info-label">支付條件：</span><span>經確認報價後支付30%訂金</span></p>
                         <p class="quote-meta-row"><span class="info-label" style="color:transparent">支付條件：</span><span>商品交付後<span contenteditable="true" data-placeholder="天數" class="editable-field" style="min-width:20px;width:auto;display:inline-block;text-align:center;border-bottom:1px dashed var(--border);margin:0 2px;padding:0">30</span>天內結清尾款</span></p>
@@ -664,7 +742,7 @@
                     <div class="section-title">報價商品明細</div>
                     <div class="items-controls">
                         <button class="row-btn add" id="addItemBtn" title="增加一行">+</button>
-                        <button class="row-btn delete" id="deleteItemBtn" title="刪除最後一行">-</button>
+                        <button class="row-btn delete" id="deleteItemBtn" title="刪除最後一行">−</button>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -732,7 +810,7 @@
             </div>
             
             <div class="legal-terms-section section">
-                <div class="legal-notice-container flex-column-container">
+                <div class="legal-notice-container">
                     <div class="section-title">法律聲明與注意事項</div>
                     <div class="legal-notice content-box-light">
                         <h4>契約法律關係說明</h4>
@@ -755,7 +833,7 @@
                         <p style="margin-bottom:0">若貴方提供圖樣、設計或其他內容進行客製化商品製作，貴方需確保擁有該等內容之合法使用權或著作權。對於貴方提供之任何可能涉及第三方著作權、商標權或其他智慧財產權之內容，本公司不負審查義務及侵權責任。若因此導致任何法律爭議或損害，應由貴方承擔全部責任並賠償本公司因此遭受之損失。本公司保留拒絕處理任何疑似侵權內容之權利。</p>
                     </div>
                 </div>
-                <div class="right-side-container flex-column-container">
+                <div class="right-side-container">
                     <div class="terms-container">
                         <div class="section-title">合約條款與條件</div>
                         <div class="terms-content content-box-light">
@@ -772,7 +850,7 @@
                     </div>
                     <div class="notes-container">
                         <div class="section-title">其他備註</div>
-                        <textarea id="notes-textarea" class="content-box-light" placeholder="" rows="5"></textarea>
+                        <textarea id="notes-textarea" class="content-box-light"></textarea>
                     </div>
                 </div>
             </div>
@@ -884,46 +962,40 @@
             }
         };
         
-        // 列印事件前後處理
+        // 列印事件處理
         function setupPrintHandlers() {
             // 列印前處理
             window.addEventListener('beforeprint', () => {
-                // 確保所有可編輯區域顯示為普通文本但保持視覺效果
+                // 處理可編輯區域
                 const editables = document.querySelectorAll('[contenteditable="true"], .editable-field');
                 editables.forEach(el => {
-                    // 只移除邊框但保持其他樣式屬性
                     el.dataset.originalBorder = el.style.border;
                     el.style.border = 'none';
                     
-                    // 如果是空白的可編輯區域，填入placeholder內容方便識別
-                    if (!el.textContent.trim() && el.getAttribute('data-placeholder')) {
+                    // 如果是空白的可編輯區域，不要顯示內容
+                    if (!el.textContent.trim()) {
                         el.dataset.wasEmpty = "true";
-                        el.textContent = el.getAttribute('data-placeholder');
-                        el.style.color = '#aaa';
+                        el.style.color = 'transparent';
                     }
                 });
                 
-                // 確保所有input顯示內容與原樣式一致
+                // 處理輸入欄位
                 const inputs = document.querySelectorAll('input.input-field');
                 inputs.forEach(input => {
-                    // 處理空白輸入框但保持樣式
-                    if (!input.value && input.placeholder) {
+                    if (!input.value) {
                         input.dataset.wasEmpty = "true";
-                        input.value = input.placeholder;
-                        input.style.color = '#aaa';
+                        // 不填充任何值，保持空白
+                        input.style.color = 'transparent';
                     }
                 });
                 
-                // 處理表格空行但保持整體結構
+                // 處理表格空行
                 const tableRows = document.querySelectorAll('#itemsTableBody tr');
                 let allEmpty = true;
                 
-                // 先檢查是否所有行都是空的
                 tableRows.forEach(row => {
                     let rowHasContent = false;
-                    const inputs = row.querySelectorAll('input');
-                    
-                    inputs.forEach(input => {
+                    row.querySelectorAll('input').forEach(input => {
                         if (input.value.trim() !== '') {
                             rowHasContent = true;
                             allEmpty = false;
@@ -935,15 +1007,13 @@
                     }
                 });
                 
-                // 如果所有行都是空的，保留第一行，否則隱藏空行
+                // 處理所有空行
                 if (allEmpty && tableRows.length > 0) {
-                    // 如果所有行都是空的，只保留第一行
                     for (let i = 1; i < tableRows.length; i++) {
                         tableRows[i].dataset.hiddenForPrint = "true";
                         tableRows[i].style.display = 'none';
                     }
                 } else {
-                    // 否則隱藏空行
                     tableRows.forEach(row => {
                         if (row.dataset.wasEmpty) {
                             row.dataset.hiddenForPrint = "true";
@@ -953,7 +1023,7 @@
                     });
                 }
                 
-                // 關閉任何打開的通知
+                // 關閉通知
                 const notification = document.querySelector('.notification-overlay.show');
                 if (notification) {
                     notification.classList.remove('show');
@@ -962,15 +1032,13 @@
             
             // 列印後還原
             window.addEventListener('afterprint', () => {
-                // 恢復可編輯區域的樣式
-                const editables = document.querySelectorAll('[contenteditable="true"], .editable-field');
-                editables.forEach(el => {
+                // 還原可編輯區域
+                document.querySelectorAll('[contenteditable="true"], .editable-field').forEach(el => {
                     if (el.dataset.originalBorder) {
                         el.style.border = el.dataset.originalBorder;
                         delete el.dataset.originalBorder;
                     }
                     
-                    // 恢復空白可編輯區域
                     if (el.dataset.wasEmpty === "true") {
                         el.textContent = '';
                         el.style.color = '';
@@ -978,9 +1046,8 @@
                     }
                 });
                 
-                // 恢復空的input
-                const inputs = document.querySelectorAll('input.input-field');
-                inputs.forEach(input => {
+                // 還原輸入欄位
+                document.querySelectorAll('input.input-field').forEach(input => {
                     if (input.dataset.wasEmpty === "true") {
                         input.value = '';
                         input.style.color = '';
@@ -988,31 +1055,30 @@
                     }
                 });
                 
-                // 恢復隱藏的表格行
-                const hiddenRows = document.querySelectorAll('tr[data-hidden-for-print="true"]');
-                hiddenRows.forEach(row => {
+                // 還原隱藏的表格行
+                document.querySelectorAll('tr[data-hidden-for-print="true"]').forEach(row => {
                     row.style.display = '';
                     delete row.dataset.hiddenForPrint;
                 });
             });
         }
         
-        // Show notification modal
+        // 顯示通知
         function showNotification(message, type = 'info') {
             if (!message) return null;
             
-            // Remove any existing notifications
+            // 移除現有通知
             const existingNotif = document.querySelector('.notification-overlay');
             if (existingNotif) {
                 existingNotif.classList.remove('show');
                 setTimeout(() => existingNotif.remove(), 300);
             }
             
-            // Create overlay container
+            // 創建通知容器
             const overlay = document.createElement('div');
             overlay.className = `notification-overlay notification-${type}`;
             
-            // Set icon based on notification type
+            // 設置圖標和標題
             let iconHtml = '';
             let title = '通知';
             
@@ -1029,7 +1095,7 @@
                 iconHtml = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
             }
             
-            // Create modal content
+            // 創建通知內容
             overlay.innerHTML = `
                 <div class="notification-modal">
                     <div class="notification-header">
@@ -1049,11 +1115,11 @@
             
             document.body.appendChild(overlay);
             
-            // Force browser reflow to enable transition
+            // 強制重排以啟用過渡效果
             overlay.offsetHeight;
             overlay.classList.add('show');
             
-            // Add event listener to close button
+            // 添加按鈕事件
             const okButton = overlay.querySelector('.notification-btn');
             if (okButton) {
                 okButton.addEventListener('click', () => {
@@ -1061,11 +1127,10 @@
                     setTimeout(() => overlay.remove(), 300);
                 });
                 
-                // Auto focus to enable closing with Enter key
                 setTimeout(() => okButton.focus(), 100);
             }
             
-            // Add keyboard event handler to close with Escape key
+            // 添加鍵盤事件
             const handleKeyDown = (e) => {
                 if (e.key === 'Escape' || e.key === 'Enter') {
                     overlay.classList.remove('show');
@@ -1080,7 +1145,7 @@
             return overlay;
         }
         
-        // Set cursor to end of editable content
+        // 設置光標到元素末尾
         function setCursorToEnd(el) {
             if (!el) return;
             try {
@@ -1096,8 +1161,8 @@
             }
         }
         
-        // 生成報價單號和採購編號的通用函數
-        function generateId(date = TODAY, prefix = '', type = 'quote') {
+        // 生成ID（報價單號）
+        function generateId(date = TODAY, prefix = '') {
             try {
                 const month = MONTH_ABBR[date.getMonth()];
                 const year = date.getFullYear().toString().slice(-2);
@@ -1105,41 +1170,28 @@
                 const day = String(date.getDate()).padStart(2, "0");
                 const rand = Math.random().toString(36).substring(2, 4).toUpperCase();
                 
-                // 根據類型使用不同格式
-                return type === 'po' 
-                    ? `${prefix}${rand}${monthNum}${day}${year}`
-                    : `${prefix}${month}-${year}${monthNum}${day}${rand}`;
+                return `${prefix}${month}-${year}${monthNum}${day}${rand}`;
             } catch (err) {
                 console.error('生成ID時發生錯誤:', err);
-                // 生成備用隨機ID
                 return `${prefix}${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
             }
         }
         
-        // 更新報價單號和採購編號
+        // 更新報價單號
         function updateIds() {
             try {
                 const qDate = $('quoteDate');
                 const dateValue = qDate?.value || TODAY.toISOString().split("T")[0];
                 const date = new Date(dateValue);
                 
-                // 更新報價單號
                 const qNum = $('quoteNumber');
-                if (qNum) {
-                    qNum.textContent = generateId(date);
-                }
-                
-                // 更新採購編號
-                const po = $('poNumber');
-                if (po) {
-                    po.textContent = generateId(date, 'PO-', 'po');
-                }
+                if (qNum) qNum.textContent = generateId(date);
             } catch (err) {
                 console.error('更新ID時發生錯誤:', err);
             }
         }
         
-        // Initialize dates on page load
+        // 初始化日期
         function initDates() {
             try {
                 // 初始化報價日期
@@ -1150,7 +1202,7 @@
                     quoteDate.value = TODAY.toISOString().split("T")[0];
                     quoteDateText.textContent = formatHelper.formatDate(quoteDate.value);
                     
-                    // 使用報價日期設置有效期和交期，確保它們始終基於當前報價日期
+                    // 基於報價日期設置有效期和交期
                     const currentQuoteDate = new Date(quoteDate.value);
                     
                     // 設置有效期限
@@ -1180,7 +1232,39 @@
             }
         }
         
-        // Add a new row to the items table
+        // 初始化商品明細表格為8行
+        function initItemsTable() {
+            const tbody = $('itemsTableBody');
+            if (!tbody) return;
+            
+            try {
+                // 清空現有行
+                tbody.innerHTML = '';
+                
+                // 添加8行
+                for (let i = 0; i < 8; i++) {
+                    const newRow = document.createElement("tr");
+                    newRow.innerHTML = `
+                        <td><input type="text" class="category-input input-field" placeholder=""></td>
+                        <td><input type="text" class="name-input input-field" placeholder=""></td>
+                        <td style="text-align:center">
+                            <input type="text" class="price-input input-field" value="">
+                            <span class="original-price"></span>
+                        </td>
+                        <td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td>
+                        <td class="text-center"><input type="text" class="unit-input input-field" value=""></td>
+                        <td class="text-center"><input type="text" class="installation-input input-field" value=""></td>
+                        <td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>
+                    `;
+                    tbody.appendChild(newRow);
+                }
+                updateTotals();
+            } catch(err) {
+                console.error('初始化表格時發生錯誤:', err);
+            }
+        }
+        
+        // 添加新行
         function addRow() {
             const tbody = $('itemsTableBody');
             if (!tbody) return;
@@ -1206,9 +1290,8 @@
             }
         }
         
-        // Update totals based on item values
+        // 更新總計
         function updateTotals() {
-            // 獲取所有需要的DOM元素
             const tbody = $('itemsTableBody');
             const subtotalEl = $('subtotal');
             const totalShippingEl = $('totalShipping');
@@ -1222,7 +1305,7 @@
             let subtotal = 0, totalShipping = 0, totalInstallation = 0;
             
             try {
-                // 計算每行商品的總計
+                // 計算每行商品總計
                 Array.from(tbody.children).forEach(row => {
                     const priceInput = row.querySelector(".price-input");
                     const quantityInput = row.querySelector(".quantity-input");
@@ -1259,7 +1342,7 @@
             }
         }
         
-        // Format input values (mainly for currency fields)
+        // 格式化輸入值
         function formatInputValue(input) {
             if (!input) return;
             const value = input.value;
@@ -1288,7 +1371,7 @@
             }
         }
         
-        // Handle input for contenteditable fields
+        // 處理可編輯欄位輸入
         function handleInput(element) {
             if (!element) return;
             
@@ -1314,7 +1397,7 @@
             }
         }
         
-        // Handle date display and picker
+        // 處理日期顯示和選擇器
         function handleDateDisplay(e) {
             e.preventDefault();
             const inputId = DATE_MAP[e.target.id];
@@ -1323,7 +1406,6 @@
             const dateInput = $(inputId);
             if (!dateInput) return;
             
-            // 使用現代瀏覽器的日期選擇器或回退到傳統方法
             if ('showPicker' in dateInput) {
                 dateInput.showPicker();
             } else {
@@ -1332,19 +1414,72 @@
             }
         }
         
-        // Set up all event listeners
+        // 處理日期變更
+        function handleDateChange(inputEl, textEl, validateFn) {
+            if (!inputEl || !textEl) return;
+            
+            inputEl.addEventListener('change', function() {
+                // 更新顯示文本
+                if (textEl) textEl.textContent = formatHelper.formatDate(this.value);
+                
+                // 執行驗證
+                if (typeof validateFn === 'function') {
+                    validateFn.call(this);
+                }
+                
+                // 如果是報價日期變更，更新ID
+                if (inputEl.id === 'quoteDate') {
+                    updateIds();
+                }
+            });
+        }
+        
+        // 根據內容自動調整 textarea 高度，不使用滾動條
+        function autoResizeTextarea(textarea) {
+            if (!textarea) return;
+            
+            // 初始高度設置
+            textarea.style.height = 'auto';
+            // 計算實際內容高度
+            const newHeight = Math.max(65, textarea.scrollHeight);
+            // 應用新高度
+            textarea.style.height = newHeight + 'px';
+        }
+        
+        // 修正後的 adjustLayout 函數
+        const adjustLayout = debounce(() => {
+            const textarea = $('notes-textarea');
+            if (textarea) {
+                autoResizeTextarea(textarea);
+            }
+        }, 50); // 縮短延遲提高響應速度
+        
+        // 在頁面初始化時設置 textarea 的初始高度
+        function initTextareaHeight() {
+            const textarea = $('notes-textarea');
+            if (textarea) {
+                // 初始化
+                autoResizeTextarea(textarea);
+                
+                // 使用輸入事件而不是僅依賴調用
+                textarea.addEventListener('input', function() {
+                    autoResizeTextarea(this);
+                });
+                
+                // 貼上時也需要觸發
+                textarea.addEventListener('paste', function() {
+                    // 短延遲以確保內容已被插入
+                    setTimeout(() => autoResizeTextarea(this), 10);
+                });
+            }
+        }
+        
+        // 設置所有事件監聽器
         function setupEventListeners() {
             const container = document.querySelector('.container');
             const updateTotalsDebounced = debounce(updateTotals, 200);
-            const adjustLayout = debounce(() => {
-                const textarea = $('notes-textarea');
-                if (textarea) {
-                    textarea.style.height = 'auto';
-                    textarea.style.height = Math.max(80, textarea.scrollHeight) + 'px';
-                }
-            }, 250);
             
-            // Logo upload handling
+            // Logo上傳處理
             const logoContainer = $('logo-container');
             const uploadLogo = $('upload-logo');
             
@@ -1383,37 +1518,17 @@
                 });
             }
             
-            // Date display click handler
+            // 日期顯示點擊處理
             container.addEventListener('click', e => {
                 if (e.target.classList.contains('date-display')) {
                     handleDateDisplay(e);
                 }
             });
             
-            // Quote date change handler
+            // 日期處理
             const qDate = $('quoteDate');
             const vDate = $('quoteValidUntil');
             const dDate = $('deliveryDate');
-            
-            // 統一處理日期變更邏輯
-            function handleDateChange(inputEl, textEl, validateFn) {
-                if (!inputEl || !textEl) return;
-                
-                inputEl.addEventListener('change', function() {
-                    // 更新顯示的日期文本
-                    if (textEl) textEl.textContent = formatHelper.formatDate(this.value);
-                    
-                    // 執行驗證函數（如果提供）
-                    if (typeof validateFn === 'function') {
-                        validateFn.call(this);
-                    }
-                    
-                    // 如果是報價日期變更，則更新ID
-                    if (inputEl.id === 'quoteDate') {
-                        updateIds();
-                    }
-                });
-            }
             
             if (qDate) {
                 handleDateChange(qDate, $('quoteDateText'), function() {
@@ -1477,13 +1592,10 @@
                 });
             }
             
-            // 定義可編輯欄位選擇器
-            const editableSelector = '[contenteditable="true"], .editable-field';
-            
             // 中文輸入法組合文字處理
+            const editableSelector = '[contenteditable="true"], .editable-field';
             const compositionElements = new WeakMap();
             
-            // 使用事件委派來處理所有可編輯元素的事件
             container.addEventListener('compositionstart', e => {
                 if (e.target.matches(editableSelector)) {
                     compositionElements.set(e.target, true);
@@ -1521,42 +1633,37 @@
                 }
             });
             
-            // Quote table event handlers
+            // 報價表格事件處理
             const qTable = $('quoteTable');
             if (qTable) {
-                // 定義價格相關欄位選擇器
                 const priceFieldSelector = '.price-input, .shipping-input, .installation-input';
                 const calculationFieldSelector = `${priceFieldSelector}, .quantity-input`;
                 
-                // 處理表格輸入事件
+                // 處理表格輸入
                 qTable.addEventListener('input', e => {
-                    // 檢查是否是需要進行計算的輸入欄位
                     if (e.target.matches(calculationFieldSelector)) {
-                        // 格式化金額數值欄位
                         if (e.target.matches(priceFieldSelector)) {
                             formatInputValue(e.target);
                         }
-                        
-                        // 更新總計金額
                         updateTotalsDebounced();
                     }
                 });
                 
-                // Auto-select input value on focus
+                // 自動選擇輸入值
                 qTable.addEventListener('focus', e => {
                     if (e.target.tagName === 'INPUT') {
                         e.target.select();
                     }
                 }, true);
                 
-                // Format input value on blur
+                // 格式化輸入值
                 qTable.addEventListener('blur', e => {
                     if (e.target.matches(priceFieldSelector)) {
                         formatInputValue(e.target);
                     }
                 }, true);
                 
-                // Add new row when tabbing out of last cell in last row
+                // Tab鍵添加新行
                 qTable.addEventListener('keydown', e => {
                     if (e.key === 'Tab') {
                         const tbody = $('itemsTableBody');
@@ -1585,11 +1692,10 @@
                 });
             }
             
-            // Button handlers
+            // 按鈕處理
             const addBtn = $('addItemBtn');
             const delBtn = $('deleteItemBtn');
             const taxType = $('taxType');
-            const notesTextarea = $('notes-textarea');
             
             if (addBtn) {
                 addBtn.addEventListener('click', () => {
@@ -1618,22 +1724,19 @@
                 taxType.addEventListener('change', updateTotalsDebounced);
             }
             
-            if (notesTextarea) {
-                notesTextarea.addEventListener('input', adjustLayout);
-                notesTextarea.addEventListener('focus', adjustLayout);
-            }
-            
-            // Window resize handler
+            // 窗口調整處理
             window.addEventListener('resize', adjustLayout);
         }
         
-        // Initialize the page
+        // 初始化頁面
         function init() {
             try {
                 initDates();
                 setupEventListeners();
-                setupPrintHandlers(); // 保留列印處理功能
+                setupPrintHandlers();
+                initItemsTable(); // 添加這一行來初始化8行表格
                 updateTotals();
+                initTextareaHeight(); // 添加初始化textarea高度
             } catch(err) {
                 console.error('初始化時發生錯誤:', err);
             }
