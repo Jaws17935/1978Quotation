@@ -5,29 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>百貨銷售報價單</title>
     <style>
-        :root {--primary:#1e3a8a;--secondary:#4b5e7a;--accent:#3b82f6;--bg-light:#f8fafc;--bg-highlight:#f1f5f9;--text:#111827;--text-light:#6b7280;--border:#e5e7eb;--success:#15803d;--danger:#e53e3e}
+        :root{--primary:#1e3a8a;--secondary:#4b5e7a;--accent:#3b82f6;--bg-light:#f8fafc;--bg-highlight:#f1f5f9;--text:#111827;--text-light:#6b7280;--border:#e5e7eb;--success:#15803d;--danger:#e53e3e}
         *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
         body{background-color:var(--bg-light);color:var(--text);line-height:1.5;font-size:14px}
         ::-webkit-scrollbar{width:0;height:0;background:transparent}
         *{-ms-overflow-style:none;scrollbar-width:none}
-        .container{max-width:1000px;margin:0 auto 20px;background-color:white;box-shadow:0 0 20px rgba(0,0,0,0.1)}
+        .container{max-width:1000px;margin:0 auto 20px;background-color:#fff;box-shadow:0 0 20px rgba(0,0,0,.1)}
         .section{border-bottom:1px solid var(--border);margin-bottom:10px;padding-bottom:10px}
-        .header{background-color:var(--primary);color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0;padding-bottom:0;border-bottom:none}
+        .header{background-color:var(--primary);color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0;padding-bottom:0;border-bottom:none;position:relative}
         .company-logo{position:relative;cursor:pointer}
-        .company-logo:hover{opacity:0.9}
-        
+        .company-logo:hover{opacity:.9}
         .company-logo img{max-height:50px;object-fit:contain}
-        .upload-logo{position:absolute;width:0.1px;height:0.1px;opacity:0;z-index:-1}
-        .company-info p{opacity:0.9;margin-bottom:2px;line-height:1.3}
-        .default-logo-text{font-size:22px;font-weight:600;color:white}
+        .upload-logo{position:absolute;width:.1px;height:.1px;opacity:0;z-index:-1}
+        .company-info p{opacity:.9;margin-bottom:2px;line-height:1.3}
+        .default-logo-text{font-size:22px;font-weight:600;color:#fff}
         .document-title h2{font-size:20px;font-weight:600;margin-bottom:2px;margin-left:-20px}
-        .document-title p{color:rgba(255,255,255,0.9);margin-bottom:2px;line-height:1.3}
-        .date-display{cursor:pointer;transition:opacity 0.2s;border-bottom:1px dashed rgba(0,0,0,0.3);padding-bottom:1px;background-color:transparent}
-        .date-display:hover{opacity:0.8;border-bottom:1px dashed rgba(0,0,0,0.6)}
-        .document-title .date-display,.document-title .editable-field{color:white;border-bottom:1px dashed rgba(255,255,255,0.5)}
-        .document-title .date-display:hover{border-bottom:1px dashed rgba(255,255,255,0.8)}
+        .document-title p{color:rgba(255,255,255,.9);margin-bottom:2px;line-height:1.3}
+        .date-display{cursor:pointer;transition:opacity .2s;border-bottom:1px dashed rgba(0,0,0,.3);padding-bottom:1px;background-color:transparent}
+        .date-display:hover{opacity:.8;border-bottom:1px dashed rgba(0,0,0,.6)}
+        .document-title .date-display,.document-title .editable-field{color:#fff;border-bottom:1px dashed rgba(255,255,255,.5)}
+        .document-title .date-display:hover{border-bottom:1px dashed rgba(255,255,255,.8)}
         .hidden-date-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}
-        .content .date-display{color:var(--text);border-bottom:1px dashed var(--accent);display:inline-block;min-width:120px}
+        .content .date-display{color:var(--text);border-bottom:1px dashed var(--accent);display:inline-block;width:auto;min-width:0}
+        #quoteDateText, #quoteValidText, #deliveryDateText {
+            padding-right: 2px;
+        }
         .quote-info{padding:8px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:15px;background-color:var(--bg-highlight)}
         #poNumber{display:inline-block;min-width:100px}
         .section-title,.section-title-with-controls{position:relative;padding-bottom:2px;height:20px;margin-bottom:2px;box-sizing:border-box}
@@ -39,17 +41,17 @@
         .info-label{font-weight:600;display:inline-block;width:90px}
         .quote-meta-row{margin-bottom:2px;line-height:1.2}
         [contenteditable=true],.editable-field{border-bottom:none;padding:1px;min-height:18px;min-width:80px;display:inline-block;color:var(--text);background-color:transparent}
-        [contenteditable=true]:hover,.editable-field:hover{background-color:rgba(59,130,246,0.1)}
-        [contenteditable=true]:focus,.editable-field:focus{outline:none;border-bottom:1px dashed var(--accent);background-color:rgba(59,130,246,0.1)}
-        .items-section{padding:10px 20px;background-color:white}
+        [contenteditable=true]:hover,.editable-field:hover{background-color:rgba(59,130,246,.1)}
+        [contenteditable=true]:focus,.editable-field:focus{outline:none;border-bottom:1px dashed var(--accent);background-color:rgba(59,130,246,.1)}
+        .items-section{padding:10px 20px;background-color:#fff}
         .section-title-with-controls{display:flex;align-items:center;justify-content:space-between}
         .items-controls{display:flex;align-items:center;gap:5px;margin-left:10px}
-        .row-btn{background:none;border:none;cursor:pointer;font-size:18px;font-weight:bold;width:24px;height:24px;text-align:center;line-height:20px;transition:transform 0.2s;padding:0}
+        .row-btn{background:none;border:none;cursor:pointer;font-size:18px;font-weight:700;width:24px;height:24px;text-align:center;line-height:20px;transition:transform .2s;padding:0}
         .row-btn.add{color:var(--success)}
         .row-btn.delete{color:var(--danger)}
         .row-btn:hover{transform:scale(1.2)}
         table{width:100%;border-collapse:collapse;margin-top:6px;border:1px solid var(--border)}
-        table th{background-color:var(--secondary);color:white;text-align:left;padding:5px;font-weight:600;border-bottom:2px solid var(--primary)}
+        table th{background-color:var(--secondary);color:#fff;text-align:left;padding:5px;font-weight:600;border-bottom:2px solid var(--primary)}
         table td{padding:3px 5px;border-bottom:1px solid var(--border);vertical-align:middle}
         table tbody tr:hover{background-color:var(--bg-light)}
         .text-center{text-align:center}
@@ -60,11 +62,11 @@
         .quantity-input::-webkit-inner-spin-button,.quantity-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
         .quantity-input{-moz-appearance:textfield;appearance:none}
         .original-price{text-decoration:line-through;color:var(--text-light);font-size:11px;display:block;text-align:center}
-        .legal-terms-section, .bank-totals-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;background-color:var(--bg-highlight);align-items:start}
+        .legal-terms-section,.bank-totals-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;background-color:var(--bg-highlight);align-items:start}
         .flex-column-container{display:flex;flex-direction:column;padding:0;margin:0}
-        .content-box-light{background-color:var(--bg-light);border:1px solid var(--border);border-radius:4px;padding:8px;font-size:13px;color:var(--text-light);line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden;resize:none}
-        .content-box-white{background-color:white;border:1px solid var(--border);border-radius:4px;font-size:14px;color:var(--text-light);line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden;resize:none}
-        .terms-content{padding:8px 8px 0 8px;display:block;box-sizing:border-box;height:auto;overflow:hidden}
+        .content-box-light{background-color:var(--bg-light);border:1px solid var(--border);border-radius:4px;padding:8px;font-size:13px;color:var(--text-light);line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden;resize:none}
+        .content-box-white{background-color:#fff;border:1px solid var(--border);border-radius:4px;font-size:14px;color:var(--text-light);line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden;resize:none}
+        .terms-content{padding:8px 8px 0;display:block;box-sizing:border-box;height:auto;overflow:hidden}
         .terms-list{padding-left:18px;padding-bottom:0;list-style-type:disc;margin:0;width:100%;font-size:13px}
         .terms-list li{margin-bottom:4px;padding-bottom:0;line-height:1.4;font-size:13px}
         .terms-list li:last-child{margin-bottom:0}
@@ -74,32 +76,108 @@
         .legal-notice p{margin-bottom:5px}
         .warranty-term-table{width:100%;border-collapse:collapse;margin:4px 0}
         .warranty-term-table td{padding:3px 5px;border:1px solid var(--border);font-size:12px}
-        .warranty-term-table .term-label{width:20%;font-weight:600;background-color:rgba(75,94,122,0.1);color:var(--primary)}
-        .totals-table{width:100%;border:none;background-color:white;border-radius:4px}
+        .warranty-term-table .term-label{width:20%;font-weight:600;background-color:rgba(75,94,122,.1);color:var(--primary)}
+        .totals-table{width:100%;border:none;background-color:#fff;border-radius:4px}
         .totals-row{height:24px;display:flex;align-items:center}
         .totals-row.totals-final{margin-top:auto;border-top:1px solid var(--border);padding-top:3px;height:28px}
         .totals-label{width:60%;color:var(--text-light);font-size:13px;padding-left:5px}
         .totals-value{width:40%;text-align:right;font-weight:600;font-size:13px;padding-right:5px}
         .clean-select{appearance:none;border:none;background:transparent;width:100%;font-size:13px;font-weight:600;color:var(--text-light);cursor:pointer;outline:none;line-height:1.2}
-        .bank-info-container, .totals-container{height:180px;display:flex;flex-direction:column}
-        .bank-info, .totals-table{box-sizing:border-box;padding:6px 8px;flex-grow:1;display:flex;flex-direction:column;margin-top:3px}
+        .bank-info-container,.totals-container{height:180px;display:flex;flex-direction:column}
+        .bank-info,.totals-table{box-sizing:border-box;padding:6px 8px;flex-grow:1;display:flex;flex-direction:column;margin-top:3px}
         .bank-info .info-group{margin:0;display:flex;flex-direction:column;justify-content:space-between;height:100%}
         .bank-info .info-label{width:75px;font-weight:600;font-size:13px;display:inline-block;color:var(--text-light);line-height:1.2}
         .bank-info .info-group p{font-size:13px;line-height:1.2;margin-bottom:0;padding:2px 0;height:24px;display:flex;align-items:center;overflow:hidden}
         .bank-info span[contenteditable="true"]{font-size:13px;font-weight:600;line-height:1.2;min-height:18px;display:inline-block;overflow:hidden}
         .signature-section{width:100%;display:flex;justify-content:space-between;background-color:var(--bg-highlight);padding:10px 20px;gap:12px;align-items:stretch}
-        .staff-info,.client-confirmation{width:48%;text-align:left;background-color:white;padding:10px;border:1px solid var(--border);border-radius:4px;display:flex;flex-direction:column;height:100%}
+        .staff-info,.client-confirmation{width:48%;text-align:left;background-color:#fff;padding:10px;border:1px solid var(--border);border-radius:4px;display:flex;flex-direction:column;height:100%}
         .staff-info .info-group,.client-confirmation .info-group{margin-top:4px;margin-bottom:0;flex:1;display:flex;flex-direction:column;justify-content:space-between}
         .staff-info .info-label,.client-confirmation .info-label{width:70px}
-        .notification-container{position:fixed;top:20px;right:20px;max-width:350px;background:white;box-shadow:0 4px 12px rgba(0,0,0,0.15);border-radius:4px;overflow:hidden;z-index:9999;transition:all 0.3s ease;opacity:0;transform:translateY(-20px)}
-        .notification-container.show{opacity:1;transform:translateY(0)}
-        .notification-content{padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
-        .notification-message{flex:1;margin-right:10px;font-size:14px}
-        .notification-close{background:none;border:none;font-size:18px;cursor:pointer;padding:0 4px;line-height:1}
-        .notification-info{border-left:4px solid var(--accent)}
-        .notification-success{border-left:4px solid var(--success)}
-        .notification-warning{border-left:4px solid #f59e0b}
-        .notification-error{border-left:4px solid var(--danger)}
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .notification-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .notification-modal {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            transform: translateY(-20px);
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+        .notification-overlay.show .notification-modal {
+            transform: translateY(0);
+        }
+        .notification-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .notification-title {
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .notification-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .notification-icon svg {
+            flex-shrink: 0;
+        }
+        .notification-content {
+            padding: 20px 16px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .notification-footer {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+        }
+        .notification-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 14px;
+        }
+        .notification-btn:hover {
+            background-color: #163172;
+        }
+        .notification-warning .notification-title {
+            color: #f59e0b;
+        }
+        .notification-error .notification-title {
+            color: var(--danger);
+        }
         .info-group-text{margin-bottom:4px;line-height:1.4;word-wrap:break-word;color:var(--text-light)}
         @media(max-width:768px){
             .container{margin:0;width:100%}
@@ -109,28 +187,432 @@
             .client-info,.quote-details,.contact-info{width:100%;margin-bottom:15px}
             .legal-terms-section,.bank-totals-section{display:flex;flex-direction:column;gap:15px;padding:15px}
             .legal-notice-container,.totals-container,.bank-info-container,.right-side-container{width:100%}
-            .items-section{padding:10px 15px;overflow-x:hidden}
-            table{min-width:650px}
+            .items-section{padding:10px 15px;overflow-x:auto}
+            .table-responsive{overflow-x:auto}
+            table{width:100%}
             .signature-section{flex-direction:column;padding:15px}
             .staff-info,.client-confirmation{width:100%;margin-bottom:10px}
         }
         @media (min-width:769px) and (max-width:992px){
             .container{margin:0 auto;width:95%}
-            .legal-terms-section, .bank-totals-section{gap:12px}
+            .legal-terms-section,.bank-totals-section{gap:12px}
             .section-title{font-size:13px}
         }
         @media print{
-            *{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
-            body{width:100%;margin:0;padding:0}
-            .container{width:100%;margin:0;box-shadow:none}
-            .header{background-color:var(--primary) !important}
-            .quote-info,.legal-terms-section,.signature-section{background-color:var(--bg-highlight) !important}
-            table th{background-color:var(--secondary) !important}
-            .legal-notice,.bank-info{background-color:var(--bg-light) !important}
-            .row-btn, .upload-logo, .notification-container{display:none !important}
-            .editable-field, [contenteditable=true]{border:none !important;background-color:transparent !important}
-            .content-box-light, .content-box-white{box-shadow:none !important;border:1px solid #ccc !important}
-            table th{background-color:#4b5e7a !important;-webkit-print-color-adjust:exact !important;color-adjust:exact !important}
+            /* 基本列印設定 */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            html, body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: white;
+            }
+            
+            .container {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                box-shadow: none;
+                padding: 0;
+            }
+            
+            /* 確保背景色顯示 */
+            .header { background-color: var(--primary) !important; }
+            .quote-info, .legal-terms-section, .bank-totals-section, .signature-section { 
+                background-color: var(--bg-highlight) !important; 
+            }
+            table th { background-color: var(--secondary) !important; }
+            .legal-notice, .bank-info, .content-box-light { background-color: var(--bg-light) !important; }
+            
+            /* 輸入框和可編輯區域保持與網頁顯示一致 */
+            .editable-field, [contenteditable=true], input.input-field {
+                border: none !important;
+                background-color: transparent !important;
+                -webkit-appearance: none !important;
+                box-shadow: none !important;
+            }
+            
+            /* 隱藏不需要的元素 */
+            .row-btn, .upload-logo, .notification-overlay, .items-controls {
+                display: none !important;
+            }
+            
+            /* 容器不被裁切的關鍵設定 */
+            .header, .quote-info, .bank-totals-section, 
+            .legal-terms-section, .signature-section, 
+            .legal-notice-container, .right-side-container, 
+            .bank-info-container, .totals-container {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            
+            /* 特別處理商品區域，允許其在必要時分頁 */
+            .items-section {
+                break-inside: auto !important;
+                page-break-inside: auto !important;
+            }
+            
+            /* 確保表格行不被切割 */
+            #itemsTableBody tr {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            
+            /* 表格標題保持在每頁表格的頂部 */
+            table thead {
+                display: table-header-group;
+            }
+            
+            /* 頁面設置 */
+            @page {
+                size: A4 portrait;
+                margin: 0.3cm;
+            }
+            
+            /* 確保背景色顯示 */
+            .header { background-color: var(--primary) !important; }
+            .quote-info, .legal-terms-section, .bank-totals-section, .signature-section { 
+                background-color: var(--bg-highlight) !important; 
+            }
+            table th { background-color: var(--secondary) !important; }
+            .legal-notice, .bank-info, .content-box-light { background-color: var(--bg-light) !important; }
+            
+            /* 標題區域調整 */
+            .header {
+                padding: 5px 15px;
+            }
+            
+            .company-logo img {
+                max-height: 40px;
+            }
+            
+            .default-logo-text {
+                font-size: 18px;
+            }
+            
+            .company-info p {
+                font-size: 11px;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+            
+            .document-title h2 {
+                font-size: 18px;
+                margin-bottom: 1px;
+            }
+            
+            .document-title p {
+                font-size: 11px;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+            
+            /* 整體佈局調整 */
+            .section {
+                margin-bottom: 3px;
+                padding-bottom: 3px;
+            }
+            
+            .quote-info {
+                padding: 4px 15px;
+                gap: 5px;
+            }
+            
+            .legal-terms-section, .bank-totals-section {
+                padding: 4px 15px;
+                gap: 4px;
+            }
+            
+            .signature-section {
+                padding: 4px 15px;
+                gap: 5px;
+            }
+            
+            .items-section {
+                padding: 4px 15px;
+            }
+            
+            /* 縮小部分元素 */
+            .terms-list li { font-size: 10px; margin-bottom: 1px; line-height: 1.2; }
+            .legal-notice p { font-size: 10px; margin-bottom: 2px; line-height: 1.2; }
+            .legal-notice h4 { font-size: 12px; margin-bottom: 2px; }
+            .warranty-term-table td { padding: 1px 2px; font-size: 9px; }
+            .info-group p { margin-bottom: 1px; }
+            
+            /* 輸入框和可編輯區域保持與網頁顯示一致 */
+            .editable-field, [contenteditable=true], input.input-field {
+                border: none !important;
+                background-color: transparent !important;
+                -webkit-appearance: none !important;
+                box-shadow: none !important;
+            }
+            
+            /* 隱藏不需要的元素 */
+            .row-btn, .upload-logo, .notification-overlay, .items-controls {
+                display: none !important;
+            }
+            
+            /* 不允許任何容器被切割 */
+            .header, .quote-info, .items-section, .bank-totals-section, 
+            .legal-terms-section, .signature-section, .bank-info-container, 
+            .totals-container, .legal-notice-container, .right-side-container {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            
+            /* 允許在這些元素後分頁 */
+            .quote-info, .items-section, .bank-totals-section {
+                break-after: auto !important;
+                page-break-after: auto !important;
+            }
+            
+            /* 商品明細表格調整 */
+            .items-section .section-title {
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+            
+            table {
+                width: 100% !important;
+                table-layout: fixed;
+                font-size: 11px;
+                margin-top: 3px;
+            }
+            
+            table th {
+                padding: 3px 2px;
+                font-size: 11px;
+            }
+            
+            table td {
+                padding: 1px 2px;
+            }
+            
+            .input-field {
+                font-size: 11px;
+                padding: 1px;
+            }
+            
+            .original-price {
+                font-size: 9px;
+            }
+            
+            /* 客戶資訊、聯絡窗口和報價資訊區域字體調整 */
+            .quote-info .section-title {
+                font-size: 12px;
+                height: 16px;
+                margin-bottom: 1px;
+            }
+            
+            .quote-info .info-group h4 {
+                font-size: 12px;
+                margin-bottom: 1px;
+            }
+            
+            .quote-info .info-group p {
+                font-size: 11px;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+            
+            .quote-info .info-label {
+                width: 70px;
+                font-size: 11px;
+            }
+            
+            .quote-info .editable-field,
+            .quote-info [contenteditable="true"] {
+                font-size: 11px;
+                min-height: 14px;
+                min-width: 60px;
+            }
+            
+            .quote-info .quote-meta-row {
+                margin-bottom: 1px;
+                line-height: 1.1;
+            }
+            
+            /* 調整標題下方的線條位置 */
+            .section-title:after {
+                bottom: -1px;
+                height: 1px;
+                width: 30px;
+            }
+            
+            /* 保持表單控件原始顯示 */
+            select, textarea, input { appearance: none !important; }
+            
+            /* 調整標題區域 */
+            .header {
+                padding: 5px 15px;
+            }
+            
+            .company-logo img {
+                max-height: 40px;
+            }
+            
+            .default-logo-text {
+                font-size: 18px;
+            }
+            
+            .company-info p {
+                font-size: 11px;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+            
+            .document-title h2 {
+                font-size: 18px;
+                margin-bottom: 1px;
+            }
+            
+            .document-title p {
+                font-size: 11px;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+            
+            /* 客戶資訊區域字體調整 */
+            .quote-info {
+                padding: 5px 15px;
+                gap: 10px;
+            }
+            
+            .quote-info .section-title {
+                font-size: 12px;
+                height: 16px;
+                margin-bottom: 1px;
+            }
+            
+            .quote-info .info-group h4 {
+                font-size: 12px;
+                margin-bottom: 1px;
+            }
+            
+            .quote-info .info-group p {
+                font-size: 11px;
+                margin-bottom: 1px;
+                line-height: 1.2;
+            }
+            
+            .quote-info .info-label {
+                width: 70px;
+                font-size: 11px;
+            }
+            
+            /* 商品明細表格調整 */
+            .items-section {
+                padding: 5px 15px;
+            }
+            
+            .items-section .section-title {
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+            
+            table {
+                width: 100% !important;
+                font-size: 11px;
+                margin-top: 3px;
+            }
+            
+            table th {
+                padding: 3px 2px;
+                font-size: 11px;
+            }
+            
+            table td {
+                padding: 1px 2px;
+            }
+            
+            .input-field {
+                font-size: 11px;
+                padding: 1px;
+            }
+            
+            /* 銀行資訊與總計金額區域 */
+            .bank-totals-section {
+                padding: 5px 15px;
+                gap: 10px;
+            }
+            
+            .bank-info .info-group p {
+                font-size: 11px;
+                height: 18px;
+            }
+            
+            .bank-info .info-label {
+                width: 65px;
+                font-size: 11px;
+            }
+            
+            .totals-table .totals-row {
+                height: 18px;
+            }
+            
+            .totals-label, .totals-value, .clean-select {
+                font-size: 11px;
+            }
+            
+            /* 法律聲明和條款區域 */
+            .legal-terms-section {
+                padding: 5px 15px;
+                gap: 10px;
+            }
+            
+            .terms-list li { 
+                font-size: 10px; 
+                margin-bottom: 1px; 
+                line-height: 1.2; 
+            }
+            
+            .legal-notice p { 
+                font-size: 10px; 
+                margin-bottom: 2px; 
+                line-height: 1.2; 
+            }
+            
+            .legal-notice h4 { 
+                font-size: 12px; 
+                margin-bottom: 2px; 
+            }
+            
+            .warranty-term-table td { 
+                padding: 1px 2px; 
+                font-size: 9px; 
+            }
+            
+            /* 簽名區域調整 */
+            .signature-section {
+                padding: 5px 15px;
+                gap: 10px;
+            }
+            
+            .signature-section .section-title {
+                font-size: 12px;
+                margin-bottom: 1px;
+            }
+            
+            .staff-info, .client-confirmation {
+                padding: 5px;
+            }
+            
+            .staff-info .info-label, 
+            .client-confirmation .info-label {
+                width: 55px;
+                font-size: 11px;
+            }
+            
+            .staff-info .info-group p, 
+            .client-confirmation .info-group p {
+                font-size: 11px;
+                margin-bottom: 1px;
+            }
         }
     </style>
 </head>
@@ -172,7 +654,8 @@
                     <div class="info-group">
                         <p class="quote-meta-row"><span class="info-label">採購編號：</span><span id="poNumber" class="editable-field"></span></p>
                         <p class="quote-meta-row"><span class="info-label">預計交期：</span><span id="deliveryDateText" class="date-display editable-field"></span><input type="date" id="deliveryDate" class="hidden-date-input"></p>
-                        <p class="quote-meta-row"><span class="info-label">支付條件：</span><span contenteditable="true" data-placeholder="請輸入支付條件" class="editable-field"></span></p>
+                        <p class="quote-meta-row"><span class="info-label">支付條件：</span><span>經確認報價後支付30%訂金</span></p>
+                        <p class="quote-meta-row"><span class="info-label" style="color:transparent">支付條件：</span><span>商品交付後<span contenteditable="true" data-placeholder="天數" class="editable-field" style="min-width:20px;width:auto;display:inline-block;text-align:center;border-bottom:1px dashed var(--border);margin:0 2px;padding:0">30</span>天內結清尾款</span></p>
                     </div>
                 </div>
             </div>
@@ -188,13 +671,13 @@
                     <table id="quoteTable">
                         <thead>
                             <tr>
-                                <th style="width:15%;">種類</th>
-                                <th style="width:30%;">名稱</th>
-                                <th style="width:15%;" class="text-center">單價</th>
-                                <th style="width:10%;" class="text-center">數量</th>
-                                <th style="width:10%;" class="text-center">單位</th>
-                                <th style="width:10%;" class="text-center">安裝</th>
-                                <th style="width:10%;" class="text-center">運費</th>
+                                <th style="width:15%">種類</th>
+                                <th style="width:30%">名稱</th>
+                                <th style="width:15%" class="text-center">單價</th>
+                                <th style="width:10%" class="text-center">數量</th>
+                                <th style="width:10%" class="text-center">單位</th>
+                                <th style="width:10%" class="text-center">安裝</th>
+                                <th style="width:10%" class="text-center">運費</th>
                             </tr>
                         </thead>
                         <tbody id="itemsTableBody">
@@ -205,7 +688,7 @@
                                     <input type="text" class="price-input input-field" value="">
                                     <span class="original-price"></span>
                                 </td>
-                                <td class="text-center"><input type="number" class="quantity-input input-field" value="" min="1"></td>
+                                <td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td>
                                 <td class="text-center"><input type="text" class="unit-input input-field" value=""></td>
                                 <td class="text-center"><input type="text" class="installation-input input-field" value=""></td>
                                 <td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>
@@ -268,8 +751,8 @@
                         </div>
                         <h4>個人資料保護聲明</h4>
                         <p>依據個人資料保護法規定，本公司蒐集、處理及利用貴方之個人資料，僅限於本交易及售後服務之目的範圍內。貴方享有查詢、閱覽、複製、補充、更正、刪除及停止蒐集處理利用之權利。</p>
-                        <h4 style="margin-bottom:4px;">版權免責聲明</h4>
-                        <p style="margin-bottom:0;">若貴方提供圖樣、設計或其他內容進行客製化商品製作，貴方需確保擁有該等內容之合法使用權或著作權。對於貴方提供之任何可能涉及第三方著作權、商標權或其他智慧財產權之內容，本公司不負審查義務及侵權責任。若因此導致任何法律爭議或損害，應由貴方承擔全部責任並賠償本公司因此遭受之損失。本公司保留拒絕處理任何疑似侵權內容之權利。</p>
+                        <h4 style="margin-bottom:4px">版權免責聲明</h4>
+                        <p style="margin-bottom:0">若貴方提供圖樣、設計或其他內容進行客製化商品製作，貴方需確保擁有該等內容之合法使用權或著作權。對於貴方提供之任何可能涉及第三方著作權、商標權或其他智慧財產權之內容，本公司不負審查義務及侵權責任。若因此導致任何法律爭議或損害，應由貴方承擔全部責任並賠償本公司因此遭受之損失。本公司保留拒絕處理任何疑似侵權內容之權利。</p>
                     </div>
                 </div>
                 <div class="right-side-container flex-column-container">
@@ -277,19 +760,19 @@
                         <div class="section-title">合約條款與條件</div>
                         <div class="terms-content content-box-light">
                             <ul class="terms-list">
-                                <li>本報價單自開立日起30天內有效，逾期未接受者視為自動失效。</li>
+                                <li>本報價單自開立日起7天內有效，逾期未接受者視為自動失效。</li>
                                 <li>政府機關、公立學校採購適用政府採購法相關規定，如有牴觸，以政府採購法為準。</li>
                                 <li>實際交付之商品顏色、紋理可能因生產批次及自然材質特性而有些微差異，此非屬產品瑕疵。</li>
                                 <li>所有金額以新台幣計價，包含基本運送與安裝費用，但不含因現場特殊情況衍生之額外工程費用。</li>
                                 <li>驗收時請確實檢查商品外觀及功能，簽收後視為接受商品現況。如有明顯瑕疵，請於驗收時立即提出。</li>
                                 <li>報價單確認無誤，需支付總金額30%作為訂金，餘款支付方式若合約另有約定則從其約定，否則應於驗收合格後30日內付清。</li>
-                                <li>標準交期為確認訂單後4-6週，實際交期將依訂單確認書為準。遇原物料短缺或不可抗力因素，交期可能順延，本公司將立即通知。</li>
+                                <li>標準交期為確認訂單後4-8週，實際交期將依訂單確認書為準。遇原物料短缺或不可抗力因素，交期可能順延，本公司將立即通知。</li>
                             </ul>
                         </div>
                     </div>
                     <div class="notes-container">
                         <div class="section-title">其他備註</div>
-                        <textarea id="notes-textarea" class="content-box-light" placeholder="請在此填寫其他特殊需求或說明..." rows="5"></textarea>
+                        <textarea id="notes-textarea" class="content-box-light" placeholder="" rows="5"></textarea>
                     </div>
                 </div>
             </div>
@@ -316,366 +799,502 @@
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // 常量配置
+        // Configuration constants
         const CONFIG = {
             TAX_RATE: 0.05,
             DEPOSIT_RATE: 0.3,
             DEFAULT_VALID_DAYS: 7,
-            MAX_VALID_DAYS: 30,
-            DEFAULT_DELIVERY_DAYS: 20
+            DEFAULT_DELIVERY_DAYS: 20,
+            MAX_VALUE: 999999999,
+            MIN_VALUE: -999999999
         };
         
         const MONTH_ABBR = ["JA", "FE", "MR", "AP", "MY", "JN", "JL", "AU", "SE", "OC", "NO", "DE"];
         const TODAY = new Date();
         
-        // DOM 元素簡易選擇器
+        // DOM Utility functions
         const $ = id => document.getElementById(id);
         const $all = sel => document.querySelectorAll(sel);
         
-        // 初始化
-        function init() {
-            // 驗證關鍵元素
-            const requiredEls = ['quoteNumber', 'quoteDateText', 'quoteValidText', 'deliveryDateText',
-                               'itemsTableBody', 'subtotal', 'grandTotal', 'taxType'];
-            if(!requiredEls.every(id => $(id))) {
-                console.error('初始化失敗：部分必要元素不存在');
-                return;
-            }
-            
-            setupLogoUpload();
-            initDates();
-            setupEditableElements();
-            setupEventListeners();
-            updateTotals();
-            setTimeout(adjustLayout, 100);
-            window.addEventListener('resize', debounce(adjustLayout, 250));
-        }
+        // Date input mapping
+        const DATE_MAP = {
+            quoteDateText: 'quoteDate',
+            quoteValidText: 'quoteValidUntil',
+            deliveryDateText: 'deliveryDate'
+        };
         
-        // 防抖函數
+        // Debounce function to limit rapid function calls
         const debounce = (fn, wait) => {
             let t;
             return function() {
                 clearTimeout(t);
                 t = setTimeout(() => fn.apply(this, arguments), wait);
             };
-        }
+        };
         
-        // 調整布局
-        function adjustLayout() {
-            const bankTitle = document.querySelector('.bank-info-container .section-title');
-            const totalsTitle = document.querySelector('.totals-container .section-title');
+        // Helper functions for formatting
+        const formatHelper = {
+            // Parse number from string, handle boundaries
+            parseNumber: (value, isInteger = false) => {
+                if (!value) return 0;
+                try {
+                    const str = String(value).replace(/[^\d.-]/g, '').trim();
+                    const num = isInteger ? parseInt(str) : parseFloat(str);
+                    return isNaN(num) ? 0 : Math.min(CONFIG.MAX_VALUE, Math.max(CONFIG.MIN_VALUE, num));
+                } catch (e) {
+                    return 0;
+                }
+            },
             
-            if (bankTitle && totalsTitle) {
-                const h = Math.max(bankTitle.offsetHeight, totalsTitle.offsetHeight);
-                bankTitle.style.height = totalsTitle.style.height = `${h}px`;
-            }
+            // Format currency for display
+            formatCurrency: value => {
+                if (isNaN(value)) return '0';
+                try {
+                    const num = Math.round(Math.min(CONFIG.MAX_VALUE, Math.max(CONFIG.MIN_VALUE, value)));
+                    return new Intl.NumberFormat('zh-TW', {
+                        style: 'decimal',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    }).format(num);
+                } catch (e) {
+                    return Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+            },
             
-            // 調整文本區域高度
-            const textarea = $('notes-textarea');
-            if (textarea) {
-                textarea.style.height = 'auto';
-                textarea.style.height = Math.max(80, textarea.scrollHeight) + 'px';
+            // Format text based on type
+            formatText: (text, type) => {
+                if (!text) return '';
+                if (type === "phone") return text.replace(/[^\d\s()+\-]/g, "").substring(0, 20);
+                if (type === "email") return text.replace(/\s/g, "").substring(0, 50);
+                return text.substring(0, 500);
+            },
+            
+            // Format date for display
+            formatDate: dateString => {
+                if (!dateString) return '';
+                try {
+                    return new Date(dateString).toLocaleDateString('zh-TW', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                } catch (e) {
+                    return dateString;
+                }
             }
-        }
+        };
         
-        // 初始化日期
-        function initDates() {
-            // 設置報價日期
-            const quoteDate = $('quoteDate');
-            const quoteDateText = $('quoteDateText');
-            if (quoteDate && quoteDateText) {
-                quoteDate.value = TODAY.toISOString().split("T")[0];
-                quoteDateText.textContent = formatDate(quoteDate.value);
-            }
-            
-            // 設置有效期限
-            const validDate = $('quoteValidUntil');
-            const validText = $('quoteValidText');
-            if (validDate && validText) {
-                const vDate = new Date(TODAY);
-                vDate.setDate(TODAY.getDate() + CONFIG.DEFAULT_VALID_DAYS);
-                validDate.value = vDate.toISOString().split("T")[0];
-                validText.textContent = formatDate(validDate.value);
-            }
-            
-            // 設置交期日期
-            const delivDate = $('deliveryDate');
-            const delivText = $('deliveryDateText');
-            if (delivDate && delivText) {
-                const dDate = new Date(TODAY);
-                dDate.setDate(TODAY.getDate() + CONFIG.DEFAULT_DELIVERY_DAYS);
-                delivDate.value = dDate.toISOString().split("T")[0];
-                delivText.textContent = formatDate(delivDate.value);
-            }
-            
-            updateQuoteNumber();
-            updatePoNumber();
-            setupDateInteractions();
-        }
-        
-        // 生成唯一ID
-        function generateId(date = TODAY, prefix = '', type = 'quote') {
-            const month = MONTH_ABBR[date.getMonth()];
-            const year = date.getFullYear().toString().slice(-2);
-            const monthNum = String(date.getMonth() + 1).padStart(2, "0");
-            const day = String(date.getDate()).padStart(2, "0");
-            const rand = Math.random().toString(36).substring(2, 4).toUpperCase();
-            
-            return type === 'po' 
-                ? `${prefix}${rand}${monthNum}${day}${year}`
-                : `${prefix}${month}-${year}${monthNum}${day}${rand}`;
-        }
-        
-        // 更新報價單號與採購編號
-        function updateQuoteNumber() {
-            const qNum = $('quoteNumber');
-            const qDate = $('quoteDate');
-            if (!qNum) return;
-            
-            const date = new Date((qDate?.value) || TODAY);
-            qNum.textContent = generateId(date);
-        }
-        
-        function updatePoNumber() {
-            const po = $('poNumber');
-            const qDate = $('quoteDate');
-            if (po && qDate) {
-                const date = new Date(qDate.value || TODAY);
-                po.textContent = generateId(date, 'PO-', 'po');
-            }
-        }
-        
-        // 設置日期互動
-        function setupDateInteractions() {
-            [
-                {display: $('quoteDateText'), picker: $('quoteDate')},
-                {display: $('quoteValidText'), picker: $('quoteValidUntil')},
-                {display: $('deliveryDateText'), picker: $('deliveryDate')}
-            ].forEach(item => {
-                if (item.display && item.picker) {
-                    item.display.addEventListener('click', e => {
-                        e.preventDefault();
-                        if ('showPicker' in item.picker) {
-                            item.picker.showPicker();
-                        } else {
-                            item.picker.focus();
-                            item.picker.click();
+        // 列印事件前後處理
+        function setupPrintHandlers() {
+            // 列印前處理
+            window.addEventListener('beforeprint', () => {
+                // 確保所有可編輯區域顯示為普通文本但保持視覺效果
+                const editables = document.querySelectorAll('[contenteditable="true"], .editable-field');
+                editables.forEach(el => {
+                    // 只移除邊框但保持其他樣式屬性
+                    el.dataset.originalBorder = el.style.border;
+                    el.style.border = 'none';
+                    
+                    // 如果是空白的可編輯區域，填入placeholder內容方便識別
+                    if (!el.textContent.trim() && el.getAttribute('data-placeholder')) {
+                        el.dataset.wasEmpty = "true";
+                        el.textContent = el.getAttribute('data-placeholder');
+                        el.style.color = '#aaa';
+                    }
+                });
+                
+                // 確保所有input顯示內容與原樣式一致
+                const inputs = document.querySelectorAll('input.input-field');
+                inputs.forEach(input => {
+                    // 處理空白輸入框但保持樣式
+                    if (!input.value && input.placeholder) {
+                        input.dataset.wasEmpty = "true";
+                        input.value = input.placeholder;
+                        input.style.color = '#aaa';
+                    }
+                });
+                
+                // 處理表格空行但保持整體結構
+                const tableRows = document.querySelectorAll('#itemsTableBody tr');
+                let allEmpty = true;
+                
+                // 先檢查是否所有行都是空的
+                tableRows.forEach(row => {
+                    let rowHasContent = false;
+                    const inputs = row.querySelectorAll('input');
+                    
+                    inputs.forEach(input => {
+                        if (input.value.trim() !== '') {
+                            rowHasContent = true;
+                            allEmpty = false;
+                        }
+                    });
+                    
+                    if (!rowHasContent) {
+                        row.dataset.wasEmpty = "true";
+                    }
+                });
+                
+                // 如果所有行都是空的，保留第一行，否則隱藏空行
+                if (allEmpty && tableRows.length > 0) {
+                    // 如果所有行都是空的，只保留第一行
+                    for (let i = 1; i < tableRows.length; i++) {
+                        tableRows[i].dataset.hiddenForPrint = "true";
+                        tableRows[i].style.display = 'none';
+                    }
+                } else {
+                    // 否則隱藏空行
+                    tableRows.forEach(row => {
+                        if (row.dataset.wasEmpty) {
+                            row.dataset.hiddenForPrint = "true";
+                            row.style.display = 'none';
+                            delete row.dataset.wasEmpty;
                         }
                     });
                 }
+                
+                // 關閉任何打開的通知
+                const notification = document.querySelector('.notification-overlay.show');
+                if (notification) {
+                    notification.classList.remove('show');
+                }
             });
             
-            // 報價日期變更
-            const qDate = $('quoteDate');
-            if (qDate) {
-                qDate.addEventListener('change', function() {
-                    const qText = $('quoteDateText');
-                    if (qText) qText.textContent = formatDate(this.value);
-                    
-                    updateQuoteNumber();
-                    updatePoNumber();
-                    validateDates();
-                    validateDeliveryDate();
-                    showNotification("報價日期已更新", "info");
-                });
-            }
-            
-            // 有效期限變更
-            const vDate = $('quoteValidUntil');
-            if (vDate) {
-                vDate.addEventListener('change', function() {
-                    const vText = $('quoteValidText');
-                    if (vText) vText.textContent = formatDate(this.value);
-                    validateDates();
-                });
-            }
-            
-            // 交期日期變更
-            const dDate = $('deliveryDate');
-            if (dDate) {
-                dDate.addEventListener('change', function() {
-                    const dText = $('deliveryDateText');
-                    if (dText) dText.textContent = formatDate(this.value);
-                    validateDeliveryDate();
-                });
-            }
-        }
-        
-        // 日期驗證相關函數
-        function validateMinDate(dateInput, dateText, minDate, message) {
-            if (!dateInput || !dateText || !minDate) return false;
-            
-            const selectedDate = new Date(dateInput.value);
-            if (selectedDate < minDate) {
-                if (confirm(message)) {
-                    const correctedDate = new Date(minDate);
-                    correctedDate.setDate(minDate.getDate() + 1);
-                    dateInput.value = correctedDate.toISOString().split("T")[0];
-                    dateText.textContent = formatDate(dateInput.value);
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-        function validateMaxDate(dateInput, dateText, maxDate, message) {
-            if (!dateInput || !dateText || !maxDate) return false;
-            
-            const selectedDate = new Date(dateInput.value);
-            if (selectedDate > maxDate) {
-                if (confirm(message)) {
-                    dateInput.value = maxDate.toISOString().split("T")[0];
-                    dateText.textContent = formatDate(dateInput.value);
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-        // 驗證有效期限
-        function validateDates() {
-            const qDate = $('quoteDate');
-            const vDate = $('quoteValidUntil');
-            const vText = $('quoteValidText');
-            
-            if (!qDate || !vDate || !vText) return;
-            
-            const quoteDate = new Date(qDate.value || TODAY);
-            
-            // 檢查最小日期 - 有效期限不應早於報價日期
-            validateMinDate(
-                vDate, vText, quoteDate, 
-                "有效期限不得早於報價日期。是否自動調整為報價日期後 " + CONFIG.DEFAULT_VALID_DAYS + " 天？"
-            );
-            
-            // 檢查最大日期 - 有效期限不應超過最大天數
-            const maxValidDate = new Date(quoteDate);
-            maxValidDate.setDate(quoteDate.getDate() + CONFIG.MAX_VALID_DAYS);
-            validateMaxDate(
-                vDate, vText, maxValidDate,
-                "根據合約條款，有效期限最長為 " + CONFIG.MAX_VALID_DAYS + " 天。是否調整為最長期限？"
-            );
-        }
-        
-        // 驗證交付日期
-        function validateDeliveryDate() {
-            const qDate = $('quoteDate');
-            const dDate = $('deliveryDate');
-            const dText = $('deliveryDateText');
-            
-            if (!qDate || !dDate || !dText) return;
-            
-            const quoteDate = new Date(qDate.value || TODAY);
-            
-            validateMinDate(
-                dDate, dText, quoteDate,
-                "預計交期不得早於報價日期。是否自動調整為報價日期後 " + CONFIG.DEFAULT_DELIVERY_DAYS + " 天？"
-            );
-        }
-        
-        // Logo上傳
-        function setupLogoUpload() {
-            const logoContainer = $('logo-container');
-            const uploadLogo = $('upload-logo');
-            
-            if (!logoContainer || !uploadLogo) return;
-            
-            // 點擊觸發檔案選擇
-            logoContainer.addEventListener('click', () => {
-                uploadLogo.value = '';
-                uploadLogo.click();
-            });
-            
-            // 檔案選擇處理
-            uploadLogo.addEventListener('change', e => {
-                const file = e.target.files[0];
-                if (!file) return;
-                
-                if (!file.type.match('image.*')) {
-                    showNotification('請選擇圖片檔案', 'error');
-                    return;
-                }
-                
-                if (file.size > 2*1024*1024) {
-                    showNotification('圖片大小不能超過 2MB', 'error');
-                    return;
-                }
-                
-                const reader = new FileReader();
-                
-                reader.onerror = () => {
-                    showNotification('讀取圖片時發生錯誤', 'error');
-                };
-                
-                reader.onload = e => {
-                    try {
-                        const tempImg = new Image();
-                        tempImg.onload = () => {
-                            logoContainer.innerHTML = '';
-                            const img = document.createElement('img');
-                            img.src = e.target.result;
-                            img.alt = '公司Logo';
-                            img.style.maxHeight = '50px';
-                            logoContainer.appendChild(img);
-                        };
-                        
-                        tempImg.onerror = () => {
-                            showNotification('圖片格式無效', 'error');
-                        };
-                        
-                        tempImg.src = e.target.result;
-                    } catch (err) {
-                        showNotification('處理圖片時發生錯誤', 'error');
+            // 列印後還原
+            window.addEventListener('afterprint', () => {
+                // 恢復可編輯區域的樣式
+                const editables = document.querySelectorAll('[contenteditable="true"], .editable-field');
+                editables.forEach(el => {
+                    if (el.dataset.originalBorder) {
+                        el.style.border = el.dataset.originalBorder;
+                        delete el.dataset.originalBorder;
                     }
-                };
+                    
+                    // 恢復空白可編輯區域
+                    if (el.dataset.wasEmpty === "true") {
+                        el.textContent = '';
+                        el.style.color = '';
+                        delete el.dataset.wasEmpty;
+                    }
+                });
                 
-                reader.readAsDataURL(file);
+                // 恢復空的input
+                const inputs = document.querySelectorAll('input.input-field');
+                inputs.forEach(input => {
+                    if (input.dataset.wasEmpty === "true") {
+                        input.value = '';
+                        input.style.color = '';
+                        delete input.dataset.wasEmpty;
+                    }
+                });
+                
+                // 恢復隱藏的表格行
+                const hiddenRows = document.querySelectorAll('tr[data-hidden-for-print="true"]');
+                hiddenRows.forEach(row => {
+                    row.style.display = '';
+                    delete row.dataset.hiddenForPrint;
+                });
             });
         }
         
-        // 設置可編輯元素
-        function setupEditableElements() {
-            const editables = $all('[contenteditable="true"],.editable-field');
+        // Show notification modal
+        function showNotification(message, type = 'info') {
+            if (!message) return null;
             
-            editables.forEach(el => {
-                if (!el) return;
-                
-                el.isComposing = false;
-                
-                el.addEventListener("compositionstart", function() { this.isComposing = true; });
-                el.addEventListener("compositionend", function() { 
-                    this.isComposing = false; 
-                    handleInput(this); 
+            // Remove any existing notifications
+            const existingNotif = document.querySelector('.notification-overlay');
+            if (existingNotif) {
+                existingNotif.classList.remove('show');
+                setTimeout(() => existingNotif.remove(), 300);
+            }
+            
+            // Create overlay container
+            const overlay = document.createElement('div');
+            overlay.className = `notification-overlay notification-${type}`;
+            
+            // Set icon based on notification type
+            let iconHtml = '';
+            let title = '通知';
+            
+            if (type === 'warning') {
+                iconHtml = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+                title = '注意';
+            } else if (type === 'error') {
+                iconHtml = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e53e3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+                title = '錯誤';
+            } else if (type === 'success') {
+                iconHtml = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+                title = '成功';
+            } else {
+                iconHtml = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+            }
+            
+            // Create modal content
+            overlay.innerHTML = `
+                <div class="notification-modal">
+                    <div class="notification-header">
+                        <div class="notification-title">
+                            <span class="notification-icon">${iconHtml}</span>
+                            <span>${title}</span>
+                        </div>
+                    </div>
+                    <div class="notification-content">
+                        ${message}
+                    </div>
+                    <div class="notification-footer">
+                        <button class="notification-btn">我知道了</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+            
+            // Force browser reflow to enable transition
+            overlay.offsetHeight;
+            overlay.classList.add('show');
+            
+            // Add event listener to close button
+            const okButton = overlay.querySelector('.notification-btn');
+            if (okButton) {
+                okButton.addEventListener('click', () => {
+                    overlay.classList.remove('show');
+                    setTimeout(() => overlay.remove(), 300);
                 });
                 
-                el.addEventListener("keypress", e => {
-                    if (e.key === "Enter") e.preventDefault();
-                });
-                
-                el.addEventListener("input", function() {
-                    if (!this.isComposing) handleInput(this);
-                });
-                
-                el.addEventListener("paste", function(e) {
-                    e.preventDefault();
-                    const text = (e.clipboardData || window.clipboardData)
-                        .getData("text")
-                        .replace(/\n/g, "")
-                        .trim();
-                    document.execCommand("insertText", false, formatText(text, this.getAttribute("data-type")));
-                    cursorHelper.setToEnd(this);
-                });
-            });
+                // Auto focus to enable closing with Enter key
+                setTimeout(() => okButton.focus(), 100);
+            }
+            
+            // Add keyboard event handler to close with Escape key
+            const handleKeyDown = (e) => {
+                if (e.key === 'Escape' || e.key === 'Enter') {
+                    overlay.classList.remove('show');
+                    setTimeout(() => {
+                        overlay.remove();
+                        document.removeEventListener('keydown', handleKeyDown);
+                    }, 300);
+                }
+            };
+            document.addEventListener('keydown', handleKeyDown);
+            
+            return overlay;
         }
         
-        // 文本處理函數
+        // Set cursor to end of editable content
+        function setCursorToEnd(el) {
+            if (!el) return;
+            try {
+                const range = document.createRange();
+                const sel = window.getSelection();
+                if (!sel) return;
+                range.selectNodeContents(el);
+                range.collapse(false);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            } catch (err) {
+                console.error('設置光標時發生錯誤:', err);
+            }
+        }
+        
+        // 生成報價單號和採購編號的通用函數
+        function generateId(date = TODAY, prefix = '', type = 'quote') {
+            try {
+                const month = MONTH_ABBR[date.getMonth()];
+                const year = date.getFullYear().toString().slice(-2);
+                const monthNum = String(date.getMonth() + 1).padStart(2, "0");
+                const day = String(date.getDate()).padStart(2, "0");
+                const rand = Math.random().toString(36).substring(2, 4).toUpperCase();
+                
+                // 根據類型使用不同格式
+                return type === 'po' 
+                    ? `${prefix}${rand}${monthNum}${day}${year}`
+                    : `${prefix}${month}-${year}${monthNum}${day}${rand}`;
+            } catch (err) {
+                console.error('生成ID時發生錯誤:', err);
+                // 生成備用隨機ID
+                return `${prefix}${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+            }
+        }
+        
+        // 更新報價單號和採購編號
+        function updateIds() {
+            try {
+                const qDate = $('quoteDate');
+                const dateValue = qDate?.value || TODAY.toISOString().split("T")[0];
+                const date = new Date(dateValue);
+                
+                // 更新報價單號
+                const qNum = $('quoteNumber');
+                if (qNum) {
+                    qNum.textContent = generateId(date);
+                }
+                
+                // 更新採購編號
+                const po = $('poNumber');
+                if (po) {
+                    po.textContent = generateId(date, 'PO-', 'po');
+                }
+            } catch (err) {
+                console.error('更新ID時發生錯誤:', err);
+            }
+        }
+        
+        // Initialize dates on page load
+        function initDates() {
+            try {
+                // 初始化報價日期
+                const quoteDate = $('quoteDate');
+                const quoteDateText = $('quoteDateText');
+                
+                if (quoteDate && quoteDateText) {
+                    quoteDate.value = TODAY.toISOString().split("T")[0];
+                    quoteDateText.textContent = formatHelper.formatDate(quoteDate.value);
+                    
+                    // 使用報價日期設置有效期和交期，確保它們始終基於當前報價日期
+                    const currentQuoteDate = new Date(quoteDate.value);
+                    
+                    // 設置有效期限
+                    const validDate = $('quoteValidUntil');
+                    const validText = $('quoteValidText');
+                    if (validDate && validText) {
+                        const vDate = new Date(currentQuoteDate);
+                        vDate.setDate(currentQuoteDate.getDate() + CONFIG.DEFAULT_VALID_DAYS);
+                        validDate.value = vDate.toISOString().split("T")[0];
+                        validText.textContent = formatHelper.formatDate(validDate.value);
+                    }
+                    
+                    // 設置預計交期
+                    const delivDate = $('deliveryDate');
+                    const delivText = $('deliveryDateText');
+                    if (delivDate && delivText) {
+                        const dDate = new Date(currentQuoteDate);
+                        dDate.setDate(currentQuoteDate.getDate() + CONFIG.DEFAULT_DELIVERY_DAYS);
+                        delivDate.value = dDate.toISOString().split("T")[0];
+                        delivText.textContent = formatHelper.formatDate(delivDate.value);
+                    }
+                }
+                
+                updateIds();
+            } catch (err) {
+                console.error('初始化日期時發生錯誤:', err);
+            }
+        }
+        
+        // Add a new row to the items table
+        function addRow() {
+            const tbody = $('itemsTableBody');
+            if (!tbody) return;
+            
+            try {
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td><input type="text" class="category-input input-field" placeholder=""></td>
+                    <td><input type="text" class="name-input input-field" placeholder=""></td>
+                    <td style="text-align:center">
+                        <input type="text" class="price-input input-field" value="">
+                        <span class="original-price"></span>
+                    </td>
+                    <td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td>
+                    <td class="text-center"><input type="text" class="unit-input input-field" value=""></td>
+                    <td class="text-center"><input type="text" class="installation-input input-field" value=""></td>
+                    <td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>
+                `;
+                tbody.appendChild(newRow);
+                updateTotals();
+            } catch(err) {
+                console.error('添加行時發生錯誤:', err);
+            }
+        }
+        
+        // Update totals based on item values
+        function updateTotals() {
+            // 獲取所有需要的DOM元素
+            const tbody = $('itemsTableBody');
+            const subtotalEl = $('subtotal');
+            const totalShippingEl = $('totalShipping');
+            const totalInstallationEl = $('totalInstallation');
+            const depositAmountEl = $('depositAmount');
+            const grandTotalEl = $('grandTotal');
+            const taxTypeEl = $('taxType');
+            
+            if (!tbody || !grandTotalEl) return;
+            
+            let subtotal = 0, totalShipping = 0, totalInstallation = 0;
+            
+            try {
+                // 計算每行商品的總計
+                Array.from(tbody.children).forEach(row => {
+                    const priceInput = row.querySelector(".price-input");
+                    const quantityInput = row.querySelector(".quantity-input");
+                    const shippingInput = row.querySelector(".shipping-input");
+                    const installationInput = row.querySelector(".installation-input");
+                    
+                    if (!priceInput || !quantityInput) return;
+                    
+                    const price = formatHelper.parseNumber(priceInput.value || "0");
+                    const quantity = Math.max(0, formatHelper.parseNumber(quantityInput.value || "0", false));
+                    const shipping = formatHelper.parseNumber(shippingInput?.value || "0");
+                    const installation = formatHelper.parseNumber(installationInput?.value || "0");
+                    
+                    subtotal += Math.round(price * quantity);
+                    totalShipping += shipping;
+                    totalInstallation += installation;
+                });
+                
+                // 計算總計
+                const untaxedTotal = subtotal + totalShipping + totalInstallation;
+                const isTaxed = taxTypeEl && taxTypeEl.value === "taxed";
+                const tax = isTaxed ? Math.round(untaxedTotal * CONFIG.TAX_RATE) : 0;
+                const grandTotal = untaxedTotal + tax;
+                const depositAmount = Math.round(grandTotal * CONFIG.DEPOSIT_RATE);
+                
+                // 更新UI
+                if (subtotalEl) subtotalEl.textContent = formatHelper.formatCurrency(subtotal);
+                if (totalShippingEl) totalShippingEl.textContent = formatHelper.formatCurrency(totalShipping);
+                if (totalInstallationEl) totalInstallationEl.textContent = formatHelper.formatCurrency(totalInstallation);
+                if (depositAmountEl) depositAmountEl.textContent = formatHelper.formatCurrency(depositAmount);
+                if (grandTotalEl) grandTotalEl.textContent = formatHelper.formatCurrency(grandTotal);
+            } catch(err) {
+                console.error('計算總計時發生錯誤:', err);
+            }
+        }
+        
+        // Format input values (mainly for currency fields)
+        function formatInputValue(input) {
+            if (!input) return;
+            const value = input.value;
+            if (value === '') return;
+            
+            try {
+                if (input.classList.contains('price-input') || 
+                    input.classList.contains('shipping-input') || 
+                    input.classList.contains('installation-input')) {
+                    
+                    const numValue = formatHelper.parseNumber(value);
+                    
+                    if (numValue > CONFIG.MAX_VALUE) {
+                        showNotification("數值超出最大限制", "warning");
+                        input.value = formatHelper.formatCurrency(CONFIG.MAX_VALUE);
+                    } else if (numValue < CONFIG.MIN_VALUE) {
+                        showNotification("數值超出最小限制", "warning");
+                        input.value = formatHelper.formatCurrency(CONFIG.MIN_VALUE);
+                    } else {
+                        input.value = formatHelper.formatCurrency(numValue);
+                    }
+                }
+            } catch (err) {
+                console.error('格式化輸入值時發生錯誤:', err);
+                input.value = formatHelper.formatCurrency(0);
+            }
+        }
+        
+        // Handle input for contenteditable fields
         function handleInput(element) {
             if (!element) return;
             
             try {
-                const cursorPos = saveCursorPosition(element);
-                const text = formatText(
-                    element.innerText.replace(/\n/g, "").trim(),
+                const text = formatHelper.formatText(
+                    element.innerText.replace(/\n/g, "").trim(), 
                     element.getAttribute("data-type")
                 );
                 
@@ -689,451 +1308,337 @@
                 selection.removeAllRanges();
                 selection.addRange(range);
                 document.execCommand("insertText", false, text);
-                
-                if (cursorPos) {
-                    restoreCursorPosition(element, cursorPos);
-                }
+                setCursorToEnd(element);
             } catch (err) {
                 console.error('處理輸入錯誤:', err);
             }
         }
         
-        // 格式化文本
-        function formatText(text, type) {
-            if (!text) return '';
+        // Handle date display and picker
+        function handleDateDisplay(e) {
+            e.preventDefault();
+            const inputId = DATE_MAP[e.target.id];
+            if (!inputId) return;
             
-            if (type === "phone") return text.replace(/[^0-9\s()+\-]/g, "");
-            if (type === "email") return text.replace(/\s/g, "");
-            return text;
-        }
-        
-        // 保存光標位置
-        function saveCursorPosition(element) {
-            if (!element) return null;
+            const dateInput = $(inputId);
+            if (!dateInput) return;
             
-            const selection = window.getSelection();
-            if (!selection || selection.rangeCount === 0) return null;
-            
-            const range = selection.getRangeAt(0);
-            if (!range || !element.contains(range.startContainer)) return null;
-            
-            return {
-                start: range.startOffset,
-                end: range.endOffset,
-                container: range.startContainer
-            };
-        }
-        
-        // 恢復光標位置
-        function restoreCursorPosition(element, position) {
-            if (!element || !position) return;
-            
-            try {
-                const selection = window.getSelection();
-                if (!selection) return;
-                
-                // 尋找所有文字節點
-                const walker = document.createTreeWalker(
-                    element,
-                    NodeFilter.SHOW_TEXT,
-                    null,
-                    false
-                );
-                
-                // 如果沒有文字節點，添加一個
-                if (!walker.nextNode()) {
-                    const textNode = document.createTextNode(element.textContent || "");
-                    element.textContent = '';
-                    element.appendChild(textNode);
-                    
-                    const range = document.createRange();
-                    range.setStart(textNode, 0);
-                    range.setEnd(textNode, 0);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                    return;
-                }
-                
-                // 重置walker
-                walker.currentNode = element;
-                
-                // 找到第一個文字節點
-                const firstTextNode = walker.nextNode();
-                const textLength = firstTextNode.textContent ? firstTextNode.textContent.length : 0;
-                const safePos = Math.min(position.start, textLength);
-                
-                const range = document.createRange();
-                range.setStart(firstTextNode, safePos);
-                range.setEnd(firstTextNode, safePos);
-                selection.removeAllRanges();
-                selection.addRange(range);
-            } catch (err) {
-                setCursorToEnd(element);
+            // 使用現代瀏覽器的日期選擇器或回退到傳統方法
+            if ('showPicker' in dateInput) {
+                dateInput.showPicker();
+            } else {
+                dateInput.focus();
+                dateInput.click();
             }
         }
         
-        // 設置光標到末尾
-        function setCursorToEnd(element) {
-            if (!element) return;
-            
-            try {
-                const selection = window.getSelection();
-                if (!selection) return;
-                
-                // 尋找最後一個文字節點
-                const walker = document.createTreeWalker(
-                    element,
-                    NodeFilter.SHOW_TEXT,
-                    null,
-                    false
-                );
-                
-                let lastTextNode = null;
-                let currentNode;
-                
-                while (currentNode = walker.nextNode()) {
-                    lastTextNode = currentNode;
-                }
-                
-                // 如果沒有文字節點，添加一個
-                if (!lastTextNode) {
-                    lastTextNode = document.createTextNode("");
-                    element.appendChild(lastTextNode);
-                }
-                
-                const textLength = lastTextNode.textContent ? lastTextNode.textContent.length : 0;
-                
-                const range = document.createRange();
-                range.setStart(lastTextNode, textLength);
-                range.setEnd(lastTextNode, textLength);
-                selection.removeAllRanges();
-                selection.addRange(range);
-            } catch (err) {
-                console.error('設置游標到末尾錯誤');
-            }
-        }
-        
-        // 設置事件監聽
+        // Set up all event listeners
         function setupEventListeners() {
-            const addBtn = $('addItemBtn'); 
-            const delBtn = $('deleteItemBtn');
-            const qTable = $('quoteTable');
-            const taxType = $('taxType');
+            const container = document.querySelector('.container');
+            const updateTotalsDebounced = debounce(updateTotals, 200);
+            const adjustLayout = debounce(() => {
+                const textarea = $('notes-textarea');
+                if (textarea) {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = Math.max(80, textarea.scrollHeight) + 'px';
+                }
+            }, 250);
             
-            if (!addBtn || !delBtn || !qTable || !taxType) return;
+            // Logo upload handling
+            const logoContainer = $('logo-container');
+            const uploadLogo = $('upload-logo');
             
-            // 增加防抖函數
-            const updateTotalDebounced = debounce(() => {
-                updateTotals();
-                adjustLayout();
-            }, 200);
-            
-            // 表格相關事件委派
-            qTable.addEventListener('input', e => {
-                const target = e.target;
+            if (logoContainer && uploadLogo) {
+                logoContainer.addEventListener('click', () => {
+                    uploadLogo.value = '';
+                    uploadLogo.click();
+                });
                 
-                if (target.classList.contains('price-input') || 
-                    target.classList.contains('quantity-input') ||
-                    target.classList.contains('shipping-input') ||
-                    target.classList.contains('installation-input')) {
+                uploadLogo.addEventListener('change', e => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
                     
-                    if (target.classList.contains('price-input') || 
-                        target.classList.contains('shipping-input') || 
-                        target.classList.contains('installation-input')) {
-                        formatInputValue(target);
+                    if (!file.type.match('image.*')) {
+                        showNotification('請選擇圖片檔案', 'error');
+                        return;
                     }
                     
-                    updateTotalDebounced();
+                    if (file.size > 2 * 1024 * 1024) {
+                        showNotification('圖片大小不能超過 2MB', 'error');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        if (!logoContainer) return;
+                        
+                        logoContainer.innerHTML = '';
+                        const img = document.createElement('img');
+                        img.src = e.target?.result?.toString() || '';
+                        img.alt = '公司Logo';
+                        img.style.maxHeight = '50px';
+                        logoContainer.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+            
+            // Date display click handler
+            container.addEventListener('click', e => {
+                if (e.target.classList.contains('date-display')) {
+                    handleDateDisplay(e);
                 }
             });
             
-            // 增加表格焦點事件
-            qTable.addEventListener('focusin', e => {
-                const target = e.target;
-                if (target.tagName === 'INPUT') {
-                    target.select();
+            // Quote date change handler
+            const qDate = $('quoteDate');
+            const vDate = $('quoteValidUntil');
+            const dDate = $('deliveryDate');
+            
+            // 統一處理日期變更邏輯
+            function handleDateChange(inputEl, textEl, validateFn) {
+                if (!inputEl || !textEl) return;
+                
+                inputEl.addEventListener('change', function() {
+                    // 更新顯示的日期文本
+                    if (textEl) textEl.textContent = formatHelper.formatDate(this.value);
+                    
+                    // 執行驗證函數（如果提供）
+                    if (typeof validateFn === 'function') {
+                        validateFn.call(this);
+                    }
+                    
+                    // 如果是報價日期變更，則更新ID
+                    if (inputEl.id === 'quoteDate') {
+                        updateIds();
+                    }
+                });
+            }
+            
+            if (qDate) {
+                handleDateChange(qDate, $('quoteDateText'), function() {
+                    const vDate = $('quoteValidUntil');
+                    const dDate = $('deliveryDate');
+                    const quoteDate = new Date(this.value);
+                    
+                    // 更新有效期限
+                    if (vDate) {
+                        const newValidDate = new Date(quoteDate);
+                        newValidDate.setDate(quoteDate.getDate() + CONFIG.DEFAULT_VALID_DAYS);
+                        vDate.value = newValidDate.toISOString().split("T")[0];
+                        const vText = $('quoteValidText');
+                        if (vText) vText.textContent = formatHelper.formatDate(vDate.value);
+                    }
+                    
+                    // 更新預計交期
+                    if (dDate) {
+                        const newDeliveryDate = new Date(quoteDate);
+                        newDeliveryDate.setDate(quoteDate.getDate() + CONFIG.DEFAULT_DELIVERY_DAYS);
+                        dDate.value = newDeliveryDate.toISOString().split("T")[0];
+                        const dText = $('deliveryDateText');
+                        if (dText) dText.textContent = formatHelper.formatDate(dDate.value);
+                    }
+                });
+            }
+            
+            // 有效期限變更處理
+            if (vDate) {
+                handleDateChange(vDate, $('quoteValidText'), function() {
+                    const qDate = $('quoteDate');
+                    if (!qDate) return;
+                    
+                    const quoteDate = new Date(qDate.value);
+                    const validDate = new Date(this.value);
+                    
+                    if (validDate < quoteDate) {
+                        const newValidDate = new Date(quoteDate);
+                        newValidDate.setDate(quoteDate.getDate() + CONFIG.DEFAULT_VALID_DAYS);
+                        this.value = newValidDate.toISOString().split("T")[0];
+                        showNotification("報價有效期不得早於報價日；系統已自動修正為預設值", "warning");
+                    }
+                });
+            }
+            
+            // 交期變更處理
+            if (dDate) {
+                handleDateChange(dDate, $('deliveryDateText'), function() {
+                    const qDate = $('quoteDate');
+                    if (!qDate) return;
+                    
+                    const quoteDate = new Date(qDate.value);
+                    const deliveryDate = new Date(this.value);
+                    
+                    if (deliveryDate < quoteDate) {
+                        const newDeliveryDate = new Date(quoteDate);
+                        newDeliveryDate.setDate(quoteDate.getDate() + CONFIG.DEFAULT_DELIVERY_DAYS);
+                        this.value = newDeliveryDate.toISOString().split("T")[0];
+                        showNotification("交期設定不得早於報價日期；系統已為您修正為預設值", "warning");
+                    }
+                });
+            }
+            
+            // 定義可編輯欄位選擇器
+            const editableSelector = '[contenteditable="true"], .editable-field';
+            
+            // 中文輸入法組合文字處理
+            const compositionElements = new WeakMap();
+            
+            // 使用事件委派來處理所有可編輯元素的事件
+            container.addEventListener('compositionstart', e => {
+                if (e.target.matches(editableSelector)) {
+                    compositionElements.set(e.target, true);
                 }
             });
             
-            // 鍵盤導航
-            qTable.addEventListener('keydown', e => {
-                if (e.key === 'Tab') {
+            container.addEventListener('compositionend', e => {
+                if (e.target.matches(editableSelector)) {
+                    compositionElements.set(e.target, false);
+                    handleInput(e.target);
+                }
+            });
+            
+            // 防止在可編輯元素中按Enter換行
+            container.addEventListener('keypress', e => {
+                if (e.target.matches(editableSelector) && e.key === "Enter") {
+                    e.preventDefault();
+                }
+            });
+            
+            // 處理可編輯元素的輸入
+            container.addEventListener('input', e => {
+                if (e.target.matches(editableSelector) && !compositionElements.get(e.target)) {
+                    handleInput(e.target);
+                }
+            });
+            
+            // 處理可編輯元素的貼上操作
+            container.addEventListener('paste', e => {
+                if (e.target.matches(editableSelector)) {
+                    e.preventDefault();
+                    const text = (e.clipboardData || window.clipboardData).getData("text").replace(/\n/g, "").trim();
+                    document.execCommand("insertText", false, formatHelper.formatText(text, e.target.getAttribute("data-type")));
+                    setCursorToEnd(e.target);
+                }
+            });
+            
+            // Quote table event handlers
+            const qTable = $('quoteTable');
+            if (qTable) {
+                // 定義價格相關欄位選擇器
+                const priceFieldSelector = '.price-input, .shipping-input, .installation-input';
+                const calculationFieldSelector = `${priceFieldSelector}, .quantity-input`;
+                
+                // 處理表格輸入事件
+                qTable.addEventListener('input', e => {
+                    // 檢查是否是需要進行計算的輸入欄位
+                    if (e.target.matches(calculationFieldSelector)) {
+                        // 格式化金額數值欄位
+                        if (e.target.matches(priceFieldSelector)) {
+                            formatInputValue(e.target);
+                        }
+                        
+                        // 更新總計金額
+                        updateTotalsDebounced();
+                    }
+                });
+                
+                // Auto-select input value on focus
+                qTable.addEventListener('focus', e => {
+                    if (e.target.tagName === 'INPUT') {
+                        e.target.select();
+                    }
+                }, true);
+                
+                // Format input value on blur
+                qTable.addEventListener('blur', e => {
+                    if (e.target.matches(priceFieldSelector)) {
+                        formatInputValue(e.target);
+                    }
+                }, true);
+                
+                // Add new row when tabbing out of last cell in last row
+                qTable.addEventListener('keydown', e => {
+                    if (e.key === 'Tab') {
+                        const tbody = $('itemsTableBody');
+                        if (!tbody) return;
+                        
+                        const rows = tbody.children;
+                        if (!rows.length) return;
+                        
+                        const lastRow = rows[rows.length - 1];
+                        if (!lastRow) return;
+                        
+                        const lastInput = lastRow.querySelector('.shipping-input');
+                        if (!lastInput) return;
+                        
+                        if (e.target === lastInput && !e.shiftKey) {
+                            e.preventDefault();
+                            addRow();
+                            setTimeout(() => {
+                                const newRow = tbody.lastChild;
+                                if (!newRow) return;
+                                const firstInput = newRow.querySelector('.category-input');
+                                if (firstInput) firstInput.focus();
+                            }, 0);
+                        }
+                    }
+                });
+            }
+            
+            // Button handlers
+            const addBtn = $('addItemBtn');
+            const delBtn = $('deleteItemBtn');
+            const taxType = $('taxType');
+            const notesTextarea = $('notes-textarea');
+            
+            if (addBtn) {
+                addBtn.addEventListener('click', () => {
+                    addRow();
+                    adjustLayout();
+                });
+            }
+            
+            if (delBtn) {
+                delBtn.addEventListener('click', () => {
                     const tbody = $('itemsTableBody');
                     if (!tbody) return;
                     
                     const rows = tbody.children;
-                    if (!rows.length) return;
-                    
-                    const lastRow = rows[rows.length - 1];
-                    if (!lastRow) return;
-                    
-                    const lastInput = lastRow.querySelector('.shipping-input');
-                    if (!lastInput) return;
-                    
-                    if (e.target === lastInput && !e.shiftKey) {
-                        e.preventDefault();
-                        addRow();
-                        
-                        setTimeout(() => {
-                            const newRow = tbody.lastChild;
-                            if (!newRow) return;
-                            
-                            const firstInput = newRow.querySelector('.category-input');
-                            if (firstInput) firstInput.focus();
-                        }, 0);
+                    if (rows.length > 1) {
+                        rows[rows.length - 1].remove();
+                        updateTotalsDebounced();
+                        adjustLayout();
+                    } else {
+                        showNotification("必須保留至少一行！", "warning");
                     }
-                }
-            });
-            
-            // 添加行按鈕
-            addBtn.addEventListener('click', () => {
-                addRow();
-                adjustLayout();
-            });
-            
-            // 刪除行按鈕
-            delBtn.addEventListener('click', () => {
-                const tbody = $('itemsTableBody');
-                if (!tbody) return;
-                
-                const rows = tbody.children;
-                if (rows.length > 1) {
-                    rows[rows.length-1].remove();
-                    updateTotals();
-                    adjustLayout();
-                } else {
-                    showNotification("必須保留至少一行！", "warning");
-                }
-            });
-            
-            // 稅率類型變更
-            taxType.addEventListener('change', updateTotalDebounced);
-            
-            // 文本區域自動調整高度
-            const notesTextarea = $('notes-textarea');
-            if (notesTextarea) {
-                const adjustTextareaHeight = debounce(() => {
-                    notesTextarea.style.height = 'auto';
-                    notesTextarea.style.height = Math.max(80, notesTextarea.scrollHeight) + 'px';
-                }, 100);
-                
-                notesTextarea.addEventListener('input', adjustTextareaHeight);
-                notesTextarea.addEventListener('focus', adjustTextareaHeight);
-            }
-            
-            // 增加打印前的表單驗證
-            window.addEventListener('beforeprint', () => {
-                if (!validateFormQuietly()) {
-                    showNotification('表單有未完成的項目，打印前請先完成', 'warning');
-                }
-            });
-        }
-        
-        // 格式化輸入值
-        function formatInputValue(input) {
-            if (!input) return;
-            
-            const value = input.value;
-            
-            if (input.classList.contains('price-input') || 
-                input.classList.contains('shipping-input') || 
-                input.classList.contains('installation-input')) {
-                const numValue = formatHelper.parseNumber(value);
-                if (numValue === 0 && value === '') {
-                    return;
-                }
-                
-                input.value = formatHelper.formatCurrency(numValue);
-            }
-        }
-        
-        // 格式化日期顯示
-        function formatDate(dateString) {
-            if (!dateString) return '';
-            
-            try {
-                return new Date(dateString).toLocaleDateString('zh-TW', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
                 });
-            } catch (e) {
-                return dateString;
+            }
+            
+            if (taxType) {
+                taxType.addEventListener('change', updateTotalsDebounced);
+            }
+            
+            if (notesTextarea) {
+                notesTextarea.addEventListener('input', adjustLayout);
+                notesTextarea.addEventListener('focus', adjustLayout);
+            }
+            
+            // Window resize handler
+            window.addEventListener('resize', adjustLayout);
+        }
+        
+        // Initialize the page
+        function init() {
+            try {
+                initDates();
+                setupEventListeners();
+                setupPrintHandlers(); // 保留列印處理功能
+                updateTotals();
+            } catch(err) {
+                console.error('初始化時發生錯誤:', err);
             }
         }
         
-        // 添加行
-        function addRow() {
-            const tbody = $('itemsTableBody');
-            if (!tbody) return;
-            
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
-                <td><input type="text" class="category-input input-field" placeholder=""></td>
-                <td><input type="text" class="name-input input-field" placeholder=""></td>
-                <td style="text-align:center">
-                    <input type="text" class="price-input input-field" value="">
-                    <span class="original-price"></span>
-                </td>
-                <td class="text-center"><input type="number" class="quantity-input input-field" value="1" min="1"></td>
-                <td class="text-center"><input type="text" class="unit-input input-field" value=""></td>
-                <td class="text-center"><input type="text" class="installation-input input-field" value=""></td>
-                <td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>
-            `;
-            tbody.appendChild(newRow);
-            updateTotals();
-        }
-        
-        // 更新總計
-        function updateTotals() {
-            const tbody = $('itemsTableBody');
-            const subtotalEl = $('subtotal');
-            const totalShippingEl = $('totalShipping');
-            const totalInstallationEl = $('totalInstallation');
-            const depositAmountEl = $('depositAmount');
-            const grandTotalEl = $('grandTotal');
-            const taxTypeEl = $('taxType');
-            
-            if (!tbody || !grandTotalEl) return;
-            
-            let subtotal = 0, totalShipping = 0, totalInstallation = 0;
-            
-            Array.from(tbody.children).forEach(row => {
-                const priceInput = row.querySelector(".price-input");
-                const quantityInput = row.querySelector(".quantity-input");
-                const shippingInput = row.querySelector(".shipping-input");
-                const installationInput = row.querySelector(".installation-input");
-                
-                const price = formatHelper.parseNumber(priceInput?.value || "0");
-                const quantity = Math.max(1, formatHelper.parseNumber(quantityInput?.value || "1", true));
-                const shipping = formatHelper.parseNumber(shippingInput?.value || "0");
-                const installation = formatHelper.parseNumber(installationInput?.value || "0");
-                
-                subtotal += Math.round(price * quantity);
-                totalShipping += shipping;
-                totalInstallation += installation;
-            });
-            
-            const untaxedTotal = subtotal + totalShipping + totalInstallation;
-            const isTaxed = taxTypeEl && taxTypeEl.value === "taxed";
-            const tax = isTaxed ? Math.round(untaxedTotal * CONFIG.TAX_RATE) : 0;
-            
-            const grandTotal = untaxedTotal + tax;
-            const depositAmount = Math.round(grandTotal * CONFIG.DEPOSIT_RATE);
-            
-            if (subtotalEl) subtotalEl.textContent = formatHelper.formatCurrency(subtotal);
-            if (totalShippingEl) totalShippingEl.textContent = formatHelper.formatCurrency(totalShipping);
-            if (totalInstallationEl) totalInstallationEl.textContent = formatHelper.formatCurrency(totalInstallation);
-            if (depositAmountEl) depositAmountEl.textContent = formatHelper.formatCurrency(depositAmount);
-            if (grandTotalEl) grandTotalEl.textContent = formatHelper.formatCurrency(grandTotal);
-        }
-        
-        // 解析數值與格式化貨幣
-        const formatHelper = {
-            // 解析數值
-            parseNumber: (value, isInteger = false) => {
-                if (!value) return 0;
-                
-                // 轉換為字串並移除非數字字符
-                let sanitized = value.toString()
-                    .replace(/[^\d.-]/g, '')
-                    .trim();
-                
-                // 處理多個小數點
-                const dotIdx = sanitized.indexOf('.');
-                if (dotIdx !== -1) {
-                    const before = sanitized.substring(0, dotIdx + 1);
-                    const after = sanitized.substring(dotIdx + 1).replace(/\./g, '');
-                    sanitized = before + after;
-                }
-                
-                // 處理多個負號
-                if (sanitized.indexOf('-') !== -1) {
-                    const isNeg = sanitized.charAt(0) === '-';
-                    sanitized = sanitized.replace(/-/g, '');
-                    if (isNeg) sanitized = '-' + sanitized;
-                }
-                
-                try {
-                    const num = isInteger ? parseInt(sanitized, 10) : parseFloat(sanitized);
-                    return (isNaN(num) || !isFinite(num)) ? 0 : num;
-                } catch(e) {
-                    return 0;
-                }
-            },
-            
-            // 格式化貨幣
-            formatCurrency: value => {
-                if (isNaN(value) || !isFinite(value)) return '0';
-                
-                try {
-                    return new Intl.NumberFormat('zh-TW', {
-                        style: 'decimal',
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0
-                    }).format(Math.round(value));
-                } catch (e) {
-                    return Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                }
-            }
-        };
-        
-        // 通知系統
-        function showNotification(message, type = 'info') {
-            const existingNotif = document.querySelector('.notification-container');
-            if (existingNotif) {
-                clearTimeout(existingNotif.dataset.timerId);
-                existingNotif.remove();
-            }
-            
-            const notification = document.createElement('div');
-            notification.className = `notification-container notification-${type}`;
-            notification.innerHTML = `
-                <div class="notification-content">
-                    <span class="notification-message">${message}</span>
-                    <button class="notification-close">×</button>
-                </div>
-            `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => notification.classList.add('show'), 10);
-            
-            const closeBtn = notification.querySelector('.notification-close');
-            closeBtn.addEventListener('click', () => {
-                notification.classList.remove('show');
-                setTimeout(() => notification.remove(), 300);
-            });
-            
-            const timerId = setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-            
-            notification.dataset.timerId = timerId;
-            
-            return notification;
-        }
-        
-        // 表單驗證
-        function validateFormQuietly() {
-            const tbody = $('itemsTableBody');
-            if (!tbody) return false;
-            
-            // 檢查是否有填寫的商品項目
-            const hasItems = Array.from(tbody.children).some(row => {
-                const nameInput = row.querySelector('.name-input');
-                const priceInput = row.querySelector('.price-input');
-                return nameInput?.value.trim() !== '' && priceInput?.value.trim() !== '';
-            });
-            
-            if (!hasItems) return false;
-            
-            // 檢查必填客戶資訊
-            const clientName = document.querySelector('.client-info h4');
-            return clientName && clientName.textContent.trim();
-        }
-        
-        // 啟動應用程序
         init();
     });
     </script>
