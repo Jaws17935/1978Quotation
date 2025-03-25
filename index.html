@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>百貨銷售報價單</title>
+<title>9StarMax報價單</title>
 <style>
 :root{--primary:#1e3a8a;--secondary:#4b5e7a;--accent:#3b82f6;--bg-light:#f8fafc;--bg-highlight:#f1f5f9;--text:#111827;--text-light:#6b7280;--border:#e5e7eb;--success:#15803d;--danger:#e53e3e}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
@@ -11,12 +11,9 @@ body{background-color:var(--bg-light);color:var(--text);line-height:1.5;font-siz
 ::-webkit-scrollbar{width:0;height:0;background:transparent}
 *{-ms-overflow-style:none;scrollbar-width:none}
 .container{max-width:1000px;margin:0 auto;background-color:#fff;box-shadow:0 0 20px rgba(0,0,0,.1)}
-.section{border-bottom:none;margin-bottom:0;padding-bottom:0}
 .section{border:none!important}
 .quote-info,.bank-totals-section,.legal-terms-section,.signature-section{background-color:var(--bg-highlight)}
-.header{background-color:var(--primary)}
-.items-section{background-color:#fff}
-.header{color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0;padding-bottom:0;border-bottom:none;position:relative}
+.header{background-color:var(--primary);color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;position:relative}
 .company-logo{position:relative;cursor:pointer}
 .company-logo:hover{opacity:.9}
 .company-logo img{max-height:50px;object-fit:contain}
@@ -51,8 +48,6 @@ body{background-color:var(--bg-light);color:var(--text);line-height:1.5;font-siz
 .row-btn.add{color:var(--success)}
 .row-btn.delete{color:var(--danger)}
 .row-btn:hover{transform:scale(1.15);opacity:.85}
-.items-section .section-title{font-size:14px;letter-spacing:1px;color:var(--primary);position:relative;padding-bottom:3px}
-.items-section .section-title:after{height:2px;width:36px;border-radius:1px;bottom:-1px}
 table{width:100%;border-collapse:collapse;margin-top:8px;border-radius:5px;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,.03);border:none}
 table th{background-color:var(--primary);color:#fff;text-align:left;padding:6px 8px;font-weight:600;font-size:14px;border:none;letter-spacing:.5px}
 table th:first-child{border-top-left-radius:5px}
@@ -87,10 +82,8 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
 .terms-list li:last-child{margin-bottom:0}
 .right-side-container{display:flex;flex-direction:column;height:100%}
 .notes-container{position:relative;width:100%;padding:0;flex-grow:1;display:flex;flex-direction:column;margin-top:6px;min-height:90px}
-#notes-textarea{width:100%;margin:0;padding:8px;height:65px;min-height:65px;max-height:none;font-size:12px;line-height:1.25;flex-grow:1;transition:none;-webkit-appearance:none;resize:vertical;box-sizing:border-box;border:1px solid var(--border);background-color:var(--bg-light);color:var(--text-light);overflow:hidden!important;scrollbar-width:none!important;-ms-overflow-style:none!important;overflow-y:hidden!important;overflow-x:hidden!important}
-#notes-textarea::-webkit-scrollbar,#notes-textarea::-webkit-scrollbar-thumb,#notes-textarea::-webkit-scrollbar-track,#notes-textarea::-webkit-scrollbar-corner{display:none!important;width:0!important;height:0!important;background:transparent!important;visibility:hidden!important}
+#notes-textarea{width:100%;margin:0;padding:8px;height:65px;min-height:65px;max-height:none;font-size:12px;line-height:1.25;flex-grow:1;transition:none;-webkit-appearance:none;resize:vertical;box-sizing:border-box;border:1px solid var(--border);background-color:var(--bg-light);color:var(--text-light);overflow:hidden!important}
 #notes-print-preview{display:none;width:100%;padding:8px;font-size:12px;line-height:1.25;min-height:65px;box-sizing:border-box;border:1px solid var(--border);background-color:var(--bg-light);color:var(--text-light);white-space:pre-wrap;word-wrap:break-word;overflow:hidden;border-radius:4px}
-textarea::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
 .legal-notice-container{height:auto;display:flex;flex-direction:column}
 .legal-notice{height:auto;flex-grow:1;display:flex;flex-direction:column;overflow:visible}
 .legal-notice h4{color:var(--primary);margin-bottom:4px;font-size:15px}
@@ -121,201 +114,275 @@ textarea::-webkit-scrollbar{display:none!important;width:0!important;height:0!im
 .notification-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .notification-title{font-weight:600;font-size:18px;display:flex;align-items:center;gap:10px}
 .notification-icon{display:flex;align-items:center;justify-content:center}
-.notification-icon svg{flex-shrink:0}
 .notification-content{padding:20px 16px;font-size:16px;line-height:1.5}
 .notification-footer{padding:12px 16px;border-top:1px solid var(--border);display:flex;justify-content:flex-end}
 .notification-btn{background-color:var(--primary);color:#fff;border:none;border-radius:4px;padding:8px 16px;font-weight:600;cursor:pointer;transition:background-color .2s;font-size:14px}
 .notification-btn:hover{background-color:#163172}
 .notification-warning .notification-title{color:#f59e0b}
 .notification-error .notification-title{color:var(--danger)}
-.info-group-text{margin-bottom:4px;line-height:1.4;word-wrap:break-word;color:var(--text-light)}
-@media(max-width:768px){.container{margin:0;width:100%}.header{flex-direction:column;align-items:center;text-align:center;padding:15px}.document-title{margin-top:15px;width:100%;text-align:center}.quote-info{display:flex;flex-direction:column;padding:10px 15px}.client-info,.quote-details,.contact-info{width:100%;margin-bottom:15px}.legal-terms-section,.bank-totals-section{display:flex;flex-direction:column;gap:15px;padding:15px}.legal-notice-container,.totals-container,.bank-info-container,.right-side-container{width:100%}.items-section{padding:10px 15px;overflow-x:auto}.table-responsive{overflow-x:auto}table{width:100%}.signature-section{flex-direction:column;padding:15px}.staff-info,.client-confirmation{width:100%;margin-bottom:10px}}
-@media (min-width:769px) and (max-width:992px){.container{margin:0 auto;width:95%}.legal-terms-section,.bank-totals-section{gap:12px}.section-title{font-size:13px}}
-@media print{
-  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
-  body,html{width:100%;height:auto;margin:0;padding:0;background-color:#fff!important}
-  .container{width:100%!important;max-width:none!important;margin:0!important;box-shadow:none!important;padding:0!important;background-color:#fff!important}
-  .header{background-color:var(--primary)!important;color:#fff!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  .bank-totals-section,.legal-terms-section,.quote-info,.signature-section{background-color:var(--bg-highlight)!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  table th{background-color:var(--primary)!important;color:#fff!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  .bank-info,.content-box-light,.legal-notice{background-color:var(--bg-light)!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  .editable-field,[contenteditable=true],input.input-field{border:none!important;background-color:transparent!important;-webkit-appearance:none!important;box-shadow:none!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  .items-controls,.notification-overlay,.row-btn,.upload-logo{display:none!important}
-  .header,.quote-info,.bank-totals-section,.legal-terms-section,.signature-section,.items-section{break-inside:avoid!important;page-break-inside:avoid!important}
-  .items-section{break-inside:auto!important;page-break-inside:auto!important}
-  #itemsTableBody tr{break-inside:avoid!important;page-break-inside:avoid!important}
-  table thead{display:table-header-group!important}
-  
-  @page{size:A4 portrait;margin:0}
-  
-  .header{padding:5px 15px!important}
-  .company-logo img{max-height:40px!important}
-  .default-logo-text{font-size:18px!important;color:#fff!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  .company-info p{font-size:11px!important;margin-bottom:1px!important;line-height:1.2!important;color:#fff!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  .document-title h2{font-size:18px!important;margin-bottom:1px!important;color:#fff!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  .document-title p{font-size:11px!important;margin-bottom:1px!important;line-height:1.2!important;color:#fff!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  
-  .section{margin-bottom:0!important;padding-bottom:0!important}
-  .bank-totals-section,.items-section,.legal-terms-section,.quote-info,.signature-section{padding:5px 15px!important}
-  .bank-totals-section .section-title,.items-section .section-title,.legal-terms-section .section-title,.quote-info .section-title,.signature-section .section-title{
-    font-size:12px!important;height:16px!important;margin-bottom:1px!important;color:var(--primary)!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important
+.client-info{position:relative;transition:all .2s ease;padding:4px 8px;border-radius:4px;border:1px solid transparent;margin:-1px}
+.client-info:hover{background-color:rgba(241,245,249,.5);border-color:var(--border);box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.client-info .section-title{color:var(--primary);font-weight:600;margin-bottom:5px;padding-bottom:2px;height:18px;font-size:13px}
+.client-info .section-title:after{height:2px;width:32px}
+.client-info .info-group h4{font-weight:600;color:var(--primary);margin-bottom:3px;font-size:14px}
+.client-info .info-group p{margin-bottom:3px;line-height:1.3}
+.client-info .editable-field{border-bottom:1px dashed rgba(203,213,225,.5);padding:1px 3px;border-radius:2px;transition:all .2s ease;min-width:100px;min-height:16px}
+.client-info .editable-field:empty{min-height:18px;background-color:rgba(241,245,249,.3)}
+.client-info p:last-child{margin-bottom:1px}
+.contact-info,.quote-details{position:relative;padding:4px 8px;border-radius:4px;border:1px solid transparent;margin:-1px}
+.contact-info:hover,.quote-details:hover{background-color:rgba(241,245,249,.5);border-color:var(--border);box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.contact-info .section-title,.quote-details .section-title{margin-bottom:5px;padding-bottom:2px;height:18px;font-size:13px}
+.contact-info .info-group p,.quote-details .info-group p{margin-bottom:2px;line-height:1.3}
+.quote-info{gap:10px;padding:6px 16px}
+.quote-details .info-group{margin-top:4px}
+
+/* 打印样式，统一布局并优化紧凑性 */
+@media print {
+  /* 基础打印设置 */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   
-  .quote-info .info-group h4{font-size:12px!important;margin-bottom:1px!important}
-  .bank-info .info-group p,.client-confirmation .info-group p,.quote-info .info-group p,.staff-info .info-group p{
-    font-size:11px!important;margin-bottom:1px!important;line-height:1.2!important
-  }
-  .bank-info .info-label,.client-confirmation .info-label,.quote-info .info-label,.staff-info .info-label{
-    width:70px!important;font-size:11px!important
-  }
-  
-  table{width:100%!important;font-size:11px!important;margin-top:3px!important;box-shadow:none!important;border:1px solid var(--border)!important;border-radius:4px!important}
-  table th{padding:3px 4px!important;font-size:11px!important;background-color:var(--primary)!important;color:#fff!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  table td{padding:2px 4px!important}
-  table tbody tr:nth-child(even){background-color:rgba(241,245,249,.5)!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  
-  .input-field{font-size:11px!important;padding:1px!important}
-  .terms-list li{font-size:10px!important;margin-bottom:1px!important;line-height:1.2!important}
-  .legal-notice p{font-size:10px!important;margin-bottom:2px!important;line-height:1.2!important}
-  .legal-notice h4{font-size:12px!important;margin-bottom:2px!important;color:var(--primary)!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  
-  .warranty-term-table td{padding:1px 2px!important;font-size:9px!important}
-  .warranty-term-table .term-label{background-color:rgba(75,94,122,.1)!important;color:var(--primary)!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
-  
-  .totals-table .totals-row{height:18px!important}
-  .clean-select,.totals-label,.totals-value{font-size:11px!important}
-  .client-confirmation,.staff-info{padding:5px!important}
-  
-  #notes-textarea{
-    resize:none!important;
-    height:auto!important;
-    min-height:40px!important;
-    font-size:10px!important;
-    overflow:visible!important;
-    display:block!important;
-    background-color:var(--bg-light)!important;
-    color:var(--text-light)!important;
-    print-color-adjust:exact!important;
-    -webkit-print-color-adjust:exact!important;
-    white-space:pre-wrap!important;
-    word-wrap:break-word!important;
-    border:1px solid var(--border)!important;
+  body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #fff !important;
+    width: 100%;
+    font-size: 12px !important;
   }
   
-  .legal-terms-section, .bank-totals-section{
-    display:grid!important;
-    grid-template-columns:1fr 1fr!important;
-    gap:8px!important;
-    page-break-inside:avoid!important;
-    break-inside:avoid!important;
+  .container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
   }
   
-  .signature-section{
-    display:flex!important;
-    flex-direction:row!important;
-    page-break-inside:avoid!important;
-    break-inside:avoid!important;
+  /* 强制保持颜色 */
+  .header {
+    background-color: var(--primary) !important;
+    color: #fff !important;
+    padding: 5px 10px !important;
   }
   
-  .staff-info, .client-confirmation{
-    width:48%!important;
-    background-color:#fff!important;
-    print-color-adjust:exact!important;
-    -webkit-print-color-adjust:exact!important;
+  .header * {
+    color: #fff !important;
   }
   
-  .quote-info{
-    display:grid!important;
-    grid-template-columns:repeat(3,1fr)!important;
-    gap:10px!important;
-    padding:6px 16px!important;
+  .company-logo img {
+    max-height: 40px !important;
   }
   
-  .content-box-white{
-    background-color:#fff!important;
-    print-color-adjust:exact!important;
-    -webkit-print-color-adjust:exact!important;
+  .default-logo-text {
+    font-size: 18px !important;
   }
   
-  .right-side-container{
-    display:flex!important;
-    flex-direction:column!important;
+  .document-title h2 {
+    font-size: 16px !important;
+    margin-bottom: 1px !important;
   }
   
-  .terms-content, .notes-container{
-    display:block!important;
-    height:auto!important;
-    overflow:visible!important;
+  .document-title p {
+    margin-bottom: 1px !important;
+    line-height: 1.2 !important;
   }
   
-  /* 新增: 確保表格正確顯示 */
+  /* 客户信息区域优化 */
+  .quote-info {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 5px !important;
+    padding: 3px 10px !important;
+    background-color: var(--bg-highlight) !important;
+  }
+  
+  .client-info, .contact-info, .quote-details {
+    padding: 2px 5px !important;
+  }
+  
+  .section-title {
+    margin-bottom: 1px !important;
+    height: 15px !important;
+    font-size: 12px !important;
+  }
+  
+  .info-group p {
+    margin-bottom: 2px !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* 表格优化 */
+  table th {
+    background-color: var(--primary) !important;
+    color: #fff !important;
+    padding: 3px 5px !important;
+    font-size: 12px !important;
+  }
+  
+  table td {
+    padding: 2px 5px !important;
+  }
+  
   #quoteTable {
     width: 100% !important;
     table-layout: fixed !important;
     page-break-inside: auto !important;
+    border-collapse: collapse !important;
     border: 1px solid var(--border) !important;
+    margin-top: 3px !important;
   }
   
-  /* 確保表格頭部在每頁都顯示 */
-  #quoteTable thead {
-    display: table-header-group !important;
-  }
-  
-  /* 確保每個單元格不會被壓縮或截斷 */
   #quoteTable th, #quoteTable td {
     box-sizing: border-box !important;
     overflow: visible !important;
     page-break-inside: avoid !important;
   }
   
-  /* 修復空行或被隱藏的行 */
   #itemsTableBody tr {
     display: table-row !important;
     visibility: visible !important;
     height: auto !important;
-    min-height: 24px !important;
+    min-height: 18px !important;
   }
   
-  /* 確保空白輸入欄位仍然可見 */
   .input-field {
     background-color: transparent !important;
     border: 1px solid #e5e7eb !important;
-    min-height: 18px !important;
+    min-height: 14px !important;
+    font-size: 11px !important;
+    padding: 1px 4px !important;
     display: block !important;
     width: 100% !important;
   }
-
-  /* 確保備註內容在列印時完整顯示 */
+  
+  /* 优化银行和总计区域 */
+  .bank-totals-section {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
+    padding: 3px 10px !important;
+    background-color: var(--bg-highlight) !important;
+  }
+  
+  .bank-info-container, .totals-container {
+    height: auto !important;
+  }
+  
+  .bank-info .info-group p {
+    font-size: 11px !important;
+    height: 20px !important;
+  }
+  
+  .totals-row {
+    height: 20px !important;
+  }
+  
+  .totals-label, .totals-value {
+    font-size: 11px !important;
+  }
+  
+  /* 法律条款区域 */
+  .legal-terms-section {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
+    padding: 3px 10px !important;
+    background-color: var(--bg-highlight) !important;
+  }
+  
+  .legal-notice h4 {
+    font-size: 13px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  .legal-notice p {
+    font-size: 10px !important;
+    margin-bottom: 3px !important;
+    line-height: 1.2 !important;
+  }
+  
+  .warranty-term-table td {
+    padding: 2px 3px !important;
+    font-size: 10px !important;
+  }
+  
+  .terms-list {
+    font-size: 10px !important;
+  }
+  
+  .terms-list li {
+    margin-bottom: 1px !important;
+    line-height: 1.15 !important;
+    font-size: 10px !important;
+  }
+  
   .notes-container {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
+    min-height: 50px !important;
+    margin-top: 3px !important;
   }
   
-  #notes-textarea {
-    display: none !important; /* 在列印時隱藏 */
-  }
-  
-  #notes-print-content {
+  #notes-print-preview {
     display: block !important;
     width: 100% !important;
-    min-height: 40px !important;
+    min-height: 30px !important;
     font-size: 10px !important;
     line-height: 1.25 !important;
     white-space: pre-wrap !important;
     word-wrap: break-word !important;
-    color: var(--text-light) !important;
     background-color: var(--bg-light) !important;
     border: 1px solid var(--border) !important;
     border-radius: 4px !important;
-    padding: 8px !important;
-    margin-top: 3px !important;
+    padding: 4px !important;
+    color: var(--text-light) !important;
     overflow: visible !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* 签名区域 */
+  .signature-section {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    padding: 5px 10px !important;
+    gap: 5px !important;
+    background-color: var(--bg-highlight) !important;
+  }
+  
+  .staff-info, .client-confirmation {
+    width: 48% !important;
+    background-color: #fff !important;
+    padding: 5px !important;
+  }
+  
+  /* 避免内容分页 */
+  .header, .quote-info, .bank-totals-section, .legal-terms-section, .signature-section {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
+  
+  /* 保证表格头部始终显示 */
+  table thead {
+    display: table-header-group !important;
+  }
+  
+  /* 笔记区域处理 */
+  #notes-textarea {
+    display: none !important;
+  }
+  
+  /* 隐藏不需要打印的元素 */
+  .items-controls, .row-btn, .upload-logo, .notification-overlay {
+    display: none !important;
+  }
+  
+  /* 确保页面边距最小 */
+  @page {
+    size: A4 portrait;
+    margin: 0.5cm;
+  }
 }
-.client-info{position:relative;transition:all .2s ease;padding:4px 8px;border-radius:4px;border:1px solid transparent;margin:-1px}.client-info:hover{background-color:rgba(241,245,249,.5);border-color:var(--border);box-shadow:0 1px 4px rgba(0,0,0,.05)}.client-info .section-title{color:var(--primary);font-weight:600;margin-bottom:5px;padding-bottom:2px;height:18px;font-size:13px}.client-info .section-title:after{height:2px;width:32px}.client-info .info-group h4{font-weight:600;color:var(--primary);margin-bottom:3px;font-size:14px}.client-info .info-group p{margin-bottom:3px;line-height:1.3}.client-info .editable-field{border-bottom:1px dashed rgba(203,213,225,.5);padding:1px 3px;border-radius:2px;transition:all .2s ease;min-width:100px;min-height:16px}.client-info .editable-field:empty{min-height:18px;background-color:rgba(241,245,249,.3)}.client-info p:last-child{margin-bottom:1px}@media print{.client-info{padding:0;background-color:transparent!important;border-color:transparent!important;box-shadow:none!important}.client-info .editable-field{border-bottom:none!important;box-shadow:none!important;background-color:transparent!important}}
-.contact-info,.quote-details{position:relative;padding:4px 8px;border-radius:4px;border:1px solid transparent;margin:-1px}.contact-info:hover,.quote-details:hover{background-color:rgba(241,245,249,.5);border-color:var(--border);box-shadow:0 1px 4px rgba(0,0,0,.05)}.contact-info .section-title,.quote-details .section-title{margin-bottom:5px;padding-bottom:2px;height:18px;font-size:13px}.contact-info .info-group p,.quote-details .info-group p{margin-bottom:2px;line-height:1.3}.quote-info{gap:10px;padding:6px 16px}.quote-details .info-group{margin-top:4px}
 </style>
 </head>
 <body>
@@ -472,6 +539,7 @@ textarea::-webkit-scrollbar{display:none!important;width:0!important;height:0!im
 <div class="notes-container">
 <div class="section-title">其他備註</div>
 <textarea id="notes-textarea" class="content-box-light"></textarea>
+<div id="notes-print-preview" class="content-box-light"></div>
 </div>
 </div>
 </div>
@@ -496,341 +564,236 @@ textarea::-webkit-scrollbar{display:none!important;width:0!important;height:0!im
 </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded',()=>{const C={TAX_RATE:.05,DEPOSIT_RATE:.3,DEFAULT_VALID_DAYS:7,DEFAULT_DELIVERY_DAYS:20,MAX_VALUE:999999999,MIN_VALUE:-999999999},M=["JA","FE","MR","AP","MY","JN","JL","AU","SE","OC","NO","DE"],T=new Date,d=e=>document.getElementById(e),a=e=>document.querySelectorAll(e),D={quoteDateText:'quoteDate',quoteValidText:'quoteValidUntil',deliveryDateText:'deliveryDate'},b=(e,t)=>{let r;return function(){clearTimeout(r),r=setTimeout(()=>e.apply(this,arguments),t)}},F={parseNumber:(e,t=!1)=>{if(!e)return 0;try{const r=String(e).replace(/[^\d.-]/g,'').trim(),n=t?parseInt(r):parseFloat(r);return isNaN(n)?0:Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,n))}catch{return 0}},formatCurrency:e=>{if(isNaN(e))return'0';try{const t=Math.round(Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,e)));return new Intl.NumberFormat('zh-TW',{style:'decimal',minimumFractionDigits:0,maximumFractionDigits:0}).format(t)}catch{return Math.round(e).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}},formatText:(e,t)=>{if(!e)return'';if(t==="phone")return e.replace(/[^\d\s()+\-]/g,"").substring(0,20);if(t==="email")return e.replace(/\s/g,"").substring(0,50);return e.substring(0,500)},formatDate:e=>{if(!e)return'';try{return new Date(e).toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}catch{return e}}};function S(e){if(!e)return;const t=e.value;e.style.height='auto';const r=Math.max(65,e.scrollHeight+5);e.style.height=r+'px'}function P(){
-  // 直接創建備註內容預覽元素，而不是等到列印時
-  const notesTextarea = document.getElementById('notes-textarea');
-  if (notesTextarea) {
-    let notesPreviewDiv = document.getElementById('notes-print-preview');
-    if (!notesPreviewDiv) {
-      notesPreviewDiv = document.createElement('div');
-      notesPreviewDiv.id = 'notes-print-preview';
-      notesPreviewDiv.className = 'content-box-light';
-      notesPreviewDiv.style.display = 'none';
-      notesPreviewDiv.style.whiteSpace = 'pre-wrap';
-      notesPreviewDiv.style.wordWrap = 'break-word';
-      // 插入到備註容器中但在textarea之後
-      notesTextarea.insertAdjacentElement('afterend', notesPreviewDiv);
-    }
-    
-    // 同步備註文本到預覽元素
-    function syncNotesText() {
-      notesPreviewDiv.textContent = notesTextarea.value;
-    }
-    
-    // 初始同步
-    syncNotesText();
-    
-    // 監聽文本變化以同步到預覽元素
-    notesTextarea.addEventListener('input', syncNotesText);
-  }
+document.addEventListener('DOMContentLoaded',()=>{const C={TAX_RATE:.05,DEPOSIT_RATE:.3,DEFAULT_VALID_DAYS:7,DEFAULT_DELIVERY_DAYS:28,MAX_VALUE:999999999,MIN_VALUE:-999999999},M=["JA","FE","MR","AP","MY","JN","JL","AU","SE","OC","NO","DE"],T=new Date,d=e=>document.getElementById(e),D={quoteDateText:'quoteDate',quoteValidText:'quoteValidUntil',deliveryDateText:'deliveryDate'},b=(e,t)=>function(){let r;clearTimeout(r),r=setTimeout(()=>e.apply(this,arguments),t)},F={parseNumber:(e,t=!1)=>{if(!e)return 0;try{const r=String(e).replace(/[^\d.-]/g,'').trim(),n=t?parseInt(r):parseFloat(r);return isNaN(n)?0:Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,n))}catch{return 0}},formatCurrency:e=>{try{return isNaN(e)?'0':(t=Math.round(Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,e))),new Intl.NumberFormat('zh-TW',{style:'decimal',minimumFractionDigits:0}).format(t));var t}catch{return Math.round(e).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}},formatText:(e,t)=>{if(!e)return'';if(t==="phone")return e.replace(/[^\d\s()+\-]/g,"").substring(0,20);if(t==="email")return e.replace(/\s/g,"").substring(0,50);return e.substring(0,500)},formatDate:e=>{if(!e)return'';try{return new Date(e).toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}catch{return e}}};function S(e){if(e){const t=e.value;e.style.height='auto',e.style.height=Math.max(65,e.scrollHeight+5)+'px'}}
 
+// 修改后的打印处理函数 - 紧凑版 - 增加动态标题功能
+function setupPrintHandlers() {
+  // 处理打印前后行为
   window.addEventListener('beforeprint', () => {
-    // 找到備註相關元素
-    const notesTextarea = document.getElementById('notes-textarea');
-    const notesPreviewDiv = document.getElementById('notes-print-preview');
-    
-    // 如果找到這些元素，則進行打印準備
-    if (notesTextarea && notesPreviewDiv) {
-      // 隱藏編輯區域，顯示預覽區域
-      notesTextarea.style.display = 'none';
-      notesPreviewDiv.style.display = 'block';
-      // 最後同步一次內容，確保最新
-      notesPreviewDiv.textContent = notesTextarea.value;
+    // 获取报价单号并设置为文档标题
+    const quoteNumber = document.getElementById('quoteNumber');
+    if (quoteNumber && quoteNumber.textContent) {
+      // 保存原始标题以便打印后恢复
+      document.dataset = document.dataset || {};
+      document.dataset.originalTitle = document.title;
+      // 设置新标题为报价单号
+      document.title = quoteNumber.textContent;
     }
     
-    // 處理可編輯區域，隱藏空白區域
-    document.querySelectorAll('[contenteditable="true"], .editable-field').forEach(t => {
-      t.dataset.originalBorder = t.style.border;
-      t.style.border = 'none';
-      if (!t.textContent.trim()) {
-        t.dataset.wasEmpty = "true";
-        t.style.color = 'transparent';
-      }
-    });
+    // 处理备注区域
+    const textarea = document.getElementById('notes-textarea');
+    const preview = document.getElementById('notes-print-preview');
     
-    // 處理輸入框，隱藏空白輸入框
-    document.querySelectorAll('input.input-field').forEach(t => {
-      if (!t.value) {
-        t.dataset.wasEmpty = "true";
-        t.style.color = 'transparent';
-      }
-    });
+    if (textarea && preview) {
+      textarea.style.display = 'none';
+      preview.style.display = 'block';
+      preview.textContent = textarea.value;
+    }
     
-    // 修改：確保表格總是顯示7行
-    const tbody = document.getElementById('itemsTableBody');
-    if (tbody) {
-      const rows = tbody.querySelectorAll('tr');
-      const visibleRows = Array.from(rows).filter(row => 
-        row.style.display !== 'none' && !row.dataset.hiddenForPrint);
+    // 处理可编辑元素
+    document.querySelectorAll('[contenteditable="true"], .editable-field').forEach(el => {
+      el.dataset.originalBorder = el.style.border;
+      el.style.border = 'none';
       
-      // 保持至少7行可見
-      if (visibleRows.length < 7) {
-        // 先恢復被標記為隱藏的行
+      // 空元素处理
+      if (!el.textContent.trim()) {
+        el.dataset.wasEmpty = "true";
+        el.style.color = 'transparent';
+      }
+    });
+    
+    // 处理输入框
+    document.querySelectorAll('input.input-field').forEach(el => {
+      if (!el.value) {
+        el.dataset.wasEmpty = "true";
+        el.style.color = 'transparent';
+      }
+    });
+    
+    // 表格行处理 - 确保显示至少5行（紧凑版减少最小行数）
+    const tableBody = document.getElementById('itemsTableBody');
+    if (tableBody) {
+      const rows = tableBody.querySelectorAll('tr');
+      const visibleRows = Array.from(rows).filter(row => 
+        row.style.display !== 'none' && !row.dataset.hiddenForPrint
+      );
+      
+      // 如果不足5行，显示足够的行
+      if (visibleRows.length < 5) {
+        // 先恢复所有隐藏的行
         rows.forEach(row => {
-          if (row.dataset.hiddenForPrint === "true" || row.dataset.wasEmpty === "true") {
+          if (row.dataset.hiddenForPrint === "true" || 
+              row.style.display === 'none') {
             row.style.display = 'table-row';
             delete row.dataset.hiddenForPrint;
             delete row.dataset.wasEmpty;
           }
         });
         
-        // 如果行數仍不足7行，則添加新行
-        if (rows.length < 7) {
-          const rowsToAdd = 7 - rows.length;
+        // 如果总行数仍不足5行，添加空行
+        if (rows.length < 5) {
+          const rowsToAdd = 5 - rows.length;
           for (let i = 0; i < rowsToAdd; i++) {
             const newRow = document.createElement('tr');
-            newRow.innerHTML = rows[0].innerHTML; // 複製第一行的結構
-            
-            // 清空所有輸入值
+            newRow.innerHTML = rows[0].innerHTML;
+            newRow.dataset.addedForPrint = "true";
             newRow.querySelectorAll('input').forEach(input => {
               input.value = '';
               input.style.border = '1px solid #e5e7eb';
             });
-            
-            tbody.appendChild(newRow);
+            tableBody.appendChild(newRow);
           }
         }
       }
       
-      // 確保輸入欄位在列印時可見
-      tbody.querySelectorAll('input').forEach(input => {
+      // 确保所有行的输入框都有边框
+      tableBody.querySelectorAll('input').forEach(input => {
         if (!input.value.trim()) {
           input.style.border = '1px solid #e5e7eb';
-          input.style.minHeight = '18px';
+          input.style.minHeight = '14px';
         }
       });
     }
     
-    // 確保顏色正確顯示
+    // 确保颜色打印正确
     document.querySelectorAll('.header, .header *, table th, .warranty-term-table .term-label').forEach(el => {
       el.style.webkitPrintColorAdjust = 'exact';
       el.style.printColorAdjust = 'exact';
     });
     
-    // 隱藏通知彈窗
-    const o = document.querySelector('.notification-overlay.show');
-    if (o) o.classList.remove('show');
+    // 隐藏通知
+    const notification = document.querySelector('.notification-overlay.show');
+    if (notification) {
+      notification.classList.remove('show');
+    }
   });
-
+  
+  // 打印后恢复原状
   window.addEventListener('afterprint', () => {
-    // 找到備註相關元素
-    const notesTextarea = document.getElementById('notes-textarea');
-    const notesPreviewDiv = document.getElementById('notes-print-preview');
-    
-    // 如果找到這些元素，則進行打印後還原
-    if (notesTextarea && notesPreviewDiv) {
-      // 顯示編輯區域，隱藏預覽區域
-      notesTextarea.style.display = 'block';
-      notesPreviewDiv.style.display = 'none';
-      // 調整文本區域高度
-      S(notesTextarea);
+    // 恢复原始文档标题
+    if (document.dataset && document.dataset.originalTitle) {
+      document.title = document.dataset.originalTitle;
     }
     
-    // 還原可編輯區域
-    document.querySelectorAll('[contenteditable="true"], .editable-field').forEach(t => {
-      if (t.dataset.originalBorder) {
-        t.style.border = t.dataset.originalBorder;
-        delete t.dataset.originalBorder;
-      }
-      if (t.dataset.wasEmpty === "true") {
-        t.textContent = '';
-        t.style.color = '';
-        delete t.dataset.wasEmpty;
-      }
-    });
+    // 恢复备注区域
+    const textarea = document.getElementById('notes-textarea');
+    const preview = document.getElementById('notes-print-preview');
     
-    // 還原輸入框
-    document.querySelectorAll('input.input-field').forEach(t => {
-      if (t.dataset.wasEmpty === "true") {
-        t.value = '';
-        t.style.color = '';
-        delete t.dataset.wasEmpty;
-      }
-    });
-    
-    // 還原表格行
-    document.querySelectorAll('tr[data-hidden-for-print="true"]').forEach(t => {
-      t.style.display = '';
-      delete t.dataset.hiddenForPrint;
-    });
-    
-    // 新增：移除多餘的行（如果超過7行）
-    const tbody = document.getElementById('itemsTableBody');
-    if (tbody) {
-      const rows = tbody.querySelectorAll('tr');
-      if (rows.length > 7) {
-        Array.from(rows).slice(7).forEach(row => row.remove());
-      }
+    if (textarea && preview) {
+      textarea.style.display = 'block';
+      preview.style.display = 'none';
+      
+      // 恢复文本区高度
+      S(textarea);
     }
+    
+    // 恢复可编辑元素
+    document.querySelectorAll('[contenteditable="true"], .editable-field').forEach(el => {
+      if (el.dataset.originalBorder) {
+        el.style.border = el.dataset.originalBorder;
+        delete el.dataset.originalBorder;
+      }
+      
+      if (el.dataset.wasEmpty === "true") {
+        el.textContent = '';
+        el.style.color = '';
+        delete el.dataset.wasEmpty;
+      }
+    });
+    
+    // 恢复输入框
+    document.querySelectorAll('input.input-field').forEach(el => {
+      if (el.dataset.wasEmpty === "true") {
+        el.value = '';
+        el.style.color = '';
+        delete el.dataset.wasEmpty;
+      }
+    });
+    
+    // 恢复隐藏的表格行
+    document.querySelectorAll('tr[data-hidden-for-print="true"]').forEach(row => {
+      row.style.display = '';
+      delete row.dataset.hiddenForPrint;
+    });
+    
+    // 移除为打印添加的行
+    document.querySelectorAll('tr[data-added-for-print="true"]').forEach(row => {
+      row.remove();
+    });
   });
-}function A(){
-  // 添加更完整的列印樣式
-  const e=document.createElement('style');
-  e.textContent=`
-@media print{
-  /* 通用列印設置 */
-  body,html,*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+}
+
+function N(e,t='info'){if(!e)return null;const r=document.querySelector('.notification-overlay');r&&(r.classList.remove('show'),setTimeout(()=>r.remove(),300));const n=document.createElement('div');n.className=`notification-overlay notification-${t}`;let i='',s='通知';t==='warning'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',s='注意'):t==='error'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e53e3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>',s='錯誤'):t==='success'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',s='成功'):i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',n.innerHTML=`<div class="notification-modal"><div class="notification-header"><div class="notification-title"><span class="notification-icon">${i}</span><span>${s}</span></div></div><div class="notification-content">${e}</div><div class="notification-footer"><button class="notification-btn">我知道了</button></div></div>`,document.body.appendChild(n),n.offsetHeight,n.classList.add('show');const c=n.querySelector('.notification-btn');c&&(c.addEventListener('click',()=>{n.classList.remove('show'),setTimeout(()=>n.remove(),300)}),setTimeout(()=>c.focus(),100));const l=e=>{(e.key==='Escape'||e.key==='Enter')&&(n.classList.remove('show'),setTimeout(()=>{n.remove(),document.removeEventListener('keydown',l)},300))};return document.addEventListener('keydown',l),n}function h(e){if(e)try{const t=document.createRange(),r=window.getSelection();r&&(t.selectNodeContents(e),t.collapse(!1),r.removeAllRanges(),r.addRange(t))}catch{}}function y(e=T,t=''){try{const r=M[e.getMonth()],n=e.getFullYear().toString().slice(-2),i=String(e.getMonth()+1).padStart(2,"0"),s=String(e.getDate()).padStart(2,"0"),c=Math.random().toString(36).substring(2,4).toUpperCase();return`${t}${r}-${n}${i}${s}${c}`}catch{return`${t}${Math.random().toString(36).substring(2,8).toUpperCase()}`}}function E(){try{const e=d('quoteDate'),t=e?.value||T.toISOString().split("T")[0],r=new Date(t),n=d('quoteNumber');n&&(n.textContent=y(r))}catch{}}function I(){try{const e=d('quoteDate'),t=d('quoteDateText');if(e&&t){e.value=T.toISOString().split("T")[0],t.textContent=F.formatDate(e.value);const r=new Date(e.value),n=d('quoteValidUntil'),i=d('quoteValidText');if(n&&i){const s=new Date(r);s.setDate(r.getDate()+C.DEFAULT_VALID_DAYS),n.value=s.toISOString().split("T")[0],i.textContent=F.formatDate(n.value)}const o=d('deliveryDate'),l=d('deliveryDateText');if(o&&l){const s=new Date(r);s.setDate(r.getDate()+C.DEFAULT_DELIVERY_DAYS),o.value=s.toISOString().split("T")[0],l.textContent=F.formatDate(o.value)}}}catch{}E()}function g(){const e=d('itemsTableBody');if(e)try{e.innerHTML='';for(let t=0;t<7;t++){const r=document.createElement("tr");r.innerHTML=`<td><input type="text" class="category-input input-field" placeholder=""></td><td><input type="text" class="name-input input-field" placeholder=""></td><td style="text-align:center"><input type="text" class="price-input input-field" value=""><span class="original-price"></span></td><td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td><td class="text-center"><input type="text" class="unit-input input-field" value=""></td><td class="text-center"><input type="text" class="installation-input input-field" value=""></td><td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>`,e.appendChild(r)}f()}catch{}}function v(){const e=d('itemsTableBody');if(e)try{const t=document.createElement("tr");t.innerHTML=`<td><input type="text" class="category-input input-field" placeholder=""></td><td><input type="text" class="name-input input-field" placeholder=""></td><td style="text-align:center"><input type="text" class="price-input input-field" value=""><span class="original-price"></span></td><td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td><td class="text-center"><input type="text" class="unit-input input-field" value=""></td><td class="text-center"><input type="text" class="installation-input input-field" value=""></td><td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>`,e.appendChild(t),f()}catch{}}function f(){const e=d('itemsTableBody'),t=d('subtotal'),r=d('totalShipping'),n=d('totalInstallation'),i=d('depositAmount'),s=d('grandTotal'),c=d('taxType');if(!e||!s)return;let l=0,o=0,p=0;try{Array.from(e.children).forEach(m=>{const u=m.querySelector(".price-input"),L=m.querySelector(".quantity-input"),w=m.querySelector(".shipping-input"),k=m.querySelector(".installation-input");if(!u||!L)return;const B=F.parseNumber(u.value||"0"),V=Math.max(0,F.parseNumber(L.value||"0",!1)),W=F.parseNumber(w?.value||"0"),O=F.parseNumber(k?.value||"0");l+=Math.round(B*V),o+=W,p+=O});const y=l+o+p,x=c&&c.value==="taxed",U=x?Math.round(y*C.TAX_RATE):0,R=y+U,X=Math.round(R*C.DEPOSIT_RATE);t&&(t.textContent=F.formatCurrency(l)),r&&(r.textContent=F.formatCurrency(o)),n&&(n.textContent=F.formatCurrency(p)),i&&(i.textContent=F.formatCurrency(X)),s&&(s.textContent=F.formatCurrency(R))}catch{}}function _(e){if(!e)return;const t=e.value;if(t==='')return;try{(e.classList.contains('price-input')||e.classList.contains('shipping-input')||e.classList.contains('installation-input'))&&(t=>{const r=F.parseNumber(t);return r>C.MAX_VALUE?(N("數值超出最大限制","warning"),e.value=F.formatCurrency(C.MAX_VALUE)):r<C.MIN_VALUE?(N("數值超出最小限制","warning"),e.value=F.formatCurrency(C.MIN_VALUE)):e.value=F.formatCurrency(r),!0})(t)}catch{e.value=F.formatCurrency(0)}}function $(e){if(!e)return;try{const t=F.formatText(e.innerText.replace(/\n/g,"").trim(),e.getAttribute("data-type"));if(t===e.innerText)return;const r=window.getSelection();if(!r)return;const n=document.createRange();n.selectNodeContents(e),r.removeAllRanges(),r.addRange(n),document.execCommand("insertText",!1,t),h(e)}catch{}}function q(e){
+  e.preventDefault();
+  const t=D[e.target.id];
+  if(!t) return;
   
-  /* 確保顏色設置正確顯示 */
-  .header{background-color:var(--primary)!important;color:#fff!important}
-  .header *{color:#fff!important}
-  .default-logo-text{color:#fff!important}
-  .document-title *{color:#fff!important}
+  const r=d(t);
+  if(!r) return;
   
-  /* 表格標題的顏色 */
-  table th{background-color:var(--primary)!important;color:#fff!important}
-  
-  /* 確保區域間避免分頁 */
-  .bank-totals-section, .legal-terms-section, .header, .quote-info, .signature-section{
-    page-break-inside:avoid!important;
-    break-inside:avoid!important;
+  // 顯示日期選擇器
+  if('showPicker' in r) {
+    r.showPicker();
+  } else {
+    r.focus();
+    r.click();
   }
   
-  /* 備註內容的特殊處理 */
-  .notes-container {
-    page-break-inside: avoid!important;
-    break-inside: avoid!important;
-    position: relative;
-  }
+  // 設置日期選擇後的回調以確保驗證
+  r.dataset.pickerOpened = 'true';
+}function H(e,t,r){
+  if(!e||!t) return;
   
-  /* 隱藏原始文本框，顯示打印內容 */
-  @media print {
-    #notes-textarea {
-      display: none!important;
+  function handleDateChange() {
+    if(t) {
+      t.textContent = F.formatDate(e.value);
     }
     
-    #notes-print-content {
-      display: block!important;
-      width: 100%!important;
-      min-height: 40px!important;
-      font-size: 10px!important;
-      line-height: 1.25!important;
-      white-space: pre-wrap!important;
-      word-wrap: break-word!important;
-      color: var(--text-light)!important;
-      background-color: var(--bg-light)!important;
-      border: 1px solid var(--border)!important;
-      border-radius: 4px!important;
-      padding: 8px!important;
-      margin-top: 3px!important;
-      overflow: visible!important;
-      page-break-inside: avoid!important;
-      break-inside: avoid!important;
+    if(typeof r === 'function') {
+      r.call(e);
+    }
+    
+    if(e.id === 'quoteDate') {
+      E();
     }
   }
   
-  /* 確保網格布局正確顯示 */
-  .bank-totals-section, .legal-terms-section{
-    display:grid!important;
-    grid-template-columns:1fr 1fr!important;
-    gap:8px!important;
-  }
+  // 監聽日期輸入框變更事件
+  e.addEventListener('change', handleDateChange);
   
-  .right-side-container{
-    display:flex!important;
-    flex-direction:column!important;
-    height:auto!important;
-  }
+  // 額外監聽日期輸入框的input事件來確保即時驗證
+  e.addEventListener('input', handleDateChange);
+}function G(){const e=d('notes-textarea');e&&(S(e),e.addEventListener('input',function(){S(this)}),e.addEventListener('paste',function(){setTimeout(()=>S(this),10)}))}const j=b(()=>{const e=d('notes-textarea');e&&S(e)},50);
+
+// 確保日期驗證立即執行的輔助函數
+function validateDateField(dateInputId) {
+  const dateInput = d(dateInputId);
+  if(!dateInput) return;
   
-  .quote-info{
-    display:grid!important;
-    grid-template-columns:repeat(3,1fr)!important;
-    gap:10px!important;
+  // 手動觸發change事件以執行驗證
+  const changeEvent = new Event('change', { bubbles: true });
+  dateInput.dispatchEvent(changeEvent);
+}function Q(){const e=document.querySelector('.container'),t=b(f,200),r=d('logo-container'),n=d('upload-logo');r&&n&&(r.addEventListener('click',()=>{n.value='',n.click()}),n.addEventListener('change',i=>{const s=i.target.files?.[0];if(!s)return;if(!s.type.match('image.*')){N('請選擇圖片檔案','error');return}if(s.size>2*1024*1024){N('圖片大小不能超過 2MB','error');return}const c=new FileReader;c.onload=l=>{if(!r)return;r.innerHTML='';const o=document.createElement('img');o.src=l.target?.result?.toString()||'',o.alt='公司Logo',o.style.maxHeight='50px',r.appendChild(o)},c.readAsDataURL(s)})),e.addEventListener('click',i=>{
+  if(i.target.classList.contains('date-display')) {
+    q(i);
+    
+    // 獲取相關日期輸入框ID
+    const dateFieldId = D[i.target.id];
+    if(dateFieldId) {
+      // 在日期選擇器關閉時進行驗證
+      setTimeout(() => {
+        const dateInput = d(dateFieldId);
+        if(dateInput && dateInput.dataset.pickerOpened === 'true') {
+          dateInput.addEventListener('blur', function onBlur() {
+            validateDateField(dateFieldId);
+            dateInput.removeEventListener('blur', onBlur);
+            delete dateInput.dataset.pickerOpened;
+          }, { once: true });
+        }
+      }, 100);
+    }
   }
-  
-  .signature-section{
-    display:flex!important;
-    flex-direction:row!important;
-    justify-content:space-between!important;
-  }
-  
-  .staff-info, .client-confirmation{
-    width:48%!important;
-  }
-  
-  /* 容器設置 */
-  .container{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:0!important;
-    box-shadow:none!important;
-  }
-  
-  /* 新增：確保表格正確顯示 */
-  #quoteTable {
-    width: 100% !important;
-    table-layout: fixed !important;
-    page-break-inside: auto !important;
-    border: 1px solid var(--border) !important;
-  }
-  
-  /* 確保表格頭部在每頁都顯示 */
-  #quoteTable thead {
-    display: table-header-group !important;
-  }
-  
-  /* 確保每個單元格不會被壓縮或截斷 */
-  #quoteTable th, #quoteTable td {
-    box-sizing: border-box !important;
-    overflow: visible !important;
-    page-break-inside: avoid !important;
-  }
-  
-  /* 修復空行或被隱藏的行 */
-  #itemsTableBody tr {
-    display: table-row !important;
-    visibility: visible !important;
-    height: auto !important;
-    min-height: 24px !important;
-  }
-  
-  /* 確保空白輸入欄位仍然可見 */
-  .input-field {
-    background-color: transparent !important;
-    border: 1px solid #e5e7eb !important;
-    min-height: 18px !important;
-    display: block !important;
-    width: 100% !important;
-  }
-}`,document.head.appendChild(e)}function N(e,t='info'){if(!e)return null;const r=document.querySelector('.notification-overlay');r&&(r.classList.remove('show'),setTimeout(()=>r.remove(),300));const n=document.createElement('div');n.className=`notification-overlay notification-${t}`;let i='',s='通知';t==='warning'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',s='注意'):t==='error'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e53e3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>',s='錯誤'):t==='success'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',s='成功'):i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',n.innerHTML=`
-<div class="notification-modal">
-<div class="notification-header">
-<div class="notification-title">
-<span class="notification-icon">${i}</span>
-<span>${s}</span>
-</div>
-</div>
-<div class="notification-content">
-${e}
-</div>
-<div class="notification-footer">
-<button class="notification-btn">我知道了</button>
-</div>
-</div>
-`,document.body.appendChild(n),n.offsetHeight,n.classList.add('show');const c=n.querySelector('.notification-btn');c&&(c.addEventListener('click',()=>{n.classList.remove('show'),setTimeout(()=>n.remove(),300)}),setTimeout(()=>c.focus(),100));const l=e=>{(e.key==='Escape'||e.key==='Enter')&&(n.classList.remove('show'),setTimeout(()=>{n.remove(),document.removeEventListener('keydown',l)},300))};return document.addEventListener('keydown',l),n}function h(e){if(!e)return;try{const t=document.createRange(),r=window.getSelection();r&&(t.selectNodeContents(e),t.collapse(!1),r.removeAllRanges(),r.addRange(t))}catch(t){console.error('設置光標時發生錯誤:',t)}}function y(e=T,t=''){try{const r=M[e.getMonth()],n=e.getFullYear().toString().slice(-2),i=String(e.getMonth()+1).padStart(2,"0"),s=String(e.getDate()).padStart(2,"0"),c=Math.random().toString(36).substring(2,4).toUpperCase();return`${t}${r}-${n}${i}${s}${c}`}catch(r){return console.error('生成ID時發生錯誤:',r),`${t}${Math.random().toString(36).substring(2,8).toUpperCase()}`}}function E(){try{const e=d('quoteDate'),t=e?.value||T.toISOString().split("T")[0],r=new Date(t),n=d('quoteNumber');n&&(n.textContent=y(r))}catch(e){console.error('更新ID時發生錯誤:',e)}}function I(){try{const e=d('quoteDate'),t=d('quoteDateText');if(e&&t){e.value=T.toISOString().split("T")[0],t.textContent=F.formatDate(e.value);const r=new Date(e.value),n=d('quoteValidUntil'),i=d('quoteValidText');if(n&&i){const s=new Date(r);s.setDate(r.getDate()+C.DEFAULT_VALID_DAYS),n.value=s.toISOString().split("T")[0],i.textContent=F.formatDate(n.value)}const o=d('deliveryDate'),l=d('deliveryDateText');if(o&&l){const s=new Date(r);s.setDate(r.getDate()+C.DEFAULT_DELIVERY_DAYS),o.value=s.toISOString().split("T")[0],l.textContent=F.formatDate(o.value)}}}catch(e){console.error('初始化日期時發生錯誤:',e)}E()}function g(){const e=d('itemsTableBody');if(!e)return;try{e.innerHTML='';for(let t=0;t<7;t++){const r=document.createElement("tr");r.innerHTML=`
-<td><input type="text" class="category-input input-field" placeholder=""></td>
-<td><input type="text" class="name-input input-field" placeholder=""></td>
-<td style="text-align:center">
-<input type="text" class="price-input input-field" value="">
-<span class="original-price"></span>
-</td>
-<td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td>
-<td class="text-center"><input type="text" class="unit-input input-field" value=""></td>
-<td class="text-center"><input type="text" class="installation-input input-field" value=""></td>
-<td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>
-`,e.appendChild(r)}f()}catch(t){console.error('初始化表格時發生錯誤:',t)}}function v(){const e=d('itemsTableBody');if(!e)return;try{const t=document.createElement("tr");t.innerHTML=`
-<td><input type="text" class="category-input input-field" placeholder=""></td>
-<td><input type="text" class="name-input input-field" placeholder=""></td>
-<td style="text-align:center">
-<input type="text" class="price-input input-field" value="">
-<span class="original-price"></span>
-</td>
-<td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td>
-<td class="text-center"><input type="text" class="unit-input input-field" value=""></td>
-<td class="text-center"><input type="text" class="installation-input input-field" value=""></td>
-<td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>
-`,e.appendChild(t),f()}catch(t){console.error('添加行時發生錯誤:',t)}}function f(){const e=d('itemsTableBody'),t=d('subtotal'),r=d('totalShipping'),n=d('totalInstallation'),i=d('depositAmount'),s=d('grandTotal'),c=d('taxType');if(!e||!s)return;let l=0,o=0,p=0;try{Array.from(e.children).forEach(m=>{const u=m.querySelector(".price-input"),L=m.querySelector(".quantity-input"),w=m.querySelector(".shipping-input"),k=m.querySelector(".installation-input");if(!u||!L)return;const B=F.parseNumber(u.value||"0"),V=Math.max(0,F.parseNumber(L.value||"0",!1)),W=F.parseNumber(w?.value||"0"),O=F.parseNumber(k?.value||"0");l+=Math.round(B*V),o+=W,p+=O});const y=l+o+p,x=c&&c.value==="taxed",U=x?Math.round(y*C.TAX_RATE):0,R=y+U,X=Math.round(R*C.DEPOSIT_RATE);t&&(t.textContent=F.formatCurrency(l)),r&&(r.textContent=F.formatCurrency(o)),n&&(n.textContent=F.formatCurrency(p)),i&&(i.textContent=F.formatCurrency(X)),s&&(s.textContent=F.formatCurrency(R))}catch(m){console.error('計算總計時發生錯誤:',m)}}function _(e){if(!e)return;const t=e.value;if(t==='')return;try{(e.classList.contains('price-input')||e.classList.contains('shipping-input')||e.classList.contains('installation-input'))&&(t=>{const r=F.parseNumber(t);return r>C.MAX_VALUE?(N("數值超出最大限制","warning"),e.value=F.formatCurrency(C.MAX_VALUE)):r<C.MIN_VALUE?(N("數值超出最小限制","warning"),e.value=F.formatCurrency(C.MIN_VALUE)):e.value=F.formatCurrency(r),!0})(t)}catch(r){console.error('格式化輸入值時發生錯誤:',r),e.value=F.formatCurrency(0)}}function $(e){if(!e)return;try{const t=F.formatText(e.innerText.replace(/\n/g,"").trim(),e.getAttribute("data-type"));if(t===e.innerText)return;const r=window.getSelection();if(!r)return;const n=document.createRange();n.selectNodeContents(e),r.removeAllRanges(),r.addRange(n),document.execCommand("insertText",!1,t),h(e)}catch(t){console.error('處理輸入錯誤:',t)}}function q(e){e.preventDefault();const t=D[e.target.id];if(!t)return;const r=d(t);!r||('showPicker'in r?r.showPicker():(r.focus(),r.click()))}function H(e,t,r){!e||!t||e.addEventListener('change',function(){t&&(t.textContent=F.formatDate(this.value)),typeof r=='function'&&r.call(this),e.id==='quoteDate'&&E()})}function G(){const e=d('notes-textarea');e&&(S(e),e.addEventListener('input',function(){S(this)}),e.addEventListener('paste',function(){setTimeout(()=>S(this),10)}))}const j=b(()=>{const e=d('notes-textarea');e&&S(e)},50);function Q(){const e=document.querySelector('.container'),t=b(f,200),r=d('logo-container'),n=d('upload-logo');r&&n&&(r.addEventListener('click',()=>{n.value='',n.click()}),n.addEventListener('change',i=>{const s=i.target.files?.[0];if(!s)return;if(!s.type.match('image.*')){N('請選擇圖片檔案','error');return}if(s.size>2*1024*1024){N('圖片大小不能超過 2MB','error');return}const c=new FileReader;c.onload=l=>{if(!r)return;r.innerHTML='';const o=document.createElement('img');o.src=l.target?.result?.toString()||'',o.alt='公司Logo',o.style.maxHeight='50px',r.appendChild(o)},c.readAsDataURL(s)})),e.addEventListener('click',i=>{i.target.classList.contains('date-display')&&q(i)});const o=d('quoteDate'),l=d('quoteValidUntil'),p=d('deliveryDate');o&&H(o,d('quoteDateText'),function(){const i=d('quoteValidUntil'),s=d('deliveryDate'),c=new Date(this.value);if(i){const l=new Date(c);l.setDate(c.getDate()+C.DEFAULT_VALID_DAYS),i.value=l.toISOString().split("T")[0];const p=d('quoteValidText');p&&(p.textContent=F.formatDate(i.value))}if(s){const l=new Date(c);l.setDate(c.getDate()+C.DEFAULT_DELIVERY_DAYS),s.value=l.toISOString().split("T")[0];const p=d('deliveryDateText');p&&(p.textContent=F.formatDate(s.value))}}),l&&H(l,d('quoteValidText'),function(){const i=d('quoteDate');if(!i)return;const s=new Date(i.value),c=new Date(this.value);if(c<s){const l=new Date(s);l.setDate(s.getDate()+C.DEFAULT_VALID_DAYS),this.value=l.toISOString().split("T")[0],N("報價有效期不得早於報價日；系統已自動修正為預設值","warning")}}),p&&H(p,d('deliveryDateText'),function(){const i=d('quoteDate');if(!i)return;const s=new Date(i.value),c=new Date(this.value);if(c<s){const l=new Date(s);l.setDate(s.getDate()+C.DEFAULT_DELIVERY_DAYS),this.value=l.toISOString().split("T")[0],N("交期設定不得早於報價日期；系統已為您修正為預設值","warning")}});const y='[contenteditable="true"], .editable-field',x=new WeakMap;e.addEventListener('compositionstart',i=>{i.target.matches(y)&&x.set(i.target,!0)}),e.addEventListener('compositionend',i=>{i.target.matches(y)&&(x.set(i.target,!1),$(i.target))}),e.addEventListener('keypress',i=>{i.target.matches(y)&&i.key==="Enter"&&i.preventDefault()}),e.addEventListener('input',i=>{i.target.matches(y)&&!x.get(i.target)&&$(i.target)}),e.addEventListener('paste',i=>{if(i.target.matches(y)){i.preventDefault();const s=(i.clipboardData||window.clipboardData).getData("text").replace(/\n/g,"").trim();document.execCommand("insertText",!1,F.formatText(s,i.target.getAttribute("data-type"))),h(i.target)}});const U=d('quoteTable');if(U){const i='.price-input, .shipping-input, .installation-input',s=`${i}, .quantity-input`;U.addEventListener('input',c=>{c.target.matches(s)&&(c.target.matches(i)&&_(c.target),t())}),U.addEventListener('focus',c=>{c.target.tagName==='INPUT'&&c.target.select()},!0),U.addEventListener('blur',c=>{c.target.matches(i)&&_(c.target)},!0),U.addEventListener('keydown',c=>{if(c.key==='Tab'){const l=d('itemsTableBody');if(!l)return;const o=l.children;if(!o.length)return;const p=o[o.length-1];if(!p)return;const m=p.querySelector('.shipping-input');!m||c.target!==m||c.shiftKey||(c.preventDefault(),v(),setTimeout(()=>{const u=l.lastChild;if(!u)return;const L=u.querySelector('.category-input');L&&L.focus()},0))}})}const R=d('addItemBtn'),X=d('deleteItemBtn'),Y=d('taxType');R&&R.addEventListener('click',()=>{v(),j()}),X&&X.addEventListener('click',()=>{const i=d('itemsTableBody');if(!i)return;const s=i.children;s.length>1?(s[s.length-1].remove(),t(),j()):N("必須保留至少一行！","warning")}),Y&&Y.addEventListener('change',t),window.addEventListener('resize',j)}function K(){try{I(),Q(),P(),g(),f(),G(),A()}catch(e){console.error('初始化時發生錯誤:',e)}}K()});
+});const o=d('quoteDate'),l=d('quoteValidUntil'),p=d('deliveryDate');o&&H(o,d('quoteDateText'),function(){const i=d('quoteValidUntil'),s=d('deliveryDate'),c=new Date(this.value);if(i){const l=new Date(c);l.setDate(c.getDate()+C.DEFAULT_VALID_DAYS),i.value=l.toISOString().split("T")[0];const p=d('quoteValidText');p&&(p.textContent=F.formatDate(i.value))}if(s){const l=new Date(c);l.setDate(c.getDate()+C.DEFAULT_DELIVERY_DAYS),s.value=l.toISOString().split("T")[0];const p=d('deliveryDateText');p&&(p.textContent=F.formatDate(s.value))}}),l&&H(l,d('quoteValidText'),function(){const i=d('quoteDate');if(!i)return;const s=new Date(i.value),c=new Date(this.value);if(c<s){const l=new Date(s);l.setDate(s.getDate()+C.DEFAULT_VALID_DAYS),this.value=l.toISOString().split("T")[0];const validText=d('quoteValidText');if(validText){validText.textContent=F.formatDate(this.value)}N("報價有效期不得早於報價日期；系統已自動修正為預設值","warning")}}),p&&H(p,d('deliveryDateText'),function(){const i=d('quoteDate');if(!i)return;const s=new Date(i.value),c=new Date(this.value);if(c<s){const l=new Date(s);l.setDate(s.getDate()+C.DEFAULT_DELIVERY_DAYS),this.value=l.toISOString().split("T")[0];const deliveryText=d('deliveryDateText');if(deliveryText){deliveryText.textContent=F.formatDate(this.value)}N("交期設定不得早於報價日期；系統已為您修正為預設值","warning")}});const y='[contenteditable="true"], .editable-field',x=new WeakMap;e.addEventListener('compositionstart',i=>{i.target.matches(y)&&x.set(i.target,!0)}),e.addEventListener('compositionend',i=>{i.target.matches(y)&&(x.set(i.target,!1),$(i.target))}),e.addEventListener('keypress',i=>{i.target.matches(y)&&i.key==="Enter"&&i.preventDefault()}),e.addEventListener('input',i=>{i.target.matches(y)&&!x.get(i.target)&&$(i.target)}),e.addEventListener('paste',i=>{if(i.target.matches(y)){i.preventDefault();const s=(i.clipboardData||window.clipboardData).getData("text").replace(/\n/g,"").trim();document.execCommand("insertText",!1,F.formatText(s,i.target.getAttribute("data-type"))),h(i.target)}});const U=d('quoteTable');if(U){const i='.price-input, .shipping-input, .installation-input',s=`${i}, .quantity-input`;U.addEventListener('input',c=>{c.target.matches(s)&&(c.target.matches(i)&&_(c.target),t())}),U.addEventListener('focus',c=>{c.target.tagName==='INPUT'&&c.target.select()},!0),U.addEventListener('blur',c=>{c.target.matches(i)&&_(c.target)},!0),U.addEventListener('keydown',c=>{if(c.key==='Tab'){const l=d('itemsTableBody');if(!l)return;const o=l.children;if(!o.length)return;const p=o[o.length-1];if(!p)return;const m=p.querySelector('.shipping-input');!m||c.target!==m||c.shiftKey||(c.preventDefault(),v(),setTimeout(()=>{const u=l.lastChild;if(!u)return;const L=u.querySelector('.category-input');L&&L.focus()},0))}})}const R=d('addItemBtn'),X=d('deleteItemBtn'),Y=d('taxType');R&&R.addEventListener('click',()=>{v(),j()}),X&&X.addEventListener('click',()=>{const i=d('itemsTableBody');if(!i)return;const s=i.children;s.length>1?(s[s.length-1].remove(),t(),j()):N("必須保留至少一行！","warning")}),Y&&Y.addEventListener('change',t),window.addEventListener('resize',j)}function K(){try{I(),Q(),setupPrintHandlers(),g(),f(),G()}catch{}}K()});
 </script>
 </body>
 </html>
