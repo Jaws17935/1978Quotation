@@ -565,7 +565,8 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
 document.addEventListener('DOMContentLoaded',()=>{const C={TAX_RATE:.05,DEPOSIT_RATE:.3,DEFAULT_VALID_DAYS:7,DEFAULT_DELIVERY_DAYS:28,MAX_VALUE:999999999,MIN_VALUE:-999999999},M=["JA","FE","MR","AP","MY","JN","JL","AU","SE","OC","NO","DE"],T=new Date,d=e=>document.getElementById(e),D={quoteDateText:'quoteDate',quoteValidText:'quoteValidUntil',deliveryDateText:'deliveryDate'},b=(e,t)=>function(){let r;clearTimeout(r),r=setTimeout(()=>e.apply(this,arguments),t)},F={parseNumber:(e,t=!1)=>{if(!e)return 0;try{const r=String(e).replace(/[^\d.-]/g,'').trim(),n=t?parseInt(r):parseFloat(r);return isNaN(n)?0:Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,n))}catch{return 0}},formatCurrency:e=>{try{return isNaN(e)?'0':(t=Math.round(Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,e))),new Intl.NumberFormat('zh-TW',{style:'decimal',minimumFractionDigits:0}).format(t));var t}catch{return Math.round(e).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}},formatText:(e,t)=>{if(!e)return'';if(t==="phone")return e.replace(/[^\d\s()+\-]/g,"").substring(0,20);if(t==="email")return e.replace(/\s/g,"").substring(0,50);return e.substring(0,500)},formatDate:e=>{if(!e)return'';try{return new Date(e).toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}catch{return e}}};function S(e){if(e){const t=e.value;e.style.height='auto',e.style.height=Math.max(65,e.scrollHeight+5)+'px'}}
 
 function setupPrintHandlers() {
-  window.addEventListener('beforeprint', () => {
+  // 創建一個可以共享的函數來準備文檔顯示
+  window.prepareDocumentForDisplay = function() {
     const quoteNumber = d('quoteNumber');
     if (quoteNumber && quoteNumber.textContent) {
       document.dataset = document.dataset || {};
@@ -575,9 +576,9 @@ function setupPrintHandlers() {
     const textarea = d('notes-textarea');
     const preview = d('notes-print-preview');
     if (textarea && preview) {
+      preview.textContent = textarea.value;
       textarea.style.display = 'none';
       preview.style.display = 'block';
-      preview.textContent = textarea.value;
     }
     document.querySelectorAll('[contenteditable="true"], .editable-field').forEach(el => {
       el.dataset.originalBorder = el.style.border;
@@ -636,8 +637,10 @@ function setupPrintHandlers() {
     if (notification) {
       notification.classList.remove('show');
     }
-  });
-  window.addEventListener('afterprint', () => {
+  };
+  
+  // 創建一個可以共享的函數來恢復文檔
+  window.restoreDocumentAfterDisplay = function() {
     if (document.dataset && document.dataset.originalTitle) {
       document.title = document.dataset.originalTitle;
     }
@@ -673,7 +676,11 @@ function setupPrintHandlers() {
     document.querySelectorAll('tr[data-added-for-print="true"]').forEach(row => {
       row.remove();
     });
-  });
+  };
+
+  // 為打印事件添加處理程序
+  window.addEventListener('beforeprint', window.prepareDocumentForDisplay);
+  window.addEventListener('afterprint', window.restoreDocumentAfterDisplay);
 }
 
 function N(e,t='info'){if(!e)return null;const r=document.querySelector('.notification-overlay');r&&(r.classList.remove('show'),setTimeout(()=>r.remove(),300));const n=document.createElement('div');n.className=`notification-overlay notification-${t}`;let i='',s='通知';t==='warning'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',s='注意'):t==='error'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e53e3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>',s='錯誤'):t==='success'?(i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',s='成功'):i='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',n.innerHTML=`<div class="notification-modal"><div class="notification-header"><div class="notification-title"><span class="notification-icon">${i}</span><span>${s}</span></div></div><div class="notification-content">${e}</div><div class="notification-footer"><button class="notification-btn">我知道了</button></div></div>`,document.body.appendChild(n),n.offsetHeight,n.classList.add('show');const c=n.querySelector('.notification-btn');c&&(c.addEventListener('click',()=>{n.classList.remove('show'),setTimeout(()=>n.remove(),300)}),setTimeout(()=>c.focus(),100));const l=e=>{(e.key==='Escape'||e.key==='Enter')&&(n.classList.remove('show'),setTimeout(()=>{n.remove(),document.removeEventListener('keydown',l)},300))};return document.addEventListener('keydown',l),n}function h(e){if(e)try{const t=document.createRange(),r=window.getSelection();r&&(t.selectNodeContents(e),t.collapse(!1),r.removeAllRanges(),r.addRange(t))}catch{}}function y(e=T,t=''){try{const r=M[e.getMonth()],n=e.getFullYear().toString().slice(-2),i=String(e.getMonth()+1).padStart(2,"0"),s=String(e.getDate()).padStart(2,"0"),c=Math.random().toString(36).substring(2,4).toUpperCase();return`${t}${r}-${n}${i}${s}${c}`}catch{return`${t}${Math.random().toString(36).substring(2,8).toUpperCase()}`}}function E(){try{const e=d('quoteDate'),t=e?.value||T.toISOString().split("T")[0],r=new Date(t),n=d('quoteNumber');n&&(n.textContent=y(r))}catch{}}function I(){try{const e=d('quoteDate'),t=d('quoteDateText');if(e&&t){e.value=T.toISOString().split("T")[0],t.textContent=F.formatDate(e.value);const r=new Date(e.value),n=d('quoteValidUntil'),i=d('quoteValidText');if(n&&i){const s=new Date(r);s.setDate(r.getDate()+C.DEFAULT_VALID_DAYS),n.value=s.toISOString().split("T")[0],i.textContent=F.formatDate(n.value)}const o=d('deliveryDate'),l=d('deliveryDateText');if(o&&l){const s=new Date(r);s.setDate(r.getDate()+C.DEFAULT_DELIVERY_DAYS),o.value=s.toISOString().split("T")[0],l.textContent=F.formatDate(o.value)}}}catch{}E()}function g(){const e=d('itemsTableBody');if(e)try{e.innerHTML='';for(let t=0;t<7;t++){const r=document.createElement("tr");r.innerHTML=`<td><input type="text" class="category-input input-field" placeholder=""></td><td><input type="text" class="name-input input-field" placeholder=""></td><td style="text-align:center"><input type="text" class="price-input input-field" value=""><span class="original-price"></span></td><td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td><td class="text-center"><input type="text" class="unit-input input-field" value=""></td><td class="text-center"><input type="text" class="installation-input input-field" value=""></td><td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>`,e.appendChild(r)}f()}catch{}}function v(){const e=d('itemsTableBody');if(e)try{const t=document.createElement("tr");t.innerHTML=`<td><input type="text" class="category-input input-field" placeholder=""></td><td><input type="text" class="name-input input-field" placeholder=""></td><td style="text-align:center"><input type="text" class="price-input input-field" value=""><span class="original-price"></span></td><td class="text-center"><input type="number" class="quantity-input input-field" value="" min="0" step="0.01"></td><td class="text-center"><input type="text" class="unit-input input-field" value=""></td><td class="text-center"><input type="text" class="installation-input input-field" value=""></td><td class="text-center"><input type="text" class="shipping-input input-field" value=""></td>`,e.appendChild(t),f()}catch{}}function f(){const e=d('itemsTableBody'),t=d('subtotal'),r=d('totalShipping'),n=d('totalInstallation'),i=d('depositAmount'),s=d('grandTotal'),c=d('taxType');if(!e||!s)return;let l=0,o=0,p=0;try{Array.from(e.children).forEach(m=>{const u=m.querySelector(".price-input"),L=m.querySelector(".quantity-input"),w=m.querySelector(".shipping-input"),k=m.querySelector(".installation-input");if(!u||!L)return;const B=F.parseNumber(u.value||"0"),V=Math.max(0,F.parseNumber(L.value||"0",!1)),W=F.parseNumber(w?.value||"0"),O=F.parseNumber(k?.value||"0");l+=Math.round(B*V),o+=W,p+=O});const y=l+o+p,x=c&&c.value==="taxed",U=x?Math.round(y*C.TAX_RATE):0,R=y+U,X=Math.round(R*C.DEPOSIT_RATE);t&&(t.textContent=F.formatCurrency(l)),r&&(r.textContent=F.formatCurrency(o)),n&&(n.textContent=F.formatCurrency(p)),i&&(i.textContent=F.formatCurrency(X)),s&&(s.textContent=F.formatCurrency(R))}catch{}}function _(e){if(!e)return;const t=e.value;if(t==='')return;try{(e.classList.contains('price-input')||e.classList.contains('shipping-input')||e.classList.contains('installation-input'))&&(t=>{const r=F.parseNumber(t);return r>C.MAX_VALUE?(N("數值超出最大限制","warning"),e.value=F.formatCurrency(C.MAX_VALUE)):r<C.MIN_VALUE?(N("數值超出最小限制","warning"),e.value=F.formatCurrency(C.MIN_VALUE)):e.value=F.formatCurrency(r),!0})(t)}catch{e.value=F.formatCurrency(0)}}function $(e){if(!e)return;try{const t=F.formatText(e.innerText.replace(/\n/g,"").trim(),e.getAttribute("data-type"));if(t===e.innerText)return;const r=window.getSelection();if(!r)return;const n=document.createRange();n.selectNodeContents(e),r.removeAllRanges(),r.addRange(n),document.execCommand("insertText",!1,t),h(e)}catch{}}function q(e){
@@ -718,12 +725,377 @@ function setupButtonHandlers() {
   const generateImageBtn = d('generateImageBtn');
   const printPdfBtn = d('printPdfBtn');
 
+  // 徹底重寫預覽功能，不使用DOM克隆，而是直接構建新的HTML
   previewBtn.addEventListener('click', () => {
+    // 確保計算是最新的
+    f();
+    
+    // 獲取原始文檔的標題和樣式
+    const originalTitle = document.title;
+    const styles = Array.from(document.styleSheets)
+      .map(sheet => {
+        try {
+          if (sheet.href) return `<link rel="stylesheet" href="${sheet.href}">`;
+          return Array.from(sheet.cssRules || [])
+            .map(rule => rule.cssText)
+            .join('\n');
+        } catch (e) {
+          if (sheet.href) return `<link rel="stylesheet" href="${sheet.href}">`;
+          return '';
+        }
+      })
+      .filter(Boolean)
+      .join('\n');
+    
+    // 獲取報價單號作為標題
+    const quoteNumber = d('quoteNumber').textContent || originalTitle;
+    
+    // 獲取各種文字內容
+    const companyName = document.querySelector('.default-logo-text')?.textContent || '玖星吉國際貿易';
+    const companyInfo = Array.from(document.querySelectorAll('.company-info > p'))
+      .map(p => p.textContent)
+      .join('<br>');
+    
+    // 客戶資訊
+    const clientName = document.querySelector('.client-info .info-group h4')?.textContent || '';
+    const clientAddress = document.querySelector('.client-info .info-group > p:first-of-type')?.textContent || '';
+    const clientTaxID = document.querySelector('.client-info .info-group > p:last-of-type span.editable-field')?.textContent || '';
+    
+    // 聯絡窗口
+    const contactPerson = document.querySelector('.contact-info .info-group p:nth-child(1) span.editable-field')?.textContent || '';
+    const contactPhone = document.querySelector('.contact-info .info-group p:nth-child(2) span.editable-field')?.textContent || '';
+    const contactEmail = document.querySelector('.contact-info .info-group p:nth-child(3) span.editable-field')?.textContent || '';
+    
+    // 報價資訊
+    const quoteDate = d('quoteDateText').textContent;
+    const quoteValid = d('quoteValidText').textContent;
+    const deliveryDate = d('deliveryDateText').textContent;
+    const paymentDays = document.querySelector('.quote-details .quote-meta-row:last-child span span.editable-field')?.textContent || '30';
+    
+    // 備註
+    const notes = d('notes-textarea').value || '';
+    
+    // 銀行資訊
+    const bankInfo = Array.from(document.querySelectorAll('.bank-info .info-group p'))
+      .map(p => {
+        const label = p.querySelector('.info-label').textContent;
+        const value = p.querySelector('span[contenteditable="true"]').textContent;
+        return `<p><span class="info-label">${label}</span>${value}</p>`;
+      })
+      .join('');
+    
+    // 金額資訊
+    const subtotal = d('subtotal').textContent;
+    const totalInstallation = d('totalInstallation').textContent;
+    const totalShipping = d('totalShipping').textContent;
+    const depositAmount = d('depositAmount').textContent;
+    const taxType = d('taxType').options[d('taxType').selectedIndex].text;
+    const grandTotal = d('grandTotal').textContent;
+    
+    // 簽名區域
+    const staffName = document.querySelector('#staff-info .info-group p:nth-child(1) span.editable-field')?.textContent || '';
+    const staffPhone = document.querySelector('#staff-info .info-group p:nth-child(2) span.editable-field')?.textContent || '';
+    const staffEmail = document.querySelector('#staff-info .info-group p:nth-child(3) span.editable-field')?.textContent || '';
+    
+    const clientSignName = document.querySelector('#client-confirmation .info-group p:nth-child(1) span.editable-field')?.textContent || '';
+    const clientSignPhone = document.querySelector('#client-confirmation .info-group p:nth-child(2) span.editable-field')?.textContent || '';
+    const clientSignEmail = document.querySelector('#client-confirmation .info-group p:nth-child(3) span.editable-field')?.textContent || '';
+    
+    // 表格數據 - 直接構建HTML
+    let tableHtml = '';
+    const rows = document.querySelectorAll('#itemsTableBody tr');
+    
+    rows.forEach(row => {
+      if (row.style.display !== 'none') {
+        const category = row.querySelector('.category-input')?.value || '';
+        const name = row.querySelector('.name-input')?.value || '';
+        const price = row.querySelector('.price-input')?.value || '';
+        const quantity = row.querySelector('.quantity-input')?.value || '';
+        const unit = row.querySelector('.unit-input')?.value || '';
+        const installation = row.querySelector('.installation-input')?.value || '';
+        const shipping = row.querySelector('.shipping-input')?.value || '';
+        
+        tableHtml += `
+          <tr>
+            <td><div class="preview-text">${category}</div></td>
+            <td><div class="preview-text">${name}</div></td>
+            <td style="text-align:center"><div class="preview-text">${price}</div></td>
+            <td class="text-center"><div class="preview-text">${quantity}</div></td>
+            <td class="text-center"><div class="preview-text">${unit}</div></td>
+            <td class="text-center"><div class="preview-text">${installation}</div></td>
+            <td class="text-center"><div class="preview-text">${shipping}</div></td>
+          </tr>
+        `;
+      }
+    });
+    
+    // 確保至少有5行數據
+    const visibleRowCount = Array.from(rows).filter(row => row.style.display !== 'none').length;
+    if (visibleRowCount < 5) {
+      for (let i = 0; i < 5 - visibleRowCount; i++) {
+        tableHtml += `
+          <tr>
+            <td><div class="preview-text"></div></td>
+            <td><div class="preview-text"></div></td>
+            <td style="text-align:center"><div class="preview-text"></div></td>
+            <td class="text-center"><div class="preview-text"></div></td>
+            <td class="text-center"><div class="preview-text"></div></td>
+            <td class="text-center"><div class="preview-text"></div></td>
+            <td class="text-center"><div class="preview-text"></div></td>
+          </tr>
+        `;
+      }
+    }
+    
+    // 創建完整的預覽HTML
+    const previewHtml = `
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>${quoteNumber}</title>
+      <style>
+        :root{--primary:#1e3a8a;--secondary:#4b5e7a;--accent:#3b82f6;--bg-light:#f8fafc;--bg-highlight:#f1f5f9;--text:#111827;--text-light:#6b7280;--border:#e5e7eb;--success:#15803d;--danger:#e53e3e}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+        body{background-color:var(--bg-light);color:var(--text);line-height:1.5;font-size:14px}
+        .container{max-width:1000px;margin:0 auto;background-color:#fff;box-shadow:0 0 20px rgba(0,0,0,.1)}
+        .section{border:none!important}
+        .quote-info,.bank-totals-section,.legal-terms-section,.signature-section{background-color:var(--bg-highlight)}
+        .header{background-color:var(--primary);color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:flex-start;position:relative}
+        .company-info p{opacity:.9;margin-bottom:2px;line-height:1.3}
+        .default-logo-text{font-size:22px;font-weight:600;color:#fff}
+        .document-title h2{font-size:20px;font-weight:600;margin-bottom:2px;margin-left:-20px}
+        .document-title p{color:rgba(255,255,255,.9);margin-bottom:2px;line-height:1.3}
+        .quote-info{padding:8px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+        .section-title{position:relative;padding-bottom:2px;height:20px;margin-bottom:2px;box-sizing:border-box;font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--primary);font-weight:600;display:flex;align-items:center}
+        .section-title:after{content:'';position:absolute;left:0;bottom:0;width:36px;height:2px;background-color:var(--accent)}
+        .info-group{margin-bottom:6px;overflow:hidden}
+        .info-group h4{font-size:14px;margin-bottom:3px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .info-group p{color:var(--text-light);margin-bottom:4px;line-height:1.4;word-wrap:break-word}
+        .info-label{font-weight:600;display:inline-block;width:90px}
+        .quote-meta-row{margin-bottom:6px;line-height:1.2}
+        .items-section{padding:8px 20px}
+        table{width:100%;border-collapse:collapse;margin-top:8px;border-radius:5px;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,.03);border:none}
+        table th{background-color:var(--primary);color:#fff;text-align:left;padding:6px 8px;font-weight:600;font-size:14px;border:none;letter-spacing:.5px}
+        table th:first-child{border-top-left-radius:5px}
+        table th:last-child{border-top-right-radius:5px}
+        table td{padding:5px 8px;border:none;border-bottom:1px solid var(--border);vertical-align:middle}
+        table tbody tr{background-color:#fff}
+        table tbody tr:nth-child(even){background-color:var(--bg-light)}
+        table tbody tr:last-child td{border-bottom:none}
+        table tbody tr:last-child td:first-child{border-bottom-left-radius:5px}
+        table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
+        .text-center{text-align:center}
+        .bank-totals-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;align-items:start}
+        .legal-terms-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;align-items:start}
+        .flex-column-container{display:flex;flex-direction:column;padding:0;margin:0}
+        .content-box-light{background-color:var(--bg-light);border:1px solid var(--border);border-radius:4px;padding:8px;font-size:13px;color:var(--text-light);line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:visible;height:auto}
+        .content-box-white{background-color:#fff;border:1px solid var(--border);border-radius:4px;font-size:14px;color:var(--text-light);line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:visible}
+        .terms-container{margin-bottom:6px;flex-shrink:0}
+        .terms-content{height:auto!important;overflow-y:visible!important;padding:8px 8px 4px;display:block;box-sizing:border-box}
+        .terms-list{padding-left:16px;padding-bottom:0;list-style-type:disc;margin:0;width:100%;font-size:12px}
+        .terms-list li{margin-bottom:2px;padding-bottom:0;line-height:1.25;font-size:12px}
+        .terms-list li:last-child{margin-bottom:0}
+        .right-side-container{display:flex;flex-direction:column;height:100%}
+        .notes-container{position:relative;width:100%;padding:0;flex-grow:1;display:flex;flex-direction:column;margin-top:6px;min-height:90px}
+        #notes-print-preview{width:100%;padding:8px;font-size:12px;line-height:1.25;min-height:65px;box-sizing:border-box;border:1px solid var(--border);background-color:var(--bg-light);color:var(--text-light);white-space:pre-wrap;word-wrap:break-word;overflow:hidden;border-radius:4px;display:block;}
+        .legal-notice-container{height:auto;display:flex;flex-direction:column}
+        .legal-notice{height:auto;flex-grow:1;display:flex;flex-direction:column;overflow:visible}
+        .legal-notice h4{color:var(--primary);margin-bottom:4px;font-size:15px}
+        .legal-notice p{margin-bottom:5px}
+        .warranty-term-table{width:100%;border-collapse:collapse;margin:4px 0}
+        .warranty-term-table td{padding:3px 5px;border:1px solid var(--border);font-size:12px}
+        .warranty-term-table .term-label{width:20%;font-weight:600;background-color:rgba(75,94,122,.1);color:var(--primary)}
+        .totals-table{width:100%;border:none;background-color:#fff;border-radius:4px}
+        .totals-row{height:24px;display:flex;align-items:center}
+        .totals-row.totals-final{margin-top:auto;border-top:1px solid var(--border);padding-top:3px;height:28px}
+        .totals-label{width:60%;color:var(--text-light);font-size:13px;padding-left:5px}
+        .totals-value{width:40%;text-align:right;font-weight:600;font-size:13px;padding-right:5px}
+        .bank-info-container,.totals-container{height:180px;display:flex;flex-direction:column}
+        .bank-info,.totals-table{box-sizing:border-box;padding:6px 8px;flex-grow:1;display:flex;flex-direction:column;margin-top:3px}
+        .bank-info .info-group{margin:0;display:flex;flex-direction:column;justify-content:space-between;height:100%}
+        .bank-info .info-label{width:75px;font-weight:600;font-size:13px;display:inline-block;color:var(--text-light);line-height:1.2}
+        .bank-info .info-group p{font-size:13px;line-height:1.2;margin-bottom:0;padding:2px 0;height:24px;display:flex;align-items:center;overflow:hidden}
+        .signature-section{width:100%;display:flex;justify-content:space-between;padding:10px 20px;gap:12px;align-items:stretch}
+        .staff-info,.client-confirmation{width:48%;text-align:left;background-color:#fff;padding:10px;border:1px solid var(--border);border-radius:4px;display:flex;flex-direction:column;height:100%}
+        .staff-info .info-group,.client-confirmation .info-group{margin-top:4px;margin-bottom:0;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+        .staff-info .info-label,.client-confirmation .info-label{width:70px}
+        .client-info,.contact-info,.quote-details{position:relative;padding:4px 8px;border-radius:4px;border:1px solid transparent;margin:-1px}
+        .contact-info .section-title,.quote-details .section-title{margin-bottom:5px;padding-bottom:2px;height:18px;font-size:13px}
+        .contact-info .info-group p,.quote-details .info-group p{margin-bottom:2px;line-height:1.3}
+        .quote-info{gap:10px;padding:6px 16px}
+        .quote-details .info-group{margin-top:4px}
+        .preview-text {
+          padding: 4px 6px;
+          display: block;
+          border: 1px solid #e5e7eb;
+          min-height: 18px;
+          width: 100%;
+          box-sizing: border-box;
+          border-radius: 3px;
+          font-size: 13px;
+        }
+      </style>
+    </head>
+    <body>
+    <div class="container">
+      <div class="header section">
+        <div class="company-info">
+          <div class="company-logo" id="logo-container"><span class="default-logo-text">${companyName}</span></div>
+          <p>${companyInfo}</p>
+        </div>
+        <div class="document-title">
+          <h2>商品報價單</h2>
+          <p>報價單號：<span id="quoteNumber">${quoteNumber}</span></p>
+          <p id="quoteDateContainer">報價日期：<span id="quoteDateText">${quoteDate}</span></p>
+          <p id="quoteValidContainer">有效期限：<span id="quoteValidText">${quoteValid}</span></p>
+        </div>
+      </div>
+      <div class="content">
+        <div class="quote-info section">
+          <div class="client-info">
+            <div class="section-title">客戶資訊</div>
+            <div class="info-group">
+              <h4>${clientName}</h4>
+              <p>${clientAddress}</p>
+              <p>統一編號：${clientTaxID}</p>
+            </div>
+          </div>
+          <div class="contact-info">
+            <div class="section-title">聯絡窗口</div>
+            <div class="info-group">
+              <p><span class="info-label">聯絡人：</span> ${contactPerson}</p>
+              <p><span class="info-label">電話：</span> ${contactPhone}</p>
+              <p><span class="info-label">電子郵件：</span> ${contactEmail}</p>
+            </div>
+          </div>
+          <div class="quote-details">
+            <div class="section-title">報價資訊</div>
+            <div class="info-group">
+              <p class="quote-meta-row"><span class="info-label">預計交期：</span>${deliveryDate}</p>
+              <p class="quote-meta-row"><span class="info-label">支付條件：</span><span>經確認報價後支付30%訂金</span></p>
+              <p class="quote-meta-row"><span class="info-label" style="color:transparent">支付條件：</span><span>商品交付後 ${paymentDays} 天內結清尾款</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="items-section section">
+          <div class="section-title">報價商品明細</div>
+          <div class="table-responsive">
+            <table id="quoteTable">
+              <thead>
+                <tr>
+                  <th style="width:15%">種類</th>
+                  <th style="width:30%">名稱</th>
+                  <th style="width:15%" class="text-center">單價</th>
+                  <th style="width:10%" class="text-center">數量</th>
+                  <th style="width:10%" class="text-center">單位</th>
+                  <th style="width:10%" class="text-center">安裝</th>
+                  <th style="width:10%" class="text-center">運費</th>
+                </tr>
+              </thead>
+              <tbody id="itemsTableBody">
+                ${tableHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="bank-totals-section section">
+          <div class="bank-info-container flex-column-container">
+            <div class="section-title">銀行資訊</div>
+            <div class="bank-info content-box-white">
+              <div class="info-group">
+                ${bankInfo}
+              </div>
+            </div>
+          </div>
+          <div class="totals-container flex-column-container">
+            <div class="section-title">總計金額</div>
+            <div class="totals-table content-box-white">
+              <div class="totals-row"><span class="totals-label">商品合計</span><span class="totals-value" id="subtotal">${subtotal}</span></div>
+              <div class="totals-row"><span class="totals-label">安裝費用</span><span class="totals-value" id="totalInstallation">${totalInstallation}</span></div>
+              <div class="totals-row"><span class="totals-label">運送費用</span><span class="totals-value" id="totalShipping">${totalShipping}</span></div>
+              <div class="totals-row"><span class="totals-label">預付訂金</span><span class="totals-value" id="depositAmount">${depositAmount}</span></div>
+              <div class="totals-row totals-final">
+                <span class="totals-label">${taxType}</span>
+                <span class="totals-value" id="grandTotal">${grandTotal}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="legal-terms-section section">
+          <div class="legal-notice-container">
+            <div class="section-title">法律聲明與注意事項</div>
+            <div class="legal-notice content-box-light">
+              <h4>契約法律關係說明</h4>
+              <p>依據中華民國民法第153條及消費者保護法第4條規定，本報價單一經貴方接受並確認，即構成具有法律約束力之買賣契約，雙方均應依誠信原則履行契約義務。</p>
+              <h4>商品瑕疵責任</h4>
+              <p>依據民法第354條及第355條規定，本公司就所出售之商品，擔保其於危險移轉時無滅失或減少其價值之瑕疵，並擔保其具有特定保證之品質。如有瑕疵，買方得依民法第359條主張減少價金或解除契約。</p>
+              <h4>保固與維修責任</h4>
+              <div class="warranty-terms">
+                <table class="warranty-term-table">
+                  <tr><td class="term-label">保固範圍</td><td>依商品保固書登載為準未特別約定自交付日起算七日</td></tr>
+                  <tr><td class="term-label">保固服務</td><td>保固期內因製造瑕疵損壞，提供免費維修或更換服務</td></tr>
+                  <tr><td class="term-label">除外情形</td><td>人為、天災、未經授權拆改或正常耗損導致損壞不保</td></tr>
+                  <tr><td class="term-label">特殊約定</td><td>除個別報價單內另有約定之事項條款者，為優先適用</td></tr>
+                  <tr><td class="term-label">法定權益</td><td>不影響消費者依《消費者保護法》享有的7天鑑賞期等權利</td></tr>
+                </table>
+              </div>
+              <h4>個人資料保護聲明</h4>
+              <p>依據個人資料保護法規定，本公司蒐集、處理及利用貴方之個人資料，僅限於本交易及售後服務之目的範圍內。貴方享有查詢、閱覽、複製、補充、更正、刪除及停止蒐集處理利用之權利。</p>
+              <h4 style="margin-bottom:4px">版權免責聲明</h4>
+              <p style="margin-bottom:0">若貴方提供圖樣、設計或其他內容進行客製化商品製作，貴方需確保擁有該等內容之合法使用權或著作權。對於貴方提供之任何可能涉及第三方著作權、商標權或其他智慧財產權之內容，本公司不負審查義務及侵權責任。若因此導致任何法律爭議或損害，應由貴方承擔全部責任並賠償本公司因此遭受之損失。本公司保留拒絕處理任何疑似侵權內容之權利。</p>
+            </div>
+          </div>
+          <div class="right-side-container">
+            <div class="terms-container">
+              <div class="section-title">合約條款與條件</div>
+              <div class="terms-content content-box-light">
+                <ul class="terms-list">
+                  <li>本報價單自開立日起7天內有效，逾期未接受者視為自動失效。</li>
+                  <li>政府機關、公立學校採購適用政府採購法相關規定，如有牴觸，以政府採購法為準。</li>
+                  <li>實際交付之商品顏色、紋理可能因生產批次及自然材質特性而有些微差異，此非屬產品瑕疵。</li>
+                  <li>所有金額以新台幣計價，包含基本運送與安裝費用，但不含因現場特殊情況衍生之額外工程費用。</li>
+                  <li>驗收時請確實檢查商品外觀及功能，簽收後視為接受商品現況。如有明顯瑕疵，請於驗收時立即提出。</li>
+                  <li>報價單確認無誤，需支付總金額30%作為訂金，餘款支付方式若合約另有約定則從其約定，否則應於驗收合格後30日內付清。</li>
+                  <li>標準交期為確認訂單後4-8週，實際交期將依訂單確認書為準。遇原物料短缺或不可抗力因素，交期可能順延，本公司將立即通知。</li>
+                </ul>
+              </div>
+            </div>
+            <div class="notes-container">
+              <div class="section-title">其他備註</div>
+              <div id="notes-print-preview" class="content-box-light">${notes}</div>
+            </div>
+          </div>
+        </div>
+        <div class="signature-section section">
+          <div class="staff-info" id="staff-info">
+            <div class="section-title" id="staff-title">銷售方資訊</div>
+            <div class="info-group">
+              <p><span class="info-label">姓名：</span> ${staffName}</p>
+              <p><span class="info-label">電話：</span> ${staffPhone}</p>
+              <p><span class="info-label">信箱：</span> ${staffEmail}</p>
+            </div>
+          </div>
+          <div class="client-confirmation" id="client-confirmation">
+            <div class="section-title" id="client-title">採購方資訊</div>
+            <div class="info-group">
+              <p><span class="info-label">姓名：</span> ${clientSignName}</p>
+              <p><span class="info-label">電話：</span> ${clientSignPhone}</p>
+              <p><span class="info-label">信箱：</span> ${clientSignEmail}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </body>
+    </html>
+    `;
+    
+    // 打開新窗口並寫入完整HTML
     const previewWindow = window.open('', '_blank');
-    const previewDoc = previewWindow.document;
-    previewDoc.write(document.documentElement.outerHTML);
-    previewDoc.querySelector('.button-section').style.display = 'none';
-    previewDoc.close();
+    previewWindow.document.write(previewHtml);
+    previewWindow.document.close();
   });
 
   generateImageBtn.addEventListener('click', () => {
