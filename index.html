@@ -67,8 +67,16 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
 .input-field:hover{background-color:rgba(241,245,249,.5)}
 .category-input{font-weight:500;color:var(--secondary)}
 .name-input{font-weight:500}
-.quantity-input::-webkit-inner-spin-button,.quantity-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-.quantity-input{-moz-appearance:textfield;appearance:none}
+.quantity-input::-webkit-inner-spin-button,.quantity-input::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+    appearance: none;
+    margin:0
+}
+.quantity-input{
+    -moz-appearance:textfield;
+    -webkit-appearance: none;
+    appearance:none
+}
 .original-price{text-decoration:line-through;color:var(--text-light);font-size:11px;display:block;text-align:center;padding-top:2px;opacity:.7}
 .bank-totals-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;align-items:start}
 .legal-terms-section{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 20px;align-items:start}
@@ -82,7 +90,26 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
 .terms-list li:last-child{margin-bottom:0}
 .right-side-container{display:flex;flex-direction:column;height:100%}
 .notes-container{position:relative;width:100%;padding:0;flex-grow:1;display:flex;flex-direction:column;margin-top:6px;min-height:90px}
-#notes-textarea{width:100%;margin:0;padding:8px;height:65px;min-height:65px;max-height:none;font-size:12px;line-height:1.25;flex-grow:1;transition:none;-webkit-appearance:none;resize:vertical;box-sizing:border-box;border:1px solid var(--border);background-color:var(--bg-light);color:var(--text-light);overflow:hidden!important}
+#notes-textarea{
+    width:100%;
+    margin:0;
+    padding:8px;
+    height:65px;
+    min-height:65px;
+    max-height:none;
+    font-size:12px;
+    line-height:1.25;
+    flex-grow:1;
+    transition:none;
+    -webkit-appearance:none;
+    appearance: none;
+    resize:vertical;
+    box-sizing:border-box;
+    border:1px solid var(--border);
+    background-color:var(--bg-light);
+    color:var(--text-light);
+    overflow:hidden!important
+}
 #notes-print-preview{display:none;width:100%;padding:8px;font-size:12px;line-height:1.25;min-height:65px;box-sizing:border-box;border:1px solid var(--border);background-color:var(--bg-light);color:var(--text-light);white-space:pre-wrap;word-wrap:break-word;overflow:hidden;border-radius:4px}
 .legal-notice-container{height:auto;display:flex;flex-direction:column}
 .legal-notice{height:auto;flex-grow:1;display:flex;flex-direction:column;overflow:visible}
@@ -96,7 +123,20 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
 .totals-row.totals-final{margin-top:auto;border-top:1px solid var(--border);padding-top:3px;height:28px}
 .totals-label{width:60%;color:var(--text-light);font-size:13px;padding-left:5px}
 .totals-value{width:40%;text-align:right;font-weight:600;font-size:13px;padding-right:5px}
-.clean-select{appearance:none;border:none;background:transparent;width:100%;font-size:13px;font-weight:600;color:var(--text-light);cursor:pointer;outline:none;line-height:1.2}
+.clean-select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance:none;
+    border:none;
+    background:transparent;
+    width:100%;
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-light);
+    cursor:pointer;
+    outline:none;
+    line-height:1.2
+}
 .bank-info-container,.totals-container{height:180px;display:flex;flex-direction:column}
 .bank-info,.totals-table{box-sizing:border-box;padding:6px 8px;flex-grow:1;display:flex;flex-direction:column;margin-top:3px}
 .bank-info .info-group{margin:0;display:flex;flex-direction:column;justify-content:space-between;height:100%}
@@ -248,7 +288,7 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
   
   .input-field {
     background-color: transparent !important;
-    border: 1px solid #e5e7eb !important;
+    border: none !important;
     min-height: 14px !important;
     font-size: 11px !important;
     padding: 1px 4px !important;
@@ -373,6 +413,36 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
     size: A4 portrait;
     margin: 0.5cm;
   }
+  
+  .section-title-with-controls {
+    margin-bottom: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+  
+  .items-controls, .row-btn, .upload-logo, .notification-overlay, .button-section {
+    display: none !important;
+  }
+}
+
+/* 添加自訂樣式 */
+#quoteTable .price-input,
+#quoteTable .quantity-input,
+#quoteTable .unit-input,
+#quoteTable .installation-input,
+#quoteTable .shipping-input {
+  text-align: center;
+  font-weight: 500;
+  padding: 4px 2px;
+  width: 100%;
+  min-width: 60px;
+  box-sizing: border-box;
+}
+
+#quoteTable .price-input {
+  color: var(--primary);
 }
 </style>
 </head>
@@ -419,24 +489,18 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
 </div>
 </div>
 <div class="items-section section">
-<div class="section-title-with-controls">
 <div class="section-title">報價商品明細</div>
-<div class="items-controls">
-<button class="row-btn add" id="addItemBtn" title="增加一行">+</button>
-<button class="row-btn delete" id="deleteItemBtn" title="刪除最後一行">−</button>
-</div>
-</div>
 <div class="table-responsive">
 <table id="quoteTable">
 <thead>
 <tr>
-<th style="width:15%">種類</th>
-<th style="width:30%">名稱</th>
-<th style="width:15%" class="text-center">單價</th>
-<th style="width:10%" class="text-center">數量</th>
-<th style="width:10%" class="text-center">單位</th>
-<th style="width:10%" class="text-center">安裝</th>
-<th style="width:10%" class="text-center">運費</th>
+<th style="width:20%">種類</th>
+<th style="width:32%">名稱</th>
+<th style="width:9.6%" class="text-center">單價</th>
+<th style="width:9.6%" class="text-center">數量</th>
+<th style="width:9.6%" class="text-center">單位</th>
+<th style="width:9.6%" class="text-center">安裝</th>
+<th style="width:9.6%" class="text-center">運費</th>
 </tr>
 </thead>
 <tbody id="itemsTableBody">
@@ -616,7 +680,7 @@ function setupPrintHandlers() {
             newRow.dataset.addedForPrint = "true";
             newRow.querySelectorAll('input').forEach(input => {
               input.value = '';
-              input.style.border = '1px solid #e5e7eb';
+              input.style.border = 'none';
             });
             tableBody.appendChild(newRow);
           }
@@ -624,7 +688,7 @@ function setupPrintHandlers() {
       }
       tableBody.querySelectorAll('input').forEach(input => {
         if (!input.value.trim()) {
-          input.style.border = '1px solid #e5e7eb';
+          input.style.border = 'none';
           input.style.minHeight = '14px';
         }
       });
@@ -876,13 +940,16 @@ function setupButtonHandlers() {
         .info-label{font-weight:600;display:inline-block;width:90px}
         .quote-meta-row{margin-bottom:6px;line-height:1.2}
         .items-section{padding:8px 20px}
+        .section-title-with-controls{display:flex;align-items:center;justify-content:flex-start;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+        .items-controls{display:none}
         table{width:100%;border-collapse:collapse;margin-top:8px;border-radius:5px;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,.03);border:none}
         table th{background-color:var(--primary);color:#fff;text-align:left;padding:6px 8px;font-weight:600;font-size:14px;border:none;letter-spacing:.5px}
         table th:first-child{border-top-left-radius:5px}
         table th:last-child{border-top-right-radius:5px}
-        table td{padding:5px 8px;border:none;border-bottom:1px solid var(--border);vertical-align:middle}
-        table tbody tr{background-color:#fff}
+        table td{padding:5px 8px;border:none;border-bottom:1px solid var(--border);vertical-align:middle;transition:all .2s ease}
+        table tbody tr{background-color:#fff;transition:all .2s ease}
         table tbody tr:nth-child(even){background-color:var(--bg-light)}
+        table tbody tr:hover{background-color:var(--bg-highlight);box-shadow:0 0 3px rgba(0,0,0,.03) inset}
         table tbody tr:last-child td{border-bottom:none}
         table tbody tr:last-child td:first-child{border-bottom-left-radius:5px}
         table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
@@ -929,7 +996,7 @@ function setupButtonHandlers() {
         .preview-text {
           padding: 4px 6px;
           display: block;
-          border: 1px solid #e5e7eb;
+          border: none;
           min-height: 18px;
           width: 100%;
           box-sizing: border-box;
@@ -985,13 +1052,13 @@ function setupButtonHandlers() {
             <table id="quoteTable">
               <thead>
                 <tr>
-                  <th style="width:15%">種類</th>
-                  <th style="width:30%">名稱</th>
-                  <th style="width:15%" class="text-center">單價</th>
-                  <th style="width:10%" class="text-center">數量</th>
-                  <th style="width:10%" class="text-center">單位</th>
-                  <th style="width:10%" class="text-center">安裝</th>
-                  <th style="width:10%" class="text-center">運費</th>
+                  <th style="width:20%">種類</th>
+                  <th style="width:32%">名稱</th>
+                  <th style="width:9.6%" class="text-center">單價</th>
+                  <th style="width:9.6%" class="text-center">數量</th>
+                  <th style="width:9.6%" class="text-center">單位</th>
+                  <th style="width:9.6%" class="text-center">安裝</th>
+                  <th style="width:9.6%" class="text-center">運費</th>
                 </tr>
               </thead>
               <tbody id="itemsTableBody">
