@@ -1034,7 +1034,7 @@ table tbody tr:last-child td:last-child{border-bottom-right-radius:5px}
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded',()=>{const C={TAX_RATE:.05,DEPOSIT_RATE:.3,DEFAULT_VALID_DAYS:7,DEFAULT_DELIVERY_DAYS:28,MAX_VALUE:999999999,MIN_VALUE:-999999999},M=["JA","FE","MR","AP","MY","JN","JL","AU","SE","OC","NO","DE"],T=new Date,d=e=>document.getElementById(e),D={quoteDateText:'quoteDate',quoteValidText:'quoteValidUntil',deliveryDateText:'deliveryDate'},b=(e,t)=>function(){let r;clearTimeout(r),r=setTimeout(()=>e.apply(this,arguments),t)},F={parseNumber:(e,t=!1)=>{if(!e)return 0;try{const r=String(e).replace(/[^\d.-]/g,'').trim(),n=t?parseInt(r):parseFloat(r);return isNaN(n)?0:Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,n))}catch{return 0}},formatCurrency:e=>{try{return isNaN(e)?'0':(t=Math.round(Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,e))),new Intl.NumberFormat('zh-TW',{style:'decimal',minimumFractionDigits:0}).format(t));var t}catch{return Math.round(e).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}},formatText:(e,t)=>{if(!e)return'';if(t==="phone")return e.replace(/[^\d\s()+\-]/g,"").substring(0,20);if(t==="email")return e.replace(/\s/g,"").substring(0,50);return e.substring(0,500)},formatDate:e=>{if(!e)return'';try{return new Date(e).toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}catch{return e}}};function S(e){if(e){e.style.height='auto';void e.offsetHeight;e.style.height=e.scrollHeight+'px'}}
+document.addEventListener('DOMContentLoaded',()=>{const C={TAX_RATE:.05,DEPOSIT_RATE:.3,DEFAULT_VALID_DAYS:7,DEFAULT_DELIVERY_DAYS:28,MAX_VALUE:999999999,MIN_VALUE:-999999999},M=["JA","FE","MR","AP","MY","JN","JL","AU","SE","OC","NO","DE"],T=new Date,d=e=>document.getElementById(e),D={quoteDateText:'quoteDate',quoteValidText:'quoteValidUntil',deliveryDateText:'deliveryDate'},b=(e,t)=>function(){let r;clearTimeout(r),r=setTimeout(()=>e.apply(this,arguments),t)},F={parseNumber:(e,t=!1)=>{if(!e)return 0;try{const r=String(e).replace(/[^\d.-]/g,'').trim(),n=t?parseInt(r):parseFloat(r);return isNaN(n)?0:Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,n))}catch{return 0}},formatCurrency:e=>{try{return isNaN(e)?'0':(t=Math.round(Math.min(C.MAX_VALUE,Math.max(C.MIN_VALUE,e))),new Intl.NumberFormat('zh-TW',{style:'decimal',minimumFractionDigits:0}).format(t));var t}catch{return Math.round(e).toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}},formatText:(e,t)=>{if(!e)return'';if(t==="phone")return e.replace(/[^\d\s()+\-]/g,"").trim().substring(0,20);if(t==="email")return e.replace(/\s/g,"").trim().substring(0,50);return e.trim().substring(0,500)},formatDate:e=>{if(!e)return'';try{return new Date(e).toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}catch{return e}}};function S(e){if(e){e.style.height='auto';void e.offsetHeight;e.style.height=e.scrollHeight+'px'}}
 
 function setupPrintHandlers() {
   window.prepareDocumentForDisplay = function() {
@@ -1203,7 +1203,35 @@ function N(e,t='info'){if(!e)return null;const r=document.querySelector('.notifi
   }
   e.addEventListener('change', handleDateChange);
   e.addEventListener('input', handleDateChange);
-}function G(){const e=d('notes-textarea');e&&(S(e),e.addEventListener('input',function(){S(this)}),e.addEventListener('paste',function(){setTimeout(()=>S(this),10)}))}const j=b(()=>{const e=d('notes-textarea');e&&S(e)},50);
+}function G(){
+  const e=d('notes-textarea');
+  if(e){
+    S(e);
+    e.addEventListener('input',function(){
+      S(this);
+      // Add trimming for notes textarea
+      if(this.value) {
+        this.value = this.value.trim();
+      }
+    });
+    e.addEventListener('paste',function(){
+      setTimeout(() => {
+        S(this);
+        // Add trimming for pasted content
+        if(this.value) {
+          this.value = this.value.trim();
+        }
+      }, 10);
+    });
+    // Add blur event handler for trimming
+    e.addEventListener('blur',function(){
+      if(this.value) {
+        this.value = this.value.trim();
+        S(this);
+      }
+    });
+  }
+}const j=b(()=>{const e=d('notes-textarea');e&&S(e)},50);
 
 function validateDateField(dateInputId) {
   const dateInput = d(dateInputId);
@@ -1497,8 +1525,188 @@ function Q(){const e=document.querySelector('.container'),t=b(f,200),r=d('logo-c
       }, 100);
     }
   }
-});const o=d('quoteDate'),l=d('quoteValidUntil'),p=d('deliveryDate');o&&H(o,d('quoteDateText'),function(){const i=d('quoteValidUntil'),s=d('deliveryDate'),c=new Date(this.value);if(i){const l=new Date(c);l.setDate(c.getDate()+C.DEFAULT_VALID_DAYS),i.value=l.toISOString().split("T")[0];const p=d('quoteValidText');p&&(p.textContent=F.formatDate(i.value))}if(s){const l=new Date(c);l.setDate(c.getDate()+C.DEFAULT_DELIVERY_DAYS),s.value=l.toISOString().split("T")[0];const p=d('deliveryDateText');p&&(p.textContent=F.formatDate(s.value))}}),l&&H(l,d('quoteValidText'),function(){const i=d('quoteDate');if(!i)return;const s=new Date(i.value),c=new Date(this.value);if(c<s){const l=new Date(s);l.setDate(s.getDate()+C.DEFAULT_VALID_DAYS),this.value=l.toISOString().split("T")[0];const validText=d('quoteValidText');if(validText){validText.textContent=F.formatDate(this.value)}N("報價有效期不得早於報價日期；系統已自動修正為預設值","warning")}}),p&&H(p,d('deliveryDateText'),function(){const i=d('quoteDate');if(!i)return;const s=new Date(i.value),c=new Date(this.value);if(c<s){const l=new Date(s);l.setDate(s.getDate()+C.DEFAULT_DELIVERY_DAYS),this.value=l.toISOString().split("T")[0];const deliveryText=d('deliveryDateText');if(deliveryText){deliveryText.textContent=F.formatDate(this.value)}N("交期設定不得早於報價日期；系統已為您修正為預設值","warning")}});const y='[contenteditable="true"], .editable-field',x=new WeakMap;e.addEventListener('compositionstart',i=>{i.target.matches(y)&&x.set(i.target,!0)}),e.addEventListener('compositionend',i=>{i.target.matches(y)&&(x.set(i.target,!1),$(i.target))}),e.addEventListener('keypress',i=>{i.target.matches(y)&&i.key==="Enter"&&i.preventDefault()}),e.addEventListener('input',i=>{i.target.matches(y)&&!x.get(i.target)&&$(i.target)}),e.addEventListener('paste',i=>{if(i.target.matches(y)){i.preventDefault();const s=(i.clipboardData||window.clipboardData).getData("text").replace(/\n/g,"").trim();document.execCommand("insertText",!1,F.formatText(s,i.target.getAttribute("data-type"))),h(i.target)}});const U=d('quoteTable');if(U){const i='.price-input, .shipping-input, .installation-input',s=`${i}, .quantity-input`;U.addEventListener('input',c=>{c.target.matches(s)&&(c.target.matches(i)&&_(c.target),t())}),U.addEventListener('focus',c=>{c.target.tagName==='INPUT'&&c.target.select()},!0),U.addEventListener('blur',c=>{c.target.matches(i)&&_(c.target)},!0),U.addEventListener('keydown',c=>{if(c.key==='Tab'){const l=d('itemsTableBody');if(!l)return;const o=l.children;if(!o.length)return;const p=o[o.length-1];if(!p)return;const m=p.querySelector('.shipping-input');!m||c.target!==m||c.shiftKey||(c.preventDefault(),v(),setTimeout(()=>{const u=l.lastChild;if(!u)return;const L=u.querySelector('.category-input');L&&L.focus()},0))}})}const R=d('addItemBtn'),X=d('deleteItemBtn'),Y=d('taxType');R&&R.addEventListener('click',()=>{v(),j()}),X&&X.addEventListener('click',()=>{const i=d('itemsTableBody');if(!i)return;const bedeleted=i.lastChild;const s=i.children;s.length>1?(bedeleted.remove(),t(),j()):N("必須保留至少一行！","warning")}),Y&&Y.addEventListener('change',t),window.addEventListener('resize',j)}
+});const o=d('quoteDate'),l=d('quoteValidUntil'),p=d('deliveryDate');o&&H(o,d('quoteDateText'),function(){const i=d('quoteValidUntil'),s=d('deliveryDate'),c=new Date(this.value);if(i){const l=new Date(c);l.setDate(c.getDate()+C.DEFAULT_VALID_DAYS),i.value=l.toISOString().split("T")[0];const p=d('quoteValidText');p&&(p.textContent=F.formatDate(i.value))}if(s){const l=new Date(c);l.setDate(c.getDate()+C.DEFAULT_DELIVERY_DAYS),s.value=l.toISOString().split("T")[0];const p=d('deliveryDateText');p&&(p.textContent=F.formatDate(s.value))}}),l&&H(l,d('quoteValidText'),function(){const i=d('quoteDate');if(!i)return;const s=new Date(i.value),c=new Date(this.value);if(c<s){const l=new Date(s);l.setDate(s.getDate()+C.DEFAULT_VALID_DAYS),this.value=l.toISOString().split("T")[0];const validText=d('quoteValidText');if(validText){validText.textContent=F.formatDate(this.value)}N("報價有效期不得早於報價日期；系統已自動修正為預設值","warning")}}),p&&H(p,d('deliveryDateText'),function(){const i=d('quoteDate');if(!i)return;const s=new Date(i.value),c=new Date(this.value);if(c<s){const l=new Date(s);l.setDate(s.getDate()+C.DEFAULT_DELIVERY_DAYS),this.value=l.toISOString().split("T")[0];const deliveryText=d('deliveryDateText');if(deliveryText){deliveryText.textContent=F.formatDate(this.value)}N("交期設定不得早於報價日期；系統已為您修正為預設值","warning")}});const y='[contenteditable="true"], .editable-field',x=new WeakMap;e.addEventListener('compositionstart',i=>{i.target.matches(y)&&x.set(i.target,!0)}),e.addEventListener('compositionend',i=>{i.target.matches(y)&&(x.set(i.target,!1),$(i.target))}),e.addEventListener('keypress',i=>{i.target.matches(y)&&i.key==="Enter"&&i.preventDefault()}),e.addEventListener('input',i=>{i.target.matches(y)&&!x.get(i.target)&&$(i.target)}),e.addEventListener('paste',i=>{if(i.target.matches(y)){i.preventDefault();const s=(i.clipboardData||window.clipboardData).getData("text").replace(/\n/g,"").trim();document.execCommand("insertText",!1,F.formatText(s,i.target.getAttribute("data-type"))),h(i.target)}});const U=d('quoteTable');if(U){const i='.price-input, .shipping-input, .installation-input',s=`${i}, .quantity-input, .category-input, .name-input, .unit-input`;
+  
+  // Add trimming for all input fields
+  function trimAllInputs() {
+    document.querySelectorAll('input.input-field').forEach(input => {
+      if (input.value) {
+        input.value = input.value.trim();
+      }
+    });
+  }
+
+  // Update input event handler for all inputs
+  U.addEventListener('input',c=>{
+    if (c.target.matches(s)) {
+      if (c.target.matches(i)) {
+        _(c.target);
+      }
+      if (c.target.value) {
+        c.target.value = c.target.value.trim();
+      }
+      t();
+    }
+  });
+
+  // Add blur event handler for all inputs
+  U.addEventListener('blur',c=>{
+    if (c.target.matches(s)) {
+      if (c.target.value) {
+        c.target.value = c.target.value.trim();
+      }
+      if (c.target.matches(i)) {
+        _(c.target);
+      }
+    }
+  },!0);
+
+  // Add paste event handler for all inputs
+  U.addEventListener('paste',c=>{
+    if (c.target.matches(s)) {
+      setTimeout(() => {
+        if (c.target.value) {
+          c.target.value = c.target.value.trim();
+        }
+        if (c.target.matches(i)) {
+          _(c.target);
+        }
+        t();
+      }, 0);
+    }
+  });
+
+  // Add focus event handler
+  U.addEventListener('focus',c=>{
+    if (c.target.tagName==='INPUT' && c.target.matches(s)) {
+      c.target.select();
+    }
+  },!0);
+
+  // Add keydown event handler
+  U.addEventListener('keydown',c=>{
+    if(c.key==='Tab'){
+      const l=d('itemsTableBody');
+      if(!l) return;
+      const o=l.children;
+      if(!o.length) return;
+      const p=o[o.length-1];
+      if(!p) return;
+      const m=p.querySelector('.shipping-input');
+      if(!m || c.target!==m || c.shiftKey) return;
+      c.preventDefault();
+      v();
+      setTimeout(()=>{
+        const u=l.lastChild;
+        if(!u) return;
+        const L=u.querySelector('.category-input');
+        L&&L.focus();
+      },0);
+    }
+  });
+}
+
+// Add global input trimming for all input fields
+document.addEventListener('input', e => {
+  if (e.target.tagName === 'INPUT' && e.target.classList.contains('input-field')) {
+    if (e.target.value) {
+      e.target.value = e.target.value.trim();
+    }
+  }
+});
+
+document.addEventListener('blur', e => {
+  if (e.target.tagName === 'INPUT' && e.target.classList.contains('input-field')) {
+    if (e.target.value) {
+      e.target.value = e.target.value.trim();
+    }
+  }
+}, true);
+
+document.addEventListener('paste', e => {
+  if (e.target.tagName === 'INPUT' && e.target.classList.contains('input-field')) {
+    setTimeout(() => {
+      if (e.target.value) {
+        e.target.value = e.target.value.trim();
+      }
+    }, 0);
+  }
+});
+
+// ... existing code ...
+
+const R=d('addItemBtn'),X=d('deleteItemBtn'),Y=d('taxType');R&&R.addEventListener('click',()=>{v(),j()}),X&&X.addEventListener('click',()=>{const i=d('itemsTableBody');if(!i)return;const bedeleted=i.lastChild;const s=i.children;s.length>1?(bedeleted.remove(),t(),j()):N("必須保留至少一行！","warning")}),Y&&Y.addEventListener('change',t),window.addEventListener('resize',j)}
 function K(){try{I(),Q(),setupPrintHandlers(),g(),f(),G(),setupButtonHandlers()}catch{}}K()});
+
+// Add new function to handle input trimming
+function trimInputValue(input) {
+  if (input.value) {
+    input.value = input.value.trim();
+  }
+}
+
+// Update the input event handler
+U.addEventListener('input',c=>{
+  if (c.target.matches(s)) {
+    if (c.target.matches(i)) {
+      _(c.target);
+    }
+    trimInputValue(c.target);
+    t();
+  }
+});
+
+// Add blur event handler for trimming
+U.addEventListener('blur',c=>{
+  if (c.target.matches(s)) {
+    trimInputValue(c.target);
+    if (c.target.matches(i)) {
+      _(c.target);
+    }
+  }
+},!0);
+
+// Add paste event handler for trimming
+U.addEventListener('paste',c=>{
+  if (c.target.matches(s)) {
+    setTimeout(() => {
+      trimInputValue(c.target);
+      if (c.target.matches(i)) {
+        _(c.target);
+      }
+      t();
+    }, 0);
+  }
+});
+
+// Add trimming for contenteditable fields
+e.addEventListener('input',i=>{
+  if (i.target.matches(y) && !x.get(i.target)) {
+    $(i.target);
+    if (i.target.textContent) {
+      i.target.textContent = i.target.textContent.trim();
+    }
+  }
+});
+
+// Add trimming for contenteditable fields on blur
+e.addEventListener('blur',i=>{
+  if (i.target.matches(y)) {
+    if (i.target.textContent) {
+      i.target.textContent = i.target.textContent.trim();
+    }
+  }
+},!0);
+
+// Add trimming for contenteditable fields on paste
+e.addEventListener('paste',i=>{
+  if (i.target.matches(y)) {
+    i.preventDefault();
+    const s=(i.clipboardData||window.clipboardData).getData("text").replace(/\n/g,"").trim();
+    document.execCommand("insertText",!1,F.formatText(s,i.target.getAttribute("data-type")));
+    h(i.target);
+  }
+});
 </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'926c3e516b08bca8',t:'MTc0MzA1MDc4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
